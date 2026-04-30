@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useRef, useEffect } from 'react';
 import type { Translations, Lang } from '../i18n/utils';
 
 interface Track {
@@ -13,6 +13,8 @@ interface Track {
   sortOrder: number;
   spotifyUrl?: string;
   spotifyTrackId?: string;
+  audioSrc: string;
+  previewDuration: number;
 }
 
 interface Props {
@@ -33,26 +35,70 @@ function CoverArt({ track }: { track: Track }) {
   );
 }
 
+function fmt(s: number) {
+  if (!isFinite(s) || s < 0) s = 0;
+  const m = Math.floor(s / 60);
+  const sec = Math.floor(s % 60);
+  return `${m}:${String(sec).padStart(2, '0')}`;
+}
+
 export default function Portfolio({ tracks, t, layout = 'list' }: Props) {
   const tp = t.portfolio;
   const sorted = useMemo(() => [...tracks].sort((a, b) => a.sortOrder - b.sortOrder), [tracks]);
   const genres = useMemo(() => ['All', ...Array.from(new Set(sorted.map(tr => tr.genre)))], [sorted]);
   const [filter, setFilter] = useState('All');
   const [playing, setPlaying] = useState<string | null>(null);
+  const [time, setTime] = useState(0);
+  const [duration, setDuration] = useState(0);
 
+  const audioRef = useRef<HTMLAudioElement>(null);
   const filtered = filter === 'All' ? sorted : sorted.filter(tr => tr.genre === filter);
-  const current = sorted.find(tr => tr.id === playing);
+  const current = sorted.find(tr => tr.id === playing) ?? null;
+
+  useEffect(() => {
+    const a = audioRef.current;
+    if (!a) return;
+    const onTime = () => setTime(a.currentTime);
+    const onMeta = () => setDuration(a.duration);
+    const onEnded = () => { setPlaying(null); setTime(0); };
+    a.addEventListener('timeupdate', onTime);
+    a.addEventListener('loadedmetadata', onMeta);
+    a.addEventListener('ended', onEnded);
+    return () => {
+      a.removeEventListener('timeupdate', onTime);
+      a.removeEventListener('loadedmetadata', onMeta);
+      a.removeEventListener('ended', onEnded);
+    };
+  }, []);
+
+  useEffect(() => {
+    const a = audioRef.current;
+    if (!a) return;
+    if (!current?.audioSrc) { a.pause(); return; }
+    a.src = current.audioSrc;
+    a.play().catch(() => setPlaying(null));
+  }, [playing, current?.audioSrc]);
 
   const togglePlay = (tr: Track) => {
-    if (!tr.spotifyTrackId) {
+    if (!tr.audioSrc) {
       window.open(tr.spotifyUrl ?? PLAYLIST_URL, '_blank', 'noopener');
       return;
     }
-    setPlaying(playing === tr.id ? null : tr.id);
+    setPlaying(prev => (prev === tr.id ? null : tr.id));
+  };
+
+  const onSeek = (e: React.MouseEvent<HTMLDivElement>) => {
+    const a = audioRef.current;
+    if (!a || !duration) return;
+    const rect = e.currentTarget.getBoundingClientRect();
+    const ratio = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+    a.currentTime = ratio * duration;
   };
 
   return (
     <>
+      <audio ref={audioRef} preload="none" crossOrigin="anonymous" />
+
       <div className="port-controls">
         <span style={{ alignSelf: 'center', fontSize: 11, color: 'var(--fg-3)', letterSpacing: '0.1em', textTransform: 'uppercase', marginRight: 8 }}>
           {tp.filter} ▸
@@ -109,22 +155,32 @@ export default function Portfolio({ tracks, t, layout = 'list' }: Props) {
         </div>
       )}
 
-      {current?.spotifyTrackId && (
+      {current && (
         <div className="now-bar">
-          <iframe
-            title={`${current.title} — ${current.artist}`}
-            src={`https://open.spotify.com/embed/track/${current.spotifyTrackId}?utm_source=altitudemusic`}
-            width="100%"
-            height="80"
-            frameBorder="0"
-            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-            loading="lazy"
-            style={{ flex: 1, border: 0, borderRadius: 8 }}
-          />
+          <div className="cover" style={{ width: 40, height: 40, position: 'relative', borderRadius: 4, overflow: 'hidden', flex: '0 0 40px' }}>
+            <CoverArt track={current} />
+          </div>
+          <div style={{ flex: '0 0 auto', minWidth: 0, maxWidth: 200 }}>
+            <div style={{ fontFamily: 'var(--display)', fontSize: 14, fontWeight: 500, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+              {current.title}
+            </div>
+            <div style={{ color: 'var(--fg-3)', fontSize: 11, letterSpacing: '0.1em', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+              {current.artist}
+            </div>
+          </div>
+          <span className="time">{fmt(time)}</span>
+          <div className="progress" onClick={onSeek} role="slider" aria-label="Seek" tabIndex={0}>
+            <div style={{ width: `${duration ? (time / duration) * 100 : 0}%` }} />
+          </div>
+          <span className="time">{fmt(duration || current.previewDuration)}</span>
+          <span className="preview-tag">PREVIEW</span>
+          <a href={current.spotifyUrl ?? PLAYLIST_URL} target="_blank" rel="noopener" className="spotify-link">
+            FULL ↗
+          </a>
           <button
             onClick={() => setPlaying(null)}
             aria-label="Close player"
-            style={{ background: 'transparent', border: '1px solid var(--line)', color: 'var(--fg-2)', borderRadius: 6, width: 32, height: 32, fontSize: 16, cursor: 'pointer' }}
+            className="close-btn"
           >×</button>
         </div>
       )}

@@ -286,10 +286,39 @@ img, video { display: block; max-width: 100%; }
 .now-bar {
   position: sticky; bottom: 16px; z-index: 50; margin-top: 16px;
   background: var(--bg-2); border: 1px solid var(--line); border-radius: 10px;
-  padding: 8px; display: flex; align-items: center; gap: 8px;
+  padding: 12px 16px; display: flex; align-items: center; gap: 14px;
+  font-family: var(--mono); font-size: 12px;
   box-shadow: 0 12px 32px rgba(0,0,0,0.35);
 }
-.now-bar iframe { display: block; }
+.now-bar .progress {
+  flex: 1; height: 4px; background: var(--line); border-radius: 2px;
+  position: relative; overflow: hidden; cursor: pointer; min-width: 60px;
+}
+.now-bar .progress > div {
+  height: 100%; background: var(--accent); border-radius: 2px;
+  transition: width .1s linear;
+}
+.now-bar .time { color: var(--fg-3); font-size: 11px; flex-shrink: 0; min-width: 32px; }
+.now-bar .preview-tag {
+  font-size: 9px; letter-spacing: 0.16em; color: var(--accent);
+  border: 1px solid var(--accent); padding: 2px 6px; border-radius: 999px;
+  text-transform: uppercase; flex-shrink: 0;
+}
+.now-bar .spotify-link {
+  color: var(--accent); font-size: 11px; letter-spacing: 0.1em;
+  text-transform: uppercase; flex-shrink: 0;
+}
+.now-bar .close-btn {
+  background: transparent; border: 1px solid var(--line); color: var(--fg-2);
+  border-radius: 6px; width: 28px; height: 28px; font-size: 14px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; transition: all .15s;
+}
+.now-bar .close-btn:hover { border-color: var(--accent); color: var(--accent); }
+@media (max-width: 600px) {
+  .now-bar { gap: 8px; padding: 10px 12px; flex-wrap: wrap; }
+  .now-bar .preview-tag, .now-bar .spotify-link { display: none; }
+}
 
 /* === MEDIA GRID === */
 .media-grid {

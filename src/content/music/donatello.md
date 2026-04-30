@@ -9,4 +9,6 @@ color: "#3206b8"
 sortOrder: 8
 spotifyUrl: "https://open.spotify.com/playlist/5WLi8GndFcqKUgNoIuDeEE"
 spotifyTrackId: "5nip80JTdKjyHHKIPVahau"
+audioSrc: "/audio/donatello.mp3"
+previewDuration: 30
 ---

@@ -9,4 +9,6 @@ color: "#3aa022"
 sortOrder: 6
 spotifyUrl: "https://open.spotify.com/playlist/5WLi8GndFcqKUgNoIuDeEE"
 spotifyTrackId: "5T1MxywONzcDMZZOXh20aJ"
+audioSrc: "/audio/michael-jackson.mp3"
+previewDuration: 30
 ---

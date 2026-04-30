@@ -9,4 +9,6 @@ color: "#ffff00"
 sortOrder: 3
 spotifyUrl: "https://open.spotify.com/playlist/5WLi8GndFcqKUgNoIuDeEE"
 spotifyTrackId: "1esT06XKXR1jJuxJKJhJQP"
+audioSrc: "/audio/de-louvain-la-neuve-a-limal.mp3"
+previewDuration: 30
 ---

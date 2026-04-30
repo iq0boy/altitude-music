@@ -9,4 +9,6 @@ color: "#ffbdff"
 sortOrder: 4
 spotifyUrl: "https://open.spotify.com/playlist/5WLi8GndFcqKUgNoIuDeEE"
 spotifyTrackId: "006isaSlLEnIxLxaPpAMce"
+audioSrc: "/audio/jamais-a-cote.mp3"
+previewDuration: 30
 ---

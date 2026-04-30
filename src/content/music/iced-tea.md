@@ -9,4 +9,6 @@ color: "#fd5f2e"
 sortOrder: 1
 spotifyUrl: "https://open.spotify.com/playlist/5WLi8GndFcqKUgNoIuDeEE"
 spotifyTrackId: "7tIXh2Djs8hg9DDMWesC6e"
+audioSrc: "/audio/iced-tea.mp3"
+previewDuration: 30
 ---

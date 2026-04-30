@@ -14,8 +14,8 @@ const blog = defineCollection({
   }),
 });
 
-const portfolio = defineCollection({
-  loader: glob({ pattern: '**/*.md', base: './src/content/portfolio' }),
+const music = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/music' }),
   schema: z.object({
     title: z.string(),
     artist: z.string(),
@@ -27,6 +27,8 @@ const portfolio = defineCollection({
     sortOrder: z.number(),
     spotifyUrl: z.string().optional(),
     spotifyTrackId: z.string().optional(),
+    audioSrc: z.string(),                       // /audio/<slug>.mp3
+    previewDuration: z.number().default(30),    // seconds — Spotify previews are 30s
   }),
 });
 
@@ -43,4 +45,4 @@ const media = defineCollection({
   }),
 });
 
-export const collections = { blog, portfolio, media };
+export const collections = { blog, music, media };

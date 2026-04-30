@@ -34,8 +34,8 @@ const posts = allPosts
   .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime())
   .slice(0, 4);
 
-const portfolioEntries = await getCollection('portfolio');
-const tracks = portfolioEntries
+const musicEntries = await getCollection('music');
+const tracks = musicEntries
   .map(e => ({ id: e.id, ...e.data }))
   .sort((a, b) => a.sortOrder - b.sortOrder);
 

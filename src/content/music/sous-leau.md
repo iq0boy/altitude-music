@@ -9,4 +9,6 @@ color: "#ffbdff"
 sortOrder: 10
 spotifyUrl: "https://open.spotify.com/playlist/5WLi8GndFcqKUgNoIuDeEE"
 spotifyTrackId: "7BA7Lwnyy3zEVHSANofGEq"
+audioSrc: "/audio/sous-leau.mp3"
+previewDuration: 30
 ---
