@@ -1,8 +1,9 @@
 ---
 interface Props { tag: string; title: string; sub: string; }
 const { tag, title, sub } = Astro.props;
+const num = tag.match(/\d+/)?.[0] ?? '';
 ---
-<div class="section-head">
+<div class="section-head" data-num={num || undefined}>
   <div>
     <div class="section-tag reveal">{tag}</div>
     <h2 class="section-title reveal">{title}</h2>

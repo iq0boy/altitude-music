@@ -1,9 +1,9 @@
 ---
-interface Props { words: readonly string[]; }
-const { words } = Astro.props;
+interface Props { words: readonly string[]; variant?: 'fill' | 'outline'; }
+const { words, variant = 'fill' } = Astro.props;
 const repeated = [...words, ...words, ...words, ...words];
 ---
-<div class="marquee">
+<div class={`marquee${variant === 'outline' ? ' outline' : ''}`}>
   <div class="marquee-track">
     {repeated.map((w, i) => <span key={i}>{w}</span>)}
   </div>
