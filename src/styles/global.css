@@ -81,6 +81,17 @@ img, video { display: block; max-width: 100%; }
 .nav-inner {
   max-width: var(--grid); margin: 0 auto; padding: 14px var(--pad-x);
   display: flex; align-items: center; justify-content: space-between; gap: 24px;
+  min-width: 0;
+}
+.nav-inner > * { min-width: 0; }
+@media (max-width: 600px) {
+  .nav-inner { gap: 12px; }
+  .nav-right { gap: 8px; }
+  .nav-right .btn { display: none; }
+  .lang-switch { font-size: 10px; }
+  .lang-switch a { padding: 6px 8px; }
+  .logo { font-size: 12px; gap: 8px; }
+  .logo svg { width: 20px; height: 20px; }
 }
 .logo {
   font-family: var(--mono); font-weight: 600; font-size: 13px;
