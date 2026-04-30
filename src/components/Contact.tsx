@@ -1,12 +1,49 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import type { Translations, Lang } from '../i18n/utils';
 
 interface Props { t: Translations; lang: Lang; }
+
+const STUDIO_LAT = 50.6705;
+const STUDIO_LNG = 4.6150;
+const STUDIO_ADDRESS = '6 Rue Louis de Geer, 1348 Ottignies-Louvain-la-Neuve, Belgium';
+const GMAPS_URL = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(STUDIO_ADDRESS)}`;
 
 export default function Contact({ t, lang }: Props) {
   const cf = t.contactForm;
   const [form, setForm] = useState({ name: '', email: '', project: cf.types[0], message: '' });
   const [sent, setSent] = useState(false);
+  const mapRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    let map: any;
+    let cancelled = false;
+    (async () => {
+      const [{ default: L }] = await Promise.all([
+        import('leaflet'),
+        import('leaflet/dist/leaflet.css'),
+      ]);
+      if (cancelled || !mapRef.current) return;
+      map = L.map(mapRef.current, {
+        center: [STUDIO_LAT, STUDIO_LNG],
+        zoom: 15,
+        zoomControl: true,
+        scrollWheelZoom: false,
+      });
+      L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+        subdomains: 'abcd',
+        maxZoom: 19,
+        attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> · © <a href="https://carto.com/attributions">CARTO</a>',
+      }).addTo(map);
+      L.circleMarker([STUDIO_LAT, STUDIO_LNG], {
+        radius: 10,
+        color: '#ffff00',
+        fillColor: '#ffff00',
+        fillOpacity: 1,
+        weight: 0,
+      }).addTo(map).bindPopup('<b>Altitude Music</b><br>6 Rue Louis de Geer<br>1348 LLN');
+    })();
+    return () => { cancelled = true; if (map) map.remove(); };
+  }, []);
 
   const submit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -66,11 +103,10 @@ export default function Contact({ t, lang }: Props) {
             </form>
           </div>
           <div className="map-wrap">
-            <iframe
-              src="https://www.openstreetmap.org/export/embed.html?bbox=4.6075%2C50.6675%2C4.6225%2C50.6735&layer=mapnik&marker=50.6705%2C4.6150"
-              loading="lazy"
-              title="Altitude Music Studio location"
-            />
+            <div ref={mapRef} className="map-leaflet" aria-label="Altitude Music Studio location" />
+            <a href={GMAPS_URL} target="_blank" rel="noopener" className="map-open-btn">
+              Google Maps ↗
+            </a>
           </div>
         </div>
   );
