@@ -15,11 +15,11 @@ const { lang, t } = Astro.props;
       ALTITUDE.MUSIC
     </a>
     <div class="nav-links">
-      <a href="#work">{t.work}</a>
-      <a href="#services">{t.services}</a>
-      <a href="#about">{t.about}</a>
+      <a href={`/${lang}/#work`}>{t.work}</a>
+      <a href={`/${lang}/#services`}>{t.services}</a>
+      <a href={`/${lang}/#about`}>{t.about}</a>
       <a href={`/${lang}/blog/`}>{t.blog}</a>
-      <a href="#contact">{t.contact}</a>
+      <a href={`/${lang}/#contact`}>{t.contact}</a>
     </div>
     <div class="nav-right">
       <div class="lang-switch">
@@ -27,7 +27,7 @@ const { lang, t } = Astro.props;
           <a href={`/${l}/`} class={lang === l ? 'active' : ''}>{l.toUpperCase()}</a>
         ))}
       </div>
-      <a href="#booking" class="btn accent">{t.book}</a>
+      <a href={`/${lang}/#booking`} class="btn accent">{t.book}</a>
     </div>
   </div>
 </nav>

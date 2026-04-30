@@ -24,7 +24,7 @@ const { t, lang } = Astro.props;
         <h5>{t.nav.services}</h5>
         <ul>
           {SERVICE_KEYS.slice(0, 5).map(k => (
-            <li><a href="#services">{t.services[k].name}</a></li>
+            <li><a href={`/${lang}/#services`}>{t.services[k].name}</a></li>
           ))}
         </ul>
       </div>
@@ -42,7 +42,7 @@ const { t, lang } = Astro.props;
         <ul>
           <li>6, Rue Louis de Geer</li>
           <li>1348, LLN — BE</li>
-          <li><a href="#booking">{t.nav.book} →</a></li>
+          <li><a href={`/${lang}/#booking`}>{t.nav.book} →</a></li>
         </ul>
       </div>
     </div>

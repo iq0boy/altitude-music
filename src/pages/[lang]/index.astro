@@ -17,7 +17,7 @@ import ServiceDetail from '../../components/ServiceDetail';
 import { getCollection } from 'astro:content';
 import { getTranslations, LANGS } from '../../i18n/utils';
 import type { Lang } from '../../i18n/utils';
-import { DEFAULT_PRICES, SERVICE_GALLERY, SERVICE_VIDEOS, SERVICE_LONG } from '../../data/services';
+import { DEFAULT_PRICES, SERVICE_GALLERY, SERVICE_VIDEOS, SERVICE_LONG, SERVICE_KEYS } from '../../data/services';
 import { VIDEOS } from '../../data/videos';
 import { TESTIMONIALS } from '../../data/testimonials';
 
@@ -40,14 +40,41 @@ const tracks = portfolioEntries
   .sort((a, b) => a.sortOrder - b.sortOrder);
 
 const SITE = 'https://altitudemusic.be';
+const inLanguage = lang === 'fr' ? 'fr-BE' : lang === 'nl' ? 'nl-BE' : 'en-BE';
+
+const services = SERVICE_KEYS.map(k => {
+  const s = t.services[k];
+  const price = DEFAULT_PRICES[k];
+  const offer = price === 0
+    ? { '@type': 'Offer', price: '0', priceCurrency: 'EUR', availability: 'https://schema.org/InStock' }
+    : price === -1
+      ? { '@type': 'Offer', priceSpecification: { '@type': 'PriceSpecification', priceCurrency: 'EUR' } }
+      : { '@type': 'Offer', price: String(price), priceCurrency: 'EUR', availability: 'https://schema.org/InStock', url: `${SITE}/${lang}/#service/${k}` };
+  return {
+    '@type': 'Service',
+    '@id': `${SITE}/${lang}/#service-${k}`,
+    name: s.name,
+    description: s.desc,
+    serviceType: s.name,
+    provider: { '@id': `${SITE}/#studio` },
+    areaServed: { '@type': 'Country', name: 'Belgium' },
+    offers: offer,
+  };
+});
+
 const homeJsonLd = {
   '@context': 'https://schema.org',
-  '@type': 'WebSite',
-  '@id': `${SITE}/#website`,
-  url: SITE,
-  name: 'Altitude Music',
-  inLanguage: lang === 'fr' ? 'fr-BE' : lang === 'nl' ? 'nl-BE' : 'en-BE',
-  publisher: { '@id': `${SITE}/#studio` },
+  '@graph': [
+    {
+      '@type': 'WebSite',
+      '@id': `${SITE}/#website`,
+      url: SITE,
+      name: 'Altitude Music',
+      inLanguage,
+      publisher: { '@id': `${SITE}/#studio` },
+    },
+    ...services,
+  ],
 };
 ---
 

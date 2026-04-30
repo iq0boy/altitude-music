@@ -38,7 +38,7 @@ export default function Videos({ videos, t, lang }: Props) {
             {videos.map((v, i) => i === active ? null : (
               <div key={v.id} className="video-tile" onClick={() => setActive(i)} style={{ cursor: 'pointer' }}>
                 <div className="embed" style={{ aspectRatio: '16/9', background: '#000', position: 'relative', overflow: 'hidden' }}>
-                  <img src={`https://img.youtube.com/vi/${v.id}/hqdefault.jpg`} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: 0.85 }} />
+                  <img src={`https://img.youtube.com/vi/${v.id}/hqdefault.jpg`} alt={v.title[lang]} loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: 0.85 }} />
                   <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                     <div style={{ width: 48, height: 48, borderRadius: '50%', background: 'rgba(255,91,61,0.9)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#0a0a0a', fontSize: 18 }}>▶</div>
                   </div>
