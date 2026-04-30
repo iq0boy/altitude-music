@@ -30,14 +30,17 @@ const portfolio = defineCollection({
   }),
 });
 
-const social = defineCollection({
-  loader: glob({ pattern: '**/*.md', base: './src/content/social' }),
+const media = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/media' }),
   schema: z.object({
-    url: z.string().url(),
-    kind: z.string(),
+    type: z.enum(['video', 'image']),
+    src: z.string(),                    // e.g. /media/clip-01.mp4
+    poster: z.string().optional(),       // optional poster for videos
+    title: z.string().optional(),
+    kind: z.string(),                    // CLIP / SESSION / BTS / etc.
     aspect: z.string().default('9/16'),
     sortOrder: z.number(),
   }),
 });
 
-export const collections = { blog, portfolio, social };
+export const collections = { blog, portfolio, media };

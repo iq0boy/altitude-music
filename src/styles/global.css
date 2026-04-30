@@ -291,38 +291,34 @@ img, video { display: block; max-width: 100%; }
 }
 .now-bar iframe { display: block; }
 
-/* === INSTAGRAM FEED === */
-.ig-grid {
+/* === MEDIA GRID === */
+.media-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
   gap: 16px;
 }
-.ig-tile {
-  display: flex; flex-direction: column;
+.media-tile {
+  display: flex; flex-direction: column; margin: 0;
   border: 1px solid var(--line); border-radius: 10px; overflow: hidden;
   background: var(--bg-2); transition: transform .2s, border-color .2s;
 }
-.ig-tile:hover { transform: translateY(-3px); border-color: var(--accent); }
-.ig-embed { background: #000; position: relative; overflow: hidden; }
-.ig-embed iframe { width: 100%; height: 100%; border: 0; display: block; }
-.ig-tag-row {
+.media-tile:hover { transform: translateY(-3px); border-color: var(--accent); }
+.media-embed { background: #000; position: relative; overflow: hidden; }
+.media-embed video,
+.media-embed img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.media-tag-row {
   padding: 10px 14px 14px; display: flex; align-items: center;
   justify-content: space-between; gap: 12px;
 }
-.ig-tag {
+.media-tag {
   font-family: var(--mono); font-size: 10px; letter-spacing: 0.14em;
   color: var(--fg-3); padding: 4px 8px; border: 1px solid var(--line);
   border-radius: 999px; text-transform: uppercase;
 }
-.ig-open { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; color: var(--accent); }
-.ig-ctas { display: flex; gap: 24px; margin-top: 24px; flex-wrap: wrap; }
-.ig-cta {
-  display: inline-flex; align-items: center; gap: 8px;
-  font-family: var(--mono); font-size: 12px; letter-spacing: 0.1em;
-  text-transform: uppercase; color: var(--fg-2); transition: color .15s;
+.media-title {
+  font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em;
+  color: var(--fg-2); overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
 }
-.ig-cta:hover { color: var(--accent); }
-.ig-tile[data-platform="tiktok"] .ig-open { color: var(--fg-2); }
 
 /* === ABOUT === */
 .about-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 64px; align-items: start; }

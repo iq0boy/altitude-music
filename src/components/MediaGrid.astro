@@ -1,0 +1,30 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props { items: CollectionEntry<'media'>[]; }
+const { items } = Astro.props;
+---
+<div class="media-grid">
+  {items.map(it => (
+    <figure class="media-tile">
+      <div class="media-embed" style={`aspect-ratio:${it.data.aspect}`}>
+        {it.data.type === 'video' ? (
+          <video
+            src={it.data.src}
+            poster={it.data.poster}
+            controls
+            preload="metadata"
+            playsinline
+            crossorigin="anonymous"
+          />
+        ) : (
+          <img src={it.data.src} alt={it.data.title ?? ''} loading="lazy" decoding="async" />
+        )}
+      </div>
+      <figcaption class="media-tag-row">
+        <span class="media-tag">{it.data.kind}</span>
+        {it.data.title && <span class="media-title">{it.data.title}</span>}
+      </figcaption>
+    </figure>
+  ))}
+</div>
