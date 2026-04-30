@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Altitude Music — Studio d'enregistrement, mix & mastering</title>
+<meta name="description" content="Studio Altitude Music à Louvain-la-Neuve. Enregistrement, mix, mastering, production sur-mesure, pochettes, accompagnement artistique." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Archivo:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" />
+<style>
+  @font-face {
+    font-family: 'Satoshi';
+    src: url('fonts/Satoshi-Variable.ttf') format('truetype-variations'),
+         url('fonts/Satoshi-Variable.ttf') format('truetype');
+    font-weight: 300 900;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: 'Clash Display';
+    src: url('fonts/ClashDisplay-Variable.ttf') format('truetype-variations'),
+         url('fonts/ClashDisplay-Variable.ttf') format('truetype');
+    font-weight: 200 700;
+    font-display: swap;
+  }
+  :root {
+    --brand-blue: #3206b8;
+    --brand-red: #fd5f2e;
+    --brand-pink: #ffbdff;
+    --brand-yellow: #ffff00;
+    --brand-sky: #a0d4e6;
+    --brand-green: #3aa022;
+    --brand-black: #000000;
+  }
+</style>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+<style id="site-styles"></style>
+</head>
+<body>
+<div id="root"></div>
+
+<script type="text/babel" src="i18n.jsx"></script>
+<script type="text/babel" src="data.jsx"></script>
+<script type="text/babel" src="styles.jsx"></script>
+<script type="text/babel" src="components.jsx"></script>
+<script type="text/babel" src="tweaks-panel.jsx"></script>
+
+<script type="text/babel" data-presets="env,react">
+const { useState, useEffect } = React;
+
+const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+  "theme": "dark",
+  "accent": "#fd5f2e",
+  "secondary": "#3206b8",
+  "displayFont": "Clash Display",
+  "textFont": "Satoshi",
+  "monoFont": "JetBrains Mono",
+  "density": "comfy",
+  "heroVariant": "video",
+  "portfolioLayout": "grid",
+  "animations": true,
+  "lang": "fr",
+  "priceRec": 60,
+  "priceMix": 90,
+  "priceCover": 120,
+  "priceProd": 150,
+  "priceCoach": 200,
+  "priceBook": 0
+}/*EDITMODE-END*/;
+
+function App() {
+  const [tw, setTweak] = useTweaks(TWEAK_DEFAULTS);
+  const [lang, setLang] = useState(tw.lang || 'fr');
+  const [serviceOpen, setServiceOpen] = useState(null);
+  const t = window.I18N[lang];
+
+  useScrollReveal();
+
+  // Hash routing for service detail
+  useEffect(() => {
+    const sync = () => {
+      const m = window.location.hash.match(/^#service\/([a-z]+)/);
+      if (m && window.I18N[lang].services[m[1]]) {
+        setServiceOpen(m[1]);
+        window.scrollTo(0, 0);
+      } else {
+        setServiceOpen(null);
+      }
+    };
+    sync();
+    window.addEventListener('hashchange', sync);
+    return () => window.removeEventListener('hashchange', sync);
+  }, [lang]);
+
+  const openService = (key) => {
+    window.location.hash = `service/${key}`;
+  };
+  const closeService = () => {
+    history.pushState(null, '', window.location.pathname + window.location.search);
+    setServiceOpen(null);
+  };
+
+  // Inject styles + apply CSS vars
+  useEffect(() => {
+    document.getElementById('site-styles').textContent = window.SITE_STYLES;
+  }, []);
+
+  useEffect(() => {
+    const r = document.documentElement;
+    r.setAttribute('data-theme', 'dark');
+    r.setAttribute('data-density', tw.density);
+    r.setAttribute('data-anim', tw.animations ? 'on' : 'off');
+    r.style.setProperty('--accent', tw.accent);
+    r.style.setProperty('--secondary', tw.secondary || '#3206b8');
+    r.style.setProperty('--display', `'${tw.displayFont}', system-ui, sans-serif`);
+    r.style.setProperty('--text', `'${tw.textFont}', system-ui, sans-serif`);
+    r.style.setProperty('--mono', `'${tw.monoFont}', ui-monospace, monospace`);
+    document.documentElement.lang = lang;
+  }, [tw, lang]);
+
+  const prices = {
+    rec: tw.priceRec, mix: tw.priceMix, cover: tw.priceCover,
+    prod: tw.priceProd, coach: tw.priceCoach, book: tw.priceBook
+  };
+
+  return (
+    <>
+      <Nav lang={lang} setLang={setLang} t={t} />
+      <main>
+        <Hero t={t} heroVariant={tw.heroVariant} />
+        <Marquee words={lang === 'fr'
+          ? ['ENREGISTREMENT','MIX & MASTER','PRODUCTION','POCHETTES','LOUVAIN-LA-NEUVE','EST. 2018']
+          : lang === 'nl'
+          ? ['OPNAME','MIX & MASTER','PRODUCTIE','COVER ART','LOUVAIN-LA-NEUVE','EST. 2018']
+          : ['RECORDING','MIX & MASTER','PRODUCTION','COVER ART','LOUVAIN-LA-NEUVE','EST. 2018']
+        } />
+        <Services t={t} prices={prices} lang={lang} openService={openService} />
+        <Portfolio t={t} lang={lang} layout={tw.portfolioLayout} />
+        <Videos t={t} lang={lang} />
+        <About t={t} lang={lang} />
+        <Testimonials t={t} lang={lang} />
+        <Blog t={t} />
+        <Booking t={t} lang={lang} />
+        <Contact t={t} lang={lang} />
+      </main>
+      <Footer t={t} />
+      <ChatWidget t={t} />
+
+      {serviceOpen && (
+        <ServiceDetail
+          serviceKey={serviceOpen}
+          t={t}
+          lang={lang}
+          prices={prices}
+          onClose={closeService}
+        />
+      )}
+
+      <TweaksPanel title="Tweaks · Altitude">
+        <TweakSection label="Theme" />
+        <TweakColor label="Accent" value={tw.accent}
+          onChange={(v) => setTweak('accent', v)} />
+        <TweakColor label="Secondary" value={tw.secondary}
+          onChange={(v) => setTweak('secondary', v)} />
+        <TweakSelect label="Palette preset" value="custom"
+          options={[
+            { value: 'custom', label: 'Custom' },
+            { value: 'red-blue', label: 'Rouge / Bleu' },
+            { value: 'pink-yellow', label: 'Rose / Jaune' },
+            { value: 'sky-green', label: 'Ciel / Vert' },
+            { value: 'yellow-blue', label: 'Jaune / Bleu' }
+          ]}
+          onChange={(v) => {
+            const presets = {
+              'red-blue':    { accent: '#fd5f2e', secondary: '#3206b8' },
+              'pink-yellow': { accent: '#ffbdff', secondary: '#ffff00' },
+              'sky-green':   { accent: '#a0d4e6', secondary: '#3aa022' },
+              'yellow-blue': { accent: '#ffff00', secondary: '#3206b8' }
+            };
+            if (presets[v]) setTweak(presets[v]);
+          }} />
+
+        <TweakSection label="Typography" />
+        <TweakSelect label="Display" value={tw.displayFont}
+          options={['Clash Display','Space Grotesk','Archivo','Satoshi']}
+          onChange={(v) => setTweak('displayFont', v)} />
+        <TweakSelect label="Text" value={tw.textFont}
+          options={['Satoshi','Inter','Space Grotesk','Archivo']}
+          onChange={(v) => setTweak('textFont', v)} />
+        <TweakSelect label="Mono" value={tw.monoFont}
+          options={['JetBrains Mono','IBM Plex Mono','Space Mono']}
+          onChange={(v) => setTweak('monoFont', v)} />
+
+        <TweakSection label="Layout" />
+        <TweakRadio label="Density" value={tw.density}
+          options={['compact','regular','comfy']}
+          onChange={(v) => setTweak('density', v)} />
+        <TweakRadio label="Hero" value={tw.heroVariant}
+          options={['video','minimal']}
+          onChange={(v) => setTweak('heroVariant', v)} />
+        <TweakRadio label="Portfolio" value={tw.portfolioLayout}
+          options={['list','grid']}
+          onChange={(v) => setTweak('portfolioLayout', v)} />
+        <TweakToggle label="Animations" value={tw.animations}
+          onChange={(v) => setTweak('animations', v)} />
+
+        <TweakSection label="Pricing (€)" />
+        <TweakNumber label="Recording" value={tw.priceRec} min={0} step={5}
+          onChange={(v) => setTweak('priceRec', v)} />
+        <TweakNumber label="Mix & Master" value={tw.priceMix} min={0} step={5}
+          onChange={(v) => setTweak('priceMix', v)} />
+        <TweakNumber label="Cover" value={tw.priceCover} min={0} step={10}
+          onChange={(v) => setTweak('priceCover', v)} />
+        <TweakNumber label="Production" value={tw.priceProd} min={0} step={10}
+          onChange={(v) => setTweak('priceProd', v)} />
+        <TweakNumber label="Coaching" value={tw.priceCoach} min={0} step={10}
+          onChange={(v) => setTweak('priceCoach', v)} />
+      </TweaksPanel>
+    </>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body>
+</html>
