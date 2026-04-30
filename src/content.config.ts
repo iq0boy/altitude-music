@@ -26,6 +26,7 @@ const portfolio = defineCollection({
     color: z.string(),
     sortOrder: z.number(),
     spotifyUrl: z.string().optional(),
+    spotifyTrackId: z.string().optional(),
   }),
 });
 

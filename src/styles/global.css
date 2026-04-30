@@ -284,13 +284,12 @@ img, video { display: block; max-width: 100%; }
 .cover-art span { position: relative; z-index: 2; padding: 8px; text-align: center; line-height: 1; }
 
 .now-bar {
-  position: sticky; bottom: 0; z-index: 50; margin-top: 16px;
-  background: var(--bg-2); border: 1px solid var(--line); border-radius: 8px;
-  padding: 12px 16px; display: flex; align-items: center; gap: 16px; font-family: var(--mono); font-size: 12px;
+  position: sticky; bottom: 16px; z-index: 50; margin-top: 16px;
+  background: var(--bg-2); border: 1px solid var(--line); border-radius: 10px;
+  padding: 8px; display: flex; align-items: center; gap: 8px;
+  box-shadow: 0 12px 32px rgba(0,0,0,0.35);
 }
-.now-bar .progress { flex: 1; height: 4px; background: var(--line); border-radius: 2px; position: relative; overflow: hidden; }
-.now-bar .progress > div { height: 100%; background: var(--accent); width: 30%; transition: width .2s; }
-.now-bar .time { color: var(--fg-3); font-size: 11px; }
+.now-bar iframe { display: block; }
 
 /* === VIDEOS === */
 .video-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 16px; }
