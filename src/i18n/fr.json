@@ -1,13 +1,13 @@
 {
   "meta": {
-    "title": "Altitude Music — Studio d'enregistrement, mix & mastering | Louvain-la-Neuve",
-    "description": "Studio Altitude Music à Louvain-la-Neuve. Enregistrement, mix, mastering, production sur-mesure, pochettes, accompagnement artistique."
+    "title": "Altitude Music — Studio d'enregistrement & label | Louvain-la-Neuve",
+    "description": "Studio d'enregistrement et label dédié aux artistes émergents à Louvain-la-Neuve. Enregistrement, mix, mastering, production sur-mesure, pochettes. Depuis 2018."
   },
-  "nav": { "work": "Travaux", "services": "Services", "about": "À propos", "blog": "Journal", "contact": "Contact", "book": "Prendre RDV" },
+  "nav": { "work": "Artistes", "services": "Services", "about": "À propos", "blog": "Journal", "contact": "Contact", "book": "Prendre RDV" },
   "hero": {
-    "tag": "STUDIO // LOUVAIN-LA-NEUVE // EST. 2018",
+    "tag": "STUDIO + LABEL // LOUVAIN-LA-NEUVE // EST. 2018",
     "title": "Le son qui te ressemble.",
-    "sub": "Studio d'enregistrement, mix, mastering et production sur-mesure. On capture ton univers, on le pousse plus haut.",
+    "sub": "Studio d'enregistrement et label dédié aux artistes émergents. Sessions personnalisées, production soignée, pochettes sur mesure — on accompagne ton projet du premier son jusqu'à la sortie.",
     "cta1": "Réserver une session",
     "cta2": "Écouter le portfolio",
     "live": "EN DIRECT DU STUDIO",
@@ -17,8 +17,8 @@
   "sections": {
     "services": "Services & Tarifs",
     "servicesSub": "Forfaits clairs, devis sur mesure pour les projets ambitieux.",
-    "portfolio": "Portfolio",
-    "portfolioSub": "La playlist Altitude — des projets qu'on a portés du démo au master.",
+    "portfolio": "Nos artistes",
+    "portfolioSub": "Une scène en mouvement — des talents qu'on accompagne du premier son jusqu'à la sortie, avec une vision et une identité fortes.",
     "videos": "Vidéos",
     "videosSub": "Sessions, clips, behind the scenes.",
     "about": "À propos",

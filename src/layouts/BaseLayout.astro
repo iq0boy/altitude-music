@@ -129,8 +129,10 @@ const studioJsonLd = {
   {jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
 
   <!-- Favicons -->
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <link rel="icon" href="/favicon.ico" />
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/jpeg" sizes="32x32" href="/favicon-32.jpg" />
+  <link rel="icon" type="image/jpeg" sizes="192x192" href="/icon-192.jpg" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.jpg" />
 
   <!-- Font preload -->
   <link rel="preload" href="/fonts/Satoshi-Variable.ttf" as="font" type="font/ttf" crossorigin />

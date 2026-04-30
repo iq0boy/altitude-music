@@ -1,13 +1,13 @@
 {
   "meta": {
-    "title": "Altitude Music — Recording Studio, Mix & Mastering | Louvain-la-Neuve",
-    "description": "Altitude Music studio in Louvain-la-Neuve. Recording, mix, mastering, custom production, cover art, artist coaching."
+    "title": "Altitude Music — Recording Studio & Label | Louvain-la-Neuve",
+    "description": "Recording studio and label dedicated to emerging artists in Louvain-la-Neuve. Recording, mix, mastering, custom production, cover art. Since 2018."
   },
-  "nav": { "work": "Work", "services": "Services", "about": "About", "blog": "Journal", "contact": "Contact", "book": "Book" },
+  "nav": { "work": "Artists", "services": "Services", "about": "About", "blog": "Journal", "contact": "Contact", "book": "Book" },
   "hero": {
-    "tag": "STUDIO // LOUVAIN-LA-NEUVE // EST. 2018",
+    "tag": "STUDIO + LABEL // LOUVAIN-LA-NEUVE // EST. 2018",
     "title": "Sound that sounds like you.",
-    "sub": "Recording, mixing, mastering, custom production. We capture your world and push it higher.",
+    "sub": "Recording studio and label dedicated to emerging artists. Tailored sessions, polished production, custom cover art — we walk your project from first sound to release.",
     "cta1": "Book a session",
     "cta2": "Listen to the work",
     "live": "LIVE FROM THE STUDIO",
@@ -17,8 +17,8 @@
   "sections": {
     "services": "Services & Pricing",
     "servicesSub": "Clear packages, custom quotes for ambitious projects.",
-    "portfolio": "Portfolio",
-    "portfolioSub": "The Altitude playlist — projects we took from demo to master.",
+    "portfolio": "Our artists",
+    "portfolioSub": "A scene in motion — talent we walk from first sound to release, with a strong vision and identity.",
     "videos": "Videos",
     "videosSub": "Sessions, clips, behind the scenes.",
     "about": "About",

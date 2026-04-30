@@ -1,13 +1,13 @@
 {
   "meta": {
-    "title": "Altitude Music — Opnamestudio, Mix & Mastering | Louvain-la-Neuve",
-    "description": "Altitude Music studio in Louvain-la-Neuve. Opname, mix, mastering, productie op maat, cover art, artistieke begeleiding."
+    "title": "Altitude Music — Opnamestudio & Label | Louvain-la-Neuve",
+    "description": "Opnamestudio en label gewijd aan opkomende artiesten in Louvain-la-Neuve. Opname, mix, mastering, productie op maat, cover art. Sinds 2018."
   },
-  "nav": { "work": "Werk", "services": "Diensten", "about": "Over ons", "blog": "Journaal", "contact": "Contact", "book": "Boeken" },
+  "nav": { "work": "Artiesten", "services": "Diensten", "about": "Over ons", "blog": "Journaal", "contact": "Contact", "book": "Boeken" },
   "hero": {
-    "tag": "STUDIO // LOUVAIN-LA-NEUVE // EST. 2018",
+    "tag": "STUDIO + LABEL // LOUVAIN-LA-NEUVE // EST. 2018",
     "title": "Geluid dat op jou lijkt.",
-    "sub": "Opname, mix, mastering en productie op maat. We vangen jouw wereld en tillen die hoger.",
+    "sub": "Opnamestudio en label voor opkomende artiesten. Sessies op maat, verfijnde productie, cover art op maat — we begeleiden jouw project van het eerste geluid tot de release.",
     "cta1": "Sessie boeken",
     "cta2": "Luister naar het werk",
     "live": "LIVE UIT DE STUDIO",
@@ -17,8 +17,8 @@
   "sections": {
     "services": "Diensten & Tarieven",
     "servicesSub": "Heldere pakketten, offertes op maat voor ambitieuze projecten.",
-    "portfolio": "Portfolio",
-    "portfolioSub": "De Altitude-playlist — projecten van demo tot master.",
+    "portfolio": "Onze artiesten",
+    "portfolioSub": "Een scene in beweging — talent dat we begeleiden van het eerste geluid tot de release, met een sterke visie en identiteit.",
     "videos": "Video's",
     "videosSub": "Sessies, clips, behind the scenes.",
     "about": "Over ons",
