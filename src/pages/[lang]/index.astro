@@ -7,6 +7,7 @@ import Services from '../../components/Services.astro';
 import About from '../../components/About.astro';
 import Blog from '../../components/Blog.astro';
 import Footer from '../../components/Footer.astro';
+import SectionHead from '../../components/SectionHead.astro';
 import Portfolio from '../../components/Portfolio';
 import Videos from '../../components/Videos';
 import Testimonials from '../../components/Testimonials';
@@ -84,13 +85,45 @@ const homeJsonLd = {
     <Hero t={t} heroVariant="video" />
     <Marquee words={t.marquee} />
     <Services t={t} prices={DEFAULT_PRICES} />
-    <Portfolio tracks={tracks} t={t} lang={lang} layout="list" client:visible />
-    <Videos videos={VIDEOS} t={t} lang={lang} client:visible />
+
+    <section class="section" id="work" style="border-top:1px solid var(--line)">
+      <div class="container">
+        <SectionHead tag="// 03" title={t.sections.portfolio} sub={t.sections.portfolioSub} />
+        <Portfolio tracks={tracks} t={t} lang={lang} layout="list" client:visible />
+      </div>
+    </section>
+
+    <section class="section" id="videos" style="border-top:1px solid var(--line)">
+      <div class="container">
+        <SectionHead tag="// 04" title={t.sections.videos} sub={t.sections.videosSub} />
+        <Videos videos={VIDEOS} t={t} lang={lang} client:visible />
+      </div>
+    </section>
+
     <About t={t} lang={lang} />
-    <Testimonials testimonials={TESTIMONIALS} t={t} lang={lang} client:visible />
+
+    <section class="section" id="testimonials" style="border-top:1px solid var(--line)">
+      <div class="container">
+        <SectionHead tag="// 06" title={t.sections.testimonials} sub={t.sections.testimonialsSub} />
+        <Testimonials testimonials={TESTIMONIALS} t={t} lang={lang} client:visible />
+      </div>
+    </section>
+
     <Blog posts={posts} t={t} lang={lang} />
-    <Booking t={t} lang={lang} client:visible />
-    <Contact t={t} lang={lang} client:visible />
+
+    <section class="section" id="booking" style="border-top:1px solid var(--line)">
+      <div class="container">
+        <SectionHead tag="// 08" title={t.sections.booking} sub={t.sections.bookingSub} />
+        <Booking t={t} lang={lang} client:visible />
+      </div>
+    </section>
+
+    <section class="section" id="contact" style="border-top:1px solid var(--line)">
+      <div class="container">
+        <SectionHead tag="// 09" title={t.sections.contact} sub={t.sections.contactSub} />
+        <Contact t={t} lang={lang} client:visible />
+      </div>
+    </section>
   </main>
   <Footer t={t} lang={lang} />
   <ChatWidget t={t} lang={lang} client:idle />

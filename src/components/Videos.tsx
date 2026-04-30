@@ -10,16 +10,7 @@ export default function Videos({ videos, t, lang }: Props) {
   const main = videos[active];
 
   return (
-    <section className="section" id="videos" style={{ borderTop: '1px solid var(--line)' }}>
-      <div className="container">
-        <div className="section-head">
-          <div>
-            <div className="section-tag reveal">// 04</div>
-            <h2 className="section-title reveal">{t.sections.videos}</h2>
-          </div>
-          <div className="section-sub reveal">{t.sections.videosSub}</div>
-        </div>
-        <div className="video-grid">
+    <div className="video-grid">
           <div className="video-tile">
             <div className="embed">
               <iframe
@@ -50,8 +41,6 @@ export default function Videos({ videos, t, lang }: Props) {
               </div>
             ))}
           </div>
-        </div>
-      </div>
-    </section>
+    </div>
   );
 }

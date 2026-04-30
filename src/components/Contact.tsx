@@ -18,16 +18,7 @@ export default function Contact({ t, lang }: Props) {
   };
 
   return (
-    <section className="section" id="contact" style={{ borderTop: '1px solid var(--line)' }}>
-      <div className="container">
-        <div className="section-head">
-          <div>
-            <div className="section-tag reveal">// 09</div>
-            <h2 className="section-title reveal">{t.sections.contact}</h2>
-          </div>
-          <div className="section-sub reveal">{t.sections.contactSub}</div>
-        </div>
-        <div className="contact-grid">
+    <div className="contact-grid">
           <div className="contact-info">
             <div className="contact-info-row">
               <span className="k">EMAIL</span>
@@ -82,7 +73,5 @@ export default function Contact({ t, lang }: Props) {
             />
           </div>
         </div>
-      </div>
-    </section>
   );
 }

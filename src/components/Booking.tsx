@@ -37,16 +37,7 @@ export default function Booking({ t, lang }: Props) {
   };
 
   return (
-    <section className="section" id="booking" style={{ borderTop: '1px solid var(--line)' }}>
-      <div className="container">
-        <div className="section-head">
-          <div>
-            <div className="section-tag reveal">// 08</div>
-            <h2 className="section-title reveal">{t.sections.booking}</h2>
-          </div>
-          <div className="section-sub reveal">{t.sections.bookingSub}</div>
-        </div>
-        <div className="booking-grid">
+    <div className="booking-grid">
           <div className="booking-cal">
             <div className="cal-head">
               <span className="month">{monthName.charAt(0).toUpperCase() + monthName.slice(1)}</span>
@@ -110,7 +101,5 @@ export default function Booking({ t, lang }: Props) {
             {confirmed && <div className="form-success">✓ {tb.booked}</div>}
           </div>
         </div>
-      </div>
-    </section>
   );
 }

@@ -25,17 +25,8 @@ export default function Testimonials({ testimonials, t, lang }: Props) {
   const tt = t.testi;
 
   return (
-    <section className="section" id="testimonials" style={{ borderTop: '1px solid var(--line)' }}>
-      <div className="container">
-        <div className="section-head">
-          <div>
-            <div className="section-tag reveal">// 06</div>
-            <h2 className="section-title reveal">{t.sections.testimonials}</h2>
-          </div>
-          <div className="section-sub reveal">{t.sections.testimonialsSub}</div>
-        </div>
-
-        <div className="testi-filter">
+    <>
+      <div className="testi-filter">
           <button className={filter === 'all' ? 'active' : ''} onClick={() => setFilter('all')}>{tt.filterAll}</button>
           {SERVICE_KEYS.filter(k => k !== 'book').map(k => (
             <button key={k} className={filter === k ? 'active' : ''} onClick={() => setFilter(k)}>{t.services[k].name}</button>
@@ -87,7 +78,6 @@ export default function Testimonials({ testimonials, t, lang }: Props) {
             {done && <div className="form-success">✓ {tt.thanks}</div>}
           </div>
         </form>
-      </div>
-    </section>
+    </>
   );
 }

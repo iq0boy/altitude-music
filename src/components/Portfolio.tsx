@@ -49,17 +49,8 @@ export default function Portfolio({ tracks, t, lang, layout = 'list' }: Props) {
   }, [playing]);
 
   return (
-    <section className="section" id="work" style={{ borderTop: '1px solid var(--line)' }}>
-      <div className="container">
-        <div className="section-head">
-          <div>
-            <div className="section-tag reveal">// 03</div>
-            <h2 className="section-title reveal">{t.sections.portfolio}</h2>
-          </div>
-          <div className="section-sub reveal">{t.sections.portfolioSub}</div>
-        </div>
-
-        <div className="port-controls">
+    <>
+      <div className="port-controls">
           <span style={{ alignSelf: 'center', fontSize: 11, color: 'var(--fg-3)', letterSpacing: '0.1em', textTransform: 'uppercase', marginRight: 8 }}>
             {tp.filter} ▸
           </span>
@@ -132,7 +123,6 @@ export default function Portfolio({ tracks, t, lang, layout = 'list' }: Props) {
             </a>
           </div>
         )}
-      </div>
-    </section>
+    </>
   );
 }
