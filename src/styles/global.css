@@ -187,12 +187,20 @@ img, video { display: block; max-width: 100%; }
 @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
 
 /* === SERVICES === */
-.services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); }
-@media (max-width: 900px) { .services-grid { grid-template-columns: 1fr; } }
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1px; background: var(--line); border: 1px solid var(--line);
+}
+@media (max-width: 1024px) { .services-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 600px)  { .services-grid { grid-template-columns: 1fr; } }
 .service-card {
   background: var(--bg); padding: 36px 32px; position: relative;
-  display: flex; flex-direction: column; gap: 24px; min-height: 320px; transition: background .2s;
+  display: flex; flex-direction: column; gap: 24px; min-height: 320px;
+  min-width: 0; transition: background .2s;
 }
+@media (max-width: 1024px) { .service-card { padding: 28px 24px; } }
+@media (max-width: 600px)  { .service-card { padding: 24px 20px; min-height: 0; } }
 .service-card:hover { background: var(--bg-2); }
 .service-card.popular::before {
   content: attr(data-popular); position: absolute; top: 16px; right: 16px;
@@ -200,7 +208,11 @@ img, video { display: block; max-width: 100%; }
   background: var(--accent); color: #0a0a0a; padding: 4px 8px; border-radius: 3px;
 }
 .service-num { font-family: var(--mono); font-size: 11px; color: var(--fg-3); letter-spacing: 0.14em; }
-.service-name { font-family: var(--display); font-size: 32px; font-weight: 500; letter-spacing: -0.02em; line-height: 1; }
+.service-name {
+  font-family: var(--display); font-size: clamp(22px, 2.4vw, 32px);
+  font-weight: 500; letter-spacing: -0.02em; line-height: 1.05;
+  text-wrap: balance; overflow-wrap: break-word; hyphens: auto;
+}
 .service-desc { color: var(--fg-2); font-size: 14px; line-height: 1.5; flex: 1; }
 .service-price { display: flex; align-items: baseline; gap: 8px; border-top: 1px dashed var(--line); padding-top: 20px; }
 .service-price .from { font-family: var(--mono); font-size: 11px; color: var(--fg-3); letter-spacing: 0.1em; text-transform: uppercase; }
