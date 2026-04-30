@@ -1,0 +1,61 @@
+---
+import type { Translations } from '../i18n/utils';
+
+interface Props { t: Translations; heroVariant?: 'video' | 'minimal'; }
+const { t, heroVariant = 'video' } = Astro.props;
+
+function splitText(text: string, delay = 0, step = 0.025) {
+  return Array.from(text).map((c, i) => ({ char: c === ' ' ? ' ' : c, delay: delay + i * step }));
+}
+const chars = splitText(t.hero.title, 0.2, 0.025);
+---
+<section class="hero" id="top">
+  {heroVariant !== 'minimal' && (
+    <video
+      class="hero-video"
+      autoplay loop muted playsinline
+      src="https://altitudemusic.be/wp-content/uploads/2025/08/altitude.webm#t=1"
+    />
+  )}
+  <div class="hero-video-overlay" />
+  <div class="hero-grain" />
+  <div class="hero-inner">
+    <div class="hero-tag"><span class="dot" />{t.hero.tag}</div>
+    <h1 class="hero-title" aria-label={t.hero.title}>
+      {chars.map(({ char, delay }) => (
+        <span class="split-char" aria-hidden="true" style={`animation-delay:${delay}s`}>{char}</span>
+      ))}
+    </h1>
+    <p class="hero-sub">{t.hero.sub}</p>
+    <div class="hero-cta">
+      <a href="#booking" class="btn">{t.hero.cta1}</a>
+      <a href="#work" class="btn ghost">{t.hero.cta2}</a>
+    </div>
+  </div>
+  <div class="hero-bottom">
+    <div class="hero-bottom-inner">
+      <div class="hero-meters">
+        <div class="meter">
+          {[0, 0.1, 0.2, 0.3, 0.4].map(d => <span style={`animation-delay:${d}s`} />)}
+        </div>
+        <span>{t.hero.live}</span>
+      </div>
+      <div style="display:flex;gap:24px">
+        <span>● REC</span>
+        <span id="hero-clock">00:00:00 CET</span>
+        <span class="col-hide">{t.hero.meta}</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const el = document.getElementById('hero-clock');
+  if (el) {
+    const tick = () => {
+      el.textContent = new Date().toLocaleTimeString('fr-BE', { hour: '2-digit', minute: '2-digit', second: '2-digit' }) + ' CET';
+    };
+    tick();
+    setInterval(tick, 1000);
+  }
+</script>

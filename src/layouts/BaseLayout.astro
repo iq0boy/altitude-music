@@ -1,0 +1,145 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  lang: string;
+  title: string;
+  description: string;
+  canonicalPath?: string;
+  ogImage?: string;
+  ogType?: 'website' | 'article';
+  article?: {
+    publishedTime: string;
+    tag?: string;
+  };
+  jsonLd?: Record<string, unknown>;
+}
+
+const SITE = 'https://altitudemusic.be';
+const DEFAULT_OG = '/og-default.jpg';
+
+const {
+  lang,
+  title,
+  description,
+  canonicalPath,
+  ogImage = DEFAULT_OG,
+  ogType = 'website',
+  article,
+  jsonLd,
+} = Astro.props;
+
+const canonical = `${SITE}${canonicalPath ?? Astro.url.pathname}`;
+const ogImageAbs = ogImage.startsWith('http') ? ogImage : `${SITE}${ogImage}`;
+const langs = ['fr', 'en', 'nl'];
+const ogLocale = lang === 'fr' ? 'fr_BE' : lang === 'nl' ? 'nl_BE' : 'en_BE';
+const altLocales = langs.filter(l => l !== lang).map(l => l === 'fr' ? 'fr_BE' : l === 'nl' ? 'nl_BE' : 'en_BE');
+
+const studioJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'MusicRecordingStudio',
+  '@id': `${SITE}/#studio`,
+  name: 'Altitude Music',
+  alternateName: 'Altitude Music ASBL',
+  url: SITE,
+  logo: `${SITE}/favicon.svg`,
+  image: ogImageAbs,
+  email: 'altitudemusic13@gmail.com',
+  telephone: '+32-400-00-00-00',
+  priceRange: '€€',
+  foundingDate: '2018',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: '6, Rue Louis de Geer',
+    addressLocality: 'Ottignies–Louvain-la-Neuve',
+    postalCode: '1348',
+    addressCountry: 'BE',
+  },
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: 50.6705,
+    longitude: 4.6150,
+  },
+  openingHoursSpecification: [
+    {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+      opens: '10:00',
+      closes: '22:00',
+    },
+  ],
+  sameAs: [
+    'https://www.instagram.com/alt_itude.music/',
+    'https://www.tiktok.com/@altitudemusic13',
+    'https://open.spotify.com/playlist/5WLi8GndFcqKUgNoIuDeEE',
+  ],
+  areaServed: { '@type': 'Country', name: 'Belgium' },
+};
+---
+<!doctype html>
+<html lang={lang} data-theme="dark" data-density="comfy" data-anim="on">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0a0a0a" />
+  <meta name="format-detection" content="telephone=no" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <link rel="canonical" href={canonical} />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content={ogType} />
+  <meta property="og:site_name" content="Altitude Music" />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:url" content={canonical} />
+  <meta property="og:image" content={ogImageAbs} />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:locale" content={ogLocale} />
+  {altLocales.map(l => <meta property="og:locale:alternate" content={l} />)}
+  {article && <meta property="article:published_time" content={article.publishedTime} />}
+  {article?.tag && <meta property="article:section" content={article.tag} />}
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content={ogImageAbs} />
+
+  <!-- hreflang -->
+  {langs.map(l => (
+    <link rel="alternate" hreflang={l === 'fr' ? 'fr-BE' : l === 'en' ? 'en-BE' : 'nl-BE'} href={`${SITE}/${l}/`} />
+  ))}
+  <link rel="alternate" hreflang="x-default" href={`${SITE}/fr/`} />
+
+  <!-- JSON-LD -->
+  <script type="application/ld+json" set:html={JSON.stringify(studioJsonLd)} />
+  {jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="icon" href="/favicon.ico" />
+
+  <!-- Font preload -->
+  <link rel="preload" href="/fonts/Satoshi-Variable.ttf" as="font" type="font/ttf" crossorigin />
+  <link rel="preload" href="/fonts/ClashDisplay-Variable.ttf" as="font" type="font/ttf" crossorigin />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" />
+
+  <meta name="generator" content={Astro.generator} />
+</head>
+<body>
+  <slot />
+
+  <script>
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -10% 0px' });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  </script>
+</body>
+</html>

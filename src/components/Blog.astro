@@ -1,0 +1,29 @@
+---
+import SectionHead from './SectionHead.astro';
+import type { Translations, Lang } from '../i18n/utils';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  t: Translations;
+  lang: Lang;
+  posts: CollectionEntry<'blog'>[];
+}
+const { t, lang, posts } = Astro.props;
+---
+<section class="section" id="blog" style="border-top:1px solid var(--line)">
+  <div class="container">
+    <SectionHead tag="// 07" title={t.sections.blog} sub={t.sections.blogSub} />
+    <div class="blog-grid">
+      {posts.map(p => (
+        <a href={`/${lang}/blog/${p.data.postSlug}/`} class="blog-card">
+          <span class="tag">{p.data.tag}</span>
+          <h3>{p.data.title}</h3>
+          <div class="meta">
+            <span>{p.data.date}</span>
+            <span>{p.data.readMin} {t.blog.min}</span>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>

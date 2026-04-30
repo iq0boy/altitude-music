@@ -1,0 +1,89 @@
+{
+  "meta": {
+    "title": "Altitude Music — Opnamestudio, Mix & Mastering | Louvain-la-Neuve",
+    "description": "Altitude Music studio in Louvain-la-Neuve. Opname, mix, mastering, productie op maat, cover art, artistieke begeleiding."
+  },
+  "nav": { "work": "Werk", "services": "Diensten", "about": "Over ons", "blog": "Journaal", "contact": "Contact", "book": "Boeken" },
+  "hero": {
+    "tag": "STUDIO // LOUVAIN-LA-NEUVE // EST. 2018",
+    "title": "Geluid dat op jou lijkt.",
+    "sub": "Opname, mix, mastering en productie op maat. We vangen jouw wereld en tillen die hoger.",
+    "cta1": "Sessie boeken",
+    "cta2": "Luister naar het werk",
+    "live": "LIVE UIT DE STUDIO",
+    "meta": "ALTITUDE.MUSIC // V.026"
+  },
+  "marquee": ["OPNAME", "MIX & MASTER", "PRODUCTIE", "COVER ART", "LOUVAIN-LA-NEUVE", "EST. 2018"],
+  "sections": {
+    "services": "Diensten & Tarieven",
+    "servicesSub": "Heldere pakketten, offertes op maat voor ambitieuze projecten.",
+    "portfolio": "Portfolio",
+    "portfolioSub": "De Altitude-playlist — projecten van demo tot master.",
+    "videos": "Video's",
+    "videosSub": "Sessies, clips, behind the scenes.",
+    "about": "Over ons",
+    "aboutSub": "Een collectief, een studio, een missie.",
+    "testimonials": "Zij tekenden",
+    "testimonialsSub": "Wat de artiesten waarmee we werken zeggen.",
+    "blog": "Journaal",
+    "blogSub": "Studionotities — tips, releases, sessies.",
+    "booking": "Afspraak maken",
+    "bookingSub": "Kies je moment. Gesynchroniseerd met de studiokalender.",
+    "contact": "Contact",
+    "contactSub": "We antwoorden binnen 24u. WhatsApp voor het snelste antwoord."
+  },
+  "services": {
+    "rec":   { "name": "Opname",            "desc": "Zang, instrumenten, live sessies. Behandelde cabine, condensator- en lintmicrofoons.", "unit": "/ sessie 4u" },
+    "mix":   { "name": "Mix & Master",      "desc": "Hybride analoge mix, loudness-aware mastering. Revisies inbegrepen.",                  "unit": "/ track" },
+    "cover": { "name": "Cover Art",         "desc": "Art direction, foto, design. Van single tot EP — wij bouwen je beeld.",                "unit": "/ artwork" },
+    "prod":  { "name": "Productie op maat", "desc": "Beats, instrumentalen, arrangementen. We bouwen rond jouw stem.",                      "unit": "/ beat" },
+    "coach": { "name": "Begeleiding",       "desc": "Releasestrategie, distributie, podiumprestatie. Langetermijnsteun.",                   "unit": "/ maand" },
+    "book":  { "name": "Studio Tour",       "desc": "Bezoek de studio, luister, brief je project. Koffie van het huis.",                    "unit": "gratis" }
+  },
+  "servicesUI": { "from": "Vanaf", "quote": "Op aanvraag", "cta": "Boeken", "popular": "POPULAIR" },
+  "portfolio": { "filter": "Filter", "all": "Alles", "play": "PLAY", "pause": "PAUZE", "open": "Open in Spotify", "duration": "DUUR", "bpm": "BPM", "genre": "GENRE" },
+  "testi": {
+    "formTitle": "Laat je getuigenis achter", "name": "Naam / Alias", "role": "Project / Rol",
+    "service": "Gebruikte dienst", "message": "Jouw feedback", "rating": "Score",
+    "submit": "Versturen", "thanks": "Bedankt! We bekijken het en publiceren.", "filterAll": "Alles", "ratedFor": "Over"
+  },
+  "serviceDetail": {
+    "back": "← Terug naar diensten", "gallery": "Galerij", "video": "Video", "pricing": "Tarief",
+    "whatYouGet": "Wat je krijgt", "reviews": "Beoordelingen voor deze dienst", "noReviews": "Nog geen beoordelingen voor deze dienst.",
+    "bookNow": "Nu boeken", "learnMore": "Meer info →", "includes": "Inbegrepen", "cta": "Laten we over je project praten"
+  },
+  "serviceIncludes": {
+    "rec":   ["Akoestisch behandelde cabine", "Technicus inbegrepen", "Multitrack WAV 24-bit", "30 dagen projectbackup"],
+    "mix":   ["Hybride analoge mix", "Mastering inbegrepen", "2 revisies", "Stems geleverd"],
+    "cover": ["Moodboard & art direction", "Fotoshoot", "DSP-aanpassingen", "3 revisies"],
+    "prod":  ["Exclusieve beat", "WAV stems", "Onderhandelbare credits", "Optionele toplines"],
+    "coach": ["1 sessie/week", "Releasestrategie", "Distributie inbegrepen", "WhatsApp support 7/7"],
+    "book":  ["Studio tour", "Gear beluisteren", "Projectbriefing", "Koffie van het huis"]
+  },
+  "contactForm": {
+    "name": "Naam", "email": "Email", "project": "Type project", "message": "Bericht",
+    "send": "Versturen", "whatsapp": "WhatsApp openen", "sent": "Bericht verzonden. Tot snel.",
+    "types": ["Opname", "Mix & Master", "Productie", "Cover Art", "Andere"]
+  },
+  "booking": {
+    "pickDate": "Kies een datum", "pickTime": "Kies een tijdslot", "duration": "Duur", "service": "Dienst",
+    "confirm": "Boeking bevestigen", "booked": "Boeking bevestigd. Bevestiging per email.", "tz": "Brusselse tijd",
+    "slots": ["10:00", "11:30", "14:00", "15:30", "17:00", "18:30"],
+    "durations": ["1u", "2u", "4u", "Volle dag"]
+  },
+  "blog": { "read": "Lezen", "min": "min" },
+  "chat": { "title": "Altitude Studio", "online": "Online", "placeholder": "Typ een bericht...", "whatsapp": "Verder op WhatsApp", "open": "Chat met ons" },
+  "footer": { "rights": "Alle rechten voorbehouden", "made": "Ontworpen en gemasterd in Louvain-la-Neuve" },
+  "about": {
+    "story": "Over ons",
+    "storyText": "Altitude Music werd in 2023 opgericht als vzw, maar het collectief bestaat sinds 2018. Sindsdien zijn we een sleutelspeler in de muziekscene van Louvain-la-Neuve. Onze missie is het artistieke potentieel van jongeren te ondersteunen en te ontwikkelen, met hiphop als middel van artistieke expressie.",
+    "team": "Het team",
+    "teamText": "Productie, mix, master, cover art, clips… Ons team brengt alles samen om je project vooruit te helpen, van geluid tot beeld.",
+    "stats": [
+      { "n": "200+", "l": "Tracks gemasterd" },
+      { "n": "07",   "l": "Jaren actief" },
+      { "n": "40+",  "l": "Artiesten begeleid" },
+      { "n": "24/7", "l": "Studio beschikbaar" }
+    ]
+  }
+}

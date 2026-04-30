@@ -1,0 +1,33 @@
+---
+import type { Translations } from '../i18n/utils';
+import type { Lang } from '../i18n/utils';
+
+interface Props { lang: Lang; t: Translations['nav']; }
+const { lang, t } = Astro.props;
+---
+<nav class="nav">
+  <div class="nav-inner">
+    <a href={`/${lang}/`} class="logo">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M3 20 L9 4 L15 20 M5 14 H13" stroke-linecap="square" stroke-linejoin="miter" />
+        <circle cx="19" cy="6" r="2" fill="var(--accent)" stroke="none" />
+      </svg>
+      ALTITUDE.MUSIC
+    </a>
+    <div class="nav-links">
+      <a href="#work">{t.work}</a>
+      <a href="#services">{t.services}</a>
+      <a href="#about">{t.about}</a>
+      <a href={`/${lang}/blog/`}>{t.blog}</a>
+      <a href="#contact">{t.contact}</a>
+    </div>
+    <div class="nav-right">
+      <div class="lang-switch">
+        {(['fr', 'en', 'nl'] as const).map(l => (
+          <a href={`/${l}/`} class={lang === l ? 'active' : ''}>{l.toUpperCase()}</a>
+        ))}
+      </div>
+      <a href="#booking" class="btn accent">{t.book}</a>
+    </div>
+  </div>
+</nav>

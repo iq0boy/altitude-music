@@ -1,0 +1,53 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Nav from '../../../components/Nav.astro';
+import Footer from '../../../components/Footer.astro';
+import { getCollection } from 'astro:content';
+import { getTranslations, LANGS } from '../../../i18n/utils';
+import type { Lang } from '../../../i18n/utils';
+
+export async function getStaticPaths() {
+  const allPosts = await getCollection('blog');
+  return LANGS.map(lang => ({
+    params: { lang },
+    props: {
+      posts: allPosts
+        .filter(p => p.data.lang === lang)
+        .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime()),
+    },
+  }));
+}
+
+const { lang } = Astro.params as { lang: Lang };
+const { posts } = Astro.props;
+const t = getTranslations(lang);
+---
+
+<BaseLayout lang={lang} title={`${t.sections.blog} — Altitude Music`} description={t.sections.blogSub}>
+  <Nav lang={lang} t={t.nav} />
+  <main style="padding-top: 80px;">
+    <div class="container" style="padding-top: var(--pad-y); padding-bottom: var(--pad-y);">
+      <div class="section-head" style="margin-bottom: 48px;">
+        <div>
+          <div class="section-tag">// JOURNAL</div>
+          <h1 class="section-title">{t.sections.blog}</h1>
+        </div>
+        <div class="section-sub">{t.sections.blogSub}</div>
+      </div>
+      <div class="blog-grid">
+        {posts.map(p => (
+          <a href={`/${lang}/blog/${p.data.postSlug}/`} class="blog-card">
+            <span class="tag">{p.data.tag}</span>
+            <h2 style="font-family:var(--display);font-size:20px;font-weight:500;line-height:1.2;letter-spacing:-0.01em;flex:1;text-wrap:balance">{p.data.title}</h2>
+            {p.data.excerpt && <p style="color:var(--fg-2);font-size:14px;line-height:1.5">{p.data.excerpt}</p>}
+            <div class="meta">
+              <span>{p.data.date}</span>
+              <span>{p.data.readMin} {t.blog.min}</span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </main>
+  <Footer t={t} lang={lang} />
+</BaseLayout>

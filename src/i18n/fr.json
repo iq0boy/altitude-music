@@ -1,0 +1,89 @@
+{
+  "meta": {
+    "title": "Altitude Music — Studio d'enregistrement, mix & mastering | Louvain-la-Neuve",
+    "description": "Studio Altitude Music à Louvain-la-Neuve. Enregistrement, mix, mastering, production sur-mesure, pochettes, accompagnement artistique."
+  },
+  "nav": { "work": "Travaux", "services": "Services", "about": "À propos", "blog": "Journal", "contact": "Contact", "book": "Prendre RDV" },
+  "hero": {
+    "tag": "STUDIO // LOUVAIN-LA-NEUVE // EST. 2018",
+    "title": "Le son qui te ressemble.",
+    "sub": "Studio d'enregistrement, mix, mastering et production sur-mesure. On capture ton univers, on le pousse plus haut.",
+    "cta1": "Réserver une session",
+    "cta2": "Écouter le portfolio",
+    "live": "EN DIRECT DU STUDIO",
+    "meta": "ALTITUDE.MUSIC // V.026"
+  },
+  "marquee": ["ENREGISTREMENT", "MIX & MASTER", "PRODUCTION", "POCHETTES", "LOUVAIN-LA-NEUVE", "EST. 2018"],
+  "sections": {
+    "services": "Services & Tarifs",
+    "servicesSub": "Forfaits clairs, devis sur mesure pour les projets ambitieux.",
+    "portfolio": "Portfolio",
+    "portfolioSub": "La playlist Altitude — des projets qu'on a portés du démo au master.",
+    "videos": "Vidéos",
+    "videosSub": "Sessions, clips, behind the scenes.",
+    "about": "À propos",
+    "aboutSub": "Un collectif, un studio, une mission.",
+    "testimonials": "Ils ont signé",
+    "testimonialsSub": "Ce que disent les artistes qu'on accompagne.",
+    "blog": "Journal",
+    "blogSub": "Notes du studio — tips, sorties, sessions.",
+    "booking": "Prendre rendez-vous",
+    "bookingSub": "Choisis ton créneau. Synchronisé au calendrier du studio.",
+    "contact": "Contact",
+    "contactSub": "On répond dans les 24h. WhatsApp pour le plus rapide."
+  },
+  "services": {
+    "rec":   { "name": "Enregistrement",   "desc": "Voix, instruments, sessions live. Cabine traitée, micros condensateurs et rubans.", "unit": "/ session 4h" },
+    "mix":   { "name": "Mix & Master",     "desc": "Mix analogique-hybride, mastering loudness-aware. Révisions incluses.",             "unit": "/ titre" },
+    "cover": { "name": "Pochettes",        "desc": "Direction artistique, photo, design. Du single à l'EP, on construit ton image.",    "unit": "/ artwork" },
+    "prod":  { "name": "Prod sur-mesure",  "desc": "Beats, instrumentaux, arrangements. On compose autour de ta voix.",                 "unit": "/ instru" },
+    "coach": { "name": "Accompagnement",   "desc": "Stratégie release, distribution, performance scénique. On te suit sur la durée.",   "unit": "/ mois" },
+    "book":  { "name": "Prendre RDV",      "desc": "Visite du studio, écoute, brief de projet. Café offert.",                           "unit": "gratuit" }
+  },
+  "servicesUI": { "from": "À partir de", "quote": "Sur devis", "cta": "Réserver", "popular": "POPULAIRE" },
+  "portfolio": { "filter": "Filtrer", "all": "Tout", "play": "PLAY", "pause": "PAUSE", "open": "Ouvrir dans Spotify", "duration": "DURÉE", "bpm": "BPM", "genre": "GENRE" },
+  "testi": {
+    "formTitle": "Laisse ton témoignage", "name": "Ton nom / Alias", "role": "Projet / Rôle",
+    "service": "Service utilisé", "message": "Ton retour", "rating": "Note",
+    "submit": "Envoyer", "thanks": "Merci ! On valide et on publie.", "filterAll": "Tout", "ratedFor": "À propos de"
+  },
+  "serviceDetail": {
+    "back": "← Retour aux services", "gallery": "Galerie", "video": "Vidéo", "pricing": "Tarification",
+    "whatYouGet": "Ce que tu obtiens", "reviews": "Avis sur ce service", "noReviews": "Pas encore d'avis pour ce service.",
+    "bookNow": "Réserver maintenant", "learnMore": "En savoir plus →", "includes": "Inclus", "cta": "Discutons de ton projet"
+  },
+  "serviceIncludes": {
+    "rec":   ["Cabine traitée acoustique", "Ingé son inclus", "Multi-pistes WAV 24-bit", "Sauvegarde projet 30 jours"],
+    "mix":   ["Mix hybride analogique", "Mastering inclus", "2 révisions", "Stems livrés"],
+    "cover": ["Moodboard & DA", "Shooting photo", "Adaptations DSP", "3 révisions"],
+    "prod":  ["Beat exclusif", "Stems WAV", "Crédits négociables", "Toplines optionnelles"],
+    "coach": ["1 session/semaine", "Stratégie release", "Distribution incluse", "Suivi WhatsApp 7/7"],
+    "book":  ["Visite du studio", "Écoute du matériel", "Brief de projet", "Café offert"]
+  },
+  "contactForm": {
+    "name": "Nom", "email": "Email", "project": "Type de projet", "message": "Message",
+    "send": "Envoyer", "whatsapp": "Ouvrir WhatsApp", "sent": "Message envoyé. À très vite.",
+    "types": ["Enregistrement", "Mix & Master", "Production", "Pochette", "Autre"]
+  },
+  "booking": {
+    "pickDate": "Choisis une date", "pickTime": "Choisis un créneau", "duration": "Durée", "service": "Service",
+    "confirm": "Confirmer le RDV", "booked": "RDV confirmé. Confirmation par email.", "tz": "Heure de Bruxelles",
+    "slots": ["10:00", "11:30", "14:00", "15:30", "17:00", "18:30"],
+    "durations": ["1h", "2h", "4h", "Journée"]
+  },
+  "blog": { "read": "Lire", "min": "min" },
+  "chat": { "title": "Studio Altitude", "online": "En ligne", "placeholder": "Écris ton message...", "whatsapp": "Continuer sur WhatsApp", "open": "Discuter avec nous" },
+  "footer": { "rights": "Tous droits réservés", "made": "Conçu et masterisé à Louvain-la-Neuve" },
+  "about": {
+    "story": "À propos",
+    "storyText": "Altitude Music a été fondée en 2023 en tant qu'asbl, mais le collectif existe depuis 2018. Depuis lors, nous sommes un acteur clé de la scène musicale de Louvain-la-Neuve. Notre mission est de soutenir et de développer le potentiel artistique des jeunes, en mettant en avant la musique hip-hop comme moyen d'expression artistique.",
+    "team": "L'équipe",
+    "teamText": "Prod, mix, master, pochette, clip… Notre équipe réunit tout pour faire avancer ton projet, du son à l'image.",
+    "stats": [
+      { "n": "200+", "l": "Titres masterisés" },
+      { "n": "07",   "l": "Ans d'activité" },
+      { "n": "40+",  "l": "Artistes accompagnés" },
+      { "n": "24/7", "l": "Studio dispo" }
+    ]
+  }
+}

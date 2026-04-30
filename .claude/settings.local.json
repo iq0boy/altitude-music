@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install *)",
+      "Bash(npx astro *)",
+      "Bash(mkdir -p public/fonts)",
+      "Bash(cp -v \"website/fonts/\"*.ttf public/fonts/)",
+      "Bash(npm run *)",
+      "Bash(curl -s -o /dev/null -w \"fr root: %{http_code}\\\\n\" http://localhost:4321/fr/)",
+      "Bash(curl -s -o /dev/null -w \"en blog: %{http_code}\\\\n\" http://localhost:4321/en/blog/)",
+      "Bash(curl -s -o /dev/null -w \"post: %{http_code}\\\\n\" http://localhost:4321/fr/blog/tips-mix-errors/)",
+      "Bash(curl -s -o /dev/null -w \"redirect /: %{http_code}\\\\n\" http://localhost:4321/)",
+      "Bash(curl -s http://localhost:4321/fr/)",
+      "Read(//tmp/**)",
+      "Bash(curl -s http://localhost:4321/fr/blog/tips-mix-errors/)",
+      "Bash(taskkill //IM node.exe //F)"
+    ]
+  }
+}

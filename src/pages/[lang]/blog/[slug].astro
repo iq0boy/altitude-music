@@ -1,0 +1,69 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Nav from '../../../components/Nav.astro';
+import Footer from '../../../components/Footer.astro';
+import { getCollection, render } from 'astro:content';
+import { getTranslations, LANGS } from '../../../i18n/utils';
+import type { Lang } from '../../../i18n/utils';
+
+export async function getStaticPaths() {
+  const allPosts = await getCollection('blog');
+  return allPosts.map(entry => ({
+    params: { lang: entry.data.lang, slug: entry.data.postSlug },
+    props: { entry },
+  }));
+}
+
+const { lang } = Astro.params as { lang: Lang };
+const { entry } = Astro.props;
+const t = getTranslations(lang);
+const { Content } = await render(entry);
+
+const SITE = 'https://altitudemusic.be';
+const url = `${SITE}/${lang}/blog/${entry.data.postSlug}/`;
+const description = entry.data.excerpt ?? entry.data.title;
+
+const blogJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  '@id': `${url}#article`,
+  headline: entry.data.title,
+  description,
+  datePublished: entry.data.date,
+  dateModified: entry.data.date,
+  inLanguage: lang === 'fr' ? 'fr-BE' : lang === 'nl' ? 'nl-BE' : 'en-BE',
+  articleSection: entry.data.tag,
+  url,
+  mainEntityOfPage: { '@type': 'WebPage', '@id': url },
+  author: { '@id': `${SITE}/#studio`, '@type': 'Organization', name: 'Altitude Music' },
+  publisher: { '@id': `${SITE}/#studio` },
+};
+---
+
+<BaseLayout
+  lang={lang}
+  title={`${entry.data.title} — Altitude Music`}
+  description={description}
+  ogType="article"
+  article={{ publishedTime: entry.data.date, tag: entry.data.tag }}
+  jsonLd={blogJsonLd}
+>
+  <Nav lang={lang} t={t.nav} />
+  <main style="padding-top: 80px;">
+    <article class="container" style="padding-top: var(--pad-y); padding-bottom: var(--pad-y);">
+      <a href={`/${lang}/blog/`} style="font-family:var(--mono);font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--fg-3);display:inline-block;margin-bottom:32px">← {t.nav.blog}</a>
+      <div style="margin-bottom: 32px;">
+        <span class="tag" style="font-family:var(--mono);font-size:10px;letter-spacing:0.16em;color:var(--accent);text-transform:uppercase">{entry.data.tag}</span>
+        <h1 style="font-family:var(--display);font-size:clamp(36px,6vw,72px);font-weight:500;letter-spacing:-0.03em;line-height:1;margin:16px 0 24px;text-wrap:balance">{entry.data.title}</h1>
+        <div style="font-family:var(--mono);font-size:11px;color:var(--fg-3);letter-spacing:0.1em;text-transform:uppercase;display:flex;gap:24px">
+          <span>{entry.data.date}</span>
+          <span>{entry.data.readMin} {t.blog.min}</span>
+        </div>
+      </div>
+      <div class="prose">
+        <Content />
+      </div>
+    </article>
+  </main>
+  <Footer t={t} lang={lang} />
+</BaseLayout>

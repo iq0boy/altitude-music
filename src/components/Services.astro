@@ -1,0 +1,41 @@
+---
+import SectionHead from './SectionHead.astro';
+import type { Translations } from '../i18n/utils';
+import { SERVICE_KEYS, DEFAULT_PRICES } from '../data/services';
+
+interface Props { t: Translations; prices?: Record<string, number>; }
+const { t, prices = DEFAULT_PRICES } = Astro.props;
+---
+<section class="section" id="services">
+  <div class="container">
+    <SectionHead tag="// 02" title={t.sections.services} sub={t.sections.servicesSub} />
+    <div class="services-grid">
+      {SERVICE_KEYS.map((k, i) => {
+        const s = t.services[k];
+        const p = prices[k];
+        const popular = k === 'mix';
+        return (
+          <div class={`service-card ${popular ? 'popular' : ''}`} data-popular={t.servicesUI.popular}>
+            <div class="service-num">SVC / {String(i + 1).padStart(2, '0')}</div>
+            <div class="service-name">{s.name}</div>
+            <div class="service-desc">{s.desc}</div>
+            <div class="service-price">
+              {p === 0 ? (
+                <span class="num">{s.unit}</span>
+              ) : p === -1 ? (
+                <span class="num">{t.servicesUI.quote}</span>
+              ) : (
+                <>
+                  <span class="from">{t.servicesUI.from}</span>
+                  <span class="num">€{p}</span>
+                  <span class="unit">{s.unit}</span>
+                </>
+              )}
+            </div>
+            <a href={`#service/${k}`} class="service-cta">{t.serviceDetail.learnMore}</a>
+          </div>
+        );
+      })}
+    </div>
+  </div>
+</section>

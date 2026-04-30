@@ -1,0 +1,37 @@
+---
+import SectionHead from './SectionHead.astro';
+import type { Translations, Lang } from '../i18n/utils';
+import { TEAM } from '../data/team';
+
+interface Props { t: Translations; lang: Lang; }
+const { t, lang } = Astro.props;
+---
+<section class="section" id="about" style="border-top:1px solid var(--line)">
+  <div class="container">
+    <SectionHead tag="// 05" title={t.sections.about} sub={t.sections.aboutSub} />
+    <div class="about-grid">
+      <div class="about-text">
+        <p><strong>{t.about.story}.</strong> {t.about.storyText}</p>
+        <p><strong>{t.about.team}.</strong> {t.about.teamText}</p>
+        <div class="stats">
+          {t.about.stats.map(s => (
+            <div class="stat">
+              <div class="stat-n reveal">{s.n}</div>
+              <div class="stat-l">{s.l}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+      <div class="team-grid">
+        {TEAM.map(m => (
+          <div class="team-card">
+            <div class="team-avatar" style={`--c:${m.color}`}>
+              <span class="name">{m.name}</span>
+            </div>
+            <span class="team-role">{m.role[lang]}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
