@@ -15,7 +15,12 @@ const { t, prices = DEFAULT_PRICES } = Astro.props;
         const p = prices[k];
         const popular = k === 'mix';
         return (
-          <div class={`service-card ${popular ? 'popular' : ''}`} data-popular={t.servicesUI.popular}>
+          <a
+            href={`#service/${k}`}
+            class={`service-card ${popular ? 'popular' : ''}`}
+            data-popular={t.servicesUI.popular}
+            aria-label={`${s.name} — ${t.serviceDetail.learnMore}`}
+          >
             <div class="service-num">SVC / {String(i + 1).padStart(2, '0')}</div>
             <div class="service-name">{s.name}</div>
             <div class="service-desc">{s.desc}</div>
@@ -32,8 +37,8 @@ const { t, prices = DEFAULT_PRICES } = Astro.props;
                 </>
               )}
             </div>
-            <a href={`#service/${k}`} class="service-cta">{t.serviceDetail.learnMore}</a>
-          </div>
+            <span class="service-cta">{t.serviceDetail.learnMore}</span>
+          </a>
         );
       })}
     </div>
