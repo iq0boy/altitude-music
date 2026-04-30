@@ -30,14 +30,14 @@ const portfolio = defineCollection({
   }),
 });
 
-const instagram = defineCollection({
-  loader: glob({ pattern: '**/*.md', base: './src/content/instagram' }),
+const social = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/social' }),
   schema: z.object({
     url: z.string().url(),
-    kind: z.enum(['CLIP', 'SESSION', 'BTS', 'REEL']),
+    kind: z.string(),
     aspect: z.string().default('9/16'),
     sortOrder: z.number(),
   }),
 });
 
-export const collections = { blog, portfolio, instagram };
+export const collections = { blog, portfolio, social };
