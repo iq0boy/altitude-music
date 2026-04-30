@@ -9,7 +9,7 @@ import Blog from '../../components/Blog.astro';
 import Footer from '../../components/Footer.astro';
 import SectionHead from '../../components/SectionHead.astro';
 import Portfolio from '../../components/Portfolio';
-import Videos from '../../components/Videos';
+import InstagramFeed from '../../components/InstagramFeed.astro';
 import Testimonials from '../../components/Testimonials';
 import Booking from '../../components/Booking';
 import Contact from '../../components/Contact';
@@ -18,8 +18,9 @@ import { getCollection } from 'astro:content';
 import { getTranslations, LANGS } from '../../i18n/utils';
 import type { Lang } from '../../i18n/utils';
 import { DEFAULT_PRICES, SERVICE_GALLERY, SERVICE_VIDEOS, SERVICE_LONG, SERVICE_KEYS } from '../../data/services';
-import { VIDEOS } from '../../data/videos';
 import { TESTIMONIALS } from '../../data/testimonials';
+
+const IG_PROFILE = 'https://www.instagram.com/alt_itude.music/';
 
 export function getStaticPaths() {
   return LANGS.map(lang => ({ params: { lang } }));
@@ -38,6 +39,9 @@ const portfolioEntries = await getCollection('portfolio');
 const tracks = portfolioEntries
   .map(e => ({ id: e.id, ...e.data }))
   .sort((a, b) => a.sortOrder - b.sortOrder);
+
+const igPosts = (await getCollection('instagram'))
+  .sort((a, b) => a.data.sortOrder - b.data.sortOrder);
 
 const SITE = 'https://altitudemusic.be';
 const inLanguage = lang === 'fr' ? 'fr-BE' : lang === 'nl' ? 'nl-BE' : 'en-BE';
@@ -95,7 +99,7 @@ const homeJsonLd = {
     <section class="section" id="videos" style="border-top:1px solid var(--line)">
       <div class="container">
         <SectionHead tag="// 04" title={t.sections.videos} sub={t.sections.videosSub} />
-        <Videos videos={VIDEOS} t={t} lang={lang} client:visible />
+        <InstagramFeed posts={igPosts} profileUrl={IG_PROFILE} />
       </div>
     </section>
 

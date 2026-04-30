@@ -30,4 +30,14 @@ const portfolio = defineCollection({
   }),
 });
 
-export const collections = { blog, portfolio };
+const instagram = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/instagram' }),
+  schema: z.object({
+    url: z.string().url(),
+    kind: z.enum(['CLIP', 'SESSION', 'BTS', 'REEL']),
+    aspect: z.string().default('9/16'),
+    sortOrder: z.number(),
+  }),
+});
+
+export const collections = { blog, portfolio, instagram };
