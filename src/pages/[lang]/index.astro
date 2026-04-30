@@ -13,7 +13,6 @@ import Videos from '../../components/Videos';
 import Testimonials from '../../components/Testimonials';
 import Booking from '../../components/Booking';
 import Contact from '../../components/Contact';
-import ChatWidget from '../../components/ChatWidget';
 import ServiceDetail from '../../components/ServiceDetail';
 import { getCollection } from 'astro:content';
 import { getTranslations, LANGS } from '../../i18n/utils';
@@ -126,7 +125,6 @@ const homeJsonLd = {
     </section>
   </main>
   <Footer t={t} lang={lang} />
-  <ChatWidget t={t} lang={lang} client:idle />
   <ServiceDetail
     t={t}
     lang={lang}

@@ -72,7 +72,6 @@
     "durations": ["1h", "2h", "4h", "Journée"]
   },
   "blog": { "read": "Lire", "min": "min" },
-  "chat": { "title": "Studio Altitude", "online": "En ligne", "placeholder": "Écris ton message...", "whatsapp": "Continuer sur WhatsApp", "open": "Discuter avec nous" },
   "footer": { "rights": "Tous droits réservés", "made": "Conçu et masterisé à Louvain-la-Neuve" },
   "about": {
     "story": "À propos",

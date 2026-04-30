@@ -72,7 +72,6 @@
     "durations": ["1u", "2u", "4u", "Volle dag"]
   },
   "blog": { "read": "Lezen", "min": "min" },
-  "chat": { "title": "Altitude Studio", "online": "Online", "placeholder": "Typ een bericht...", "whatsapp": "Verder op WhatsApp", "open": "Chat met ons" },
   "footer": { "rights": "Alle rechten voorbehouden", "made": "Ontworpen en gemasterd in Louvain-la-Neuve" },
   "about": {
     "story": "Over ons",
