@@ -1,0 +1,52 @@
+{
+  "key": "mix",
+  "sortOrder": 2,
+  "price": 30,
+  "popular": true,
+  "name": {
+    "fr": "Mix & Master",
+    "en": "Mix & Master",
+    "nl": "Mix & Master"
+  },
+  "unit": {
+    "fr": "/ session 1h",
+    "en": "/ 1h session",
+    "nl": "/ sessie 1u"
+  },
+  "desc": {
+    "fr": "Mix analogique-hybride, mastering loudness-aware. Révisions incluses.",
+    "en": "Hybrid analog mix, loudness-aware mastering. Revisions included.",
+    "nl": "Hybride analoge mix, loudness-aware mastering. Revisies inbegrepen."
+  },
+  "long": {
+    "fr": "Mix hybride analogique/numérique pour profondeur et caractère. Mastering loudness-aware adapté streaming, vinyle, broadcast. Deux révisions incluses, livrables WAV/MP3/stems. Délai standard : 5 jours ouvrables.",
+    "en": "Hybrid analog/digital mix for depth and character. Loudness-aware mastering adapted to streaming, vinyl, broadcast. Two revisions included, WAV/MP3/stems delivered. Standard turnaround: 5 working days.",
+    "nl": "Hybride analoge/digitale mix voor diepte en karakter. Loudness-aware mastering aangepast aan streaming, vinyl, broadcast. Twee revisies inbegrepen, WAV/MP3/stems geleverd. Standaard doorlooptijd: 5 werkdagen."
+  },
+  "includes": {
+    "fr": [
+      "Mix hybride analogique",
+      "Mastering inclus",
+      "2 révisions",
+      "Stems livrés"
+    ],
+    "en": [
+      "Hybrid analog mix",
+      "Mastering included",
+      "2 revisions",
+      "Stems delivered"
+    ],
+    "nl": [
+      "Hybride analoge mix",
+      "Mastering inbegrepen",
+      "2 revisies",
+      "Stems geleverd"
+    ]
+  },
+  "gallery": [
+    "#3206b8",
+    "#fd5f2e",
+    "#a0d4e6"
+  ],
+  "video": "kJQP7kiw5Fk"
+}

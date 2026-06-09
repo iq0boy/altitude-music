@@ -1,9 +1,14 @@
 ---
 import type { Translations, Lang } from '../i18n/utils';
-import { SERVICE_KEYS } from '../data/services';
+import type { ServiceData } from '../data/services';
+import { getCollection } from 'astro:content';
 
 interface Props { t: Translations; lang: Lang; }
 const { t, lang } = Astro.props;
+
+const services = (await getCollection('services'))
+  .map(e => e.data as ServiceData)
+  .sort((a, b) => a.sortOrder - b.sortOrder);
 ---
 <footer class="footer">
   <div class="container">
@@ -23,8 +28,8 @@ const { t, lang } = Astro.props;
       <div>
         <h5>{t.nav.services}</h5>
         <ul>
-          {SERVICE_KEYS.slice(0, 5).map(k => (
-            <li><a href={`/${lang}/#services`}>{t.services[k].name}</a></li>
+          {services.slice(0, 5).map(s => (
+            <li><a href={`/${lang}/#services`}>{s.name[lang]}</a></li>
           ))}
         </ul>
       </div>

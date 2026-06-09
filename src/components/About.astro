@@ -1,10 +1,10 @@
 ---
 import SectionHead from './SectionHead.astro';
 import type { Translations, Lang } from '../i18n/utils';
-import { TEAM } from '../data/team';
+import type { TeamMember } from '../data/services';
 
-interface Props { t: Translations; lang: Lang; }
-const { t, lang } = Astro.props;
+interface Props { t: Translations; lang: Lang; team: TeamMember[]; }
+const { t, lang, team } = Astro.props;
 ---
 <section class="section" id="about" style="border-top:1px solid var(--line)">
   <div class="container">
@@ -23,13 +23,14 @@ const { t, lang } = Astro.props;
         </div>
       </div>
       <div class="team-grid">
-        {TEAM.map(m => (
-          <div class="team-card">
+        {team.map(m => (
+          <a class="team-card" href={m.instagram} target="_blank" rel="noopener" aria-label={`${m.name} — @${m.handle} · ${m.role[lang]}`}>
             <div class="team-avatar" style={`--c:${m.color}`}>
               <span class="name">{m.name}</span>
             </div>
             <span class="team-role">{m.role[lang]}</span>
-          </div>
+            <span class="team-handle">@{m.handle}</span>
+          </a>
         ))}
       </div>
     </div>

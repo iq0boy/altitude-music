@@ -1,0 +1,12 @@
+{
+  "name": "Zayd",
+  "role": "Producteur",
+  "service": "prod",
+  "rating": 5,
+  "sortOrder": 4,
+  "text": {
+    "fr": "Le mastering envoie. Mes prods sonnent comme à la radio. Mission accomplie.",
+    "en": "The mastering hits. My beats sound radio-ready. Mission accomplished.",
+    "nl": "De mastering knalt. Mijn beats klinken radioklaar. Missie volbracht."
+  }
+}

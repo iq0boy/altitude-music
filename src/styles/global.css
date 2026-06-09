@@ -409,7 +409,9 @@ button:focus-visible, a:focus-visible { outline-offset: 4px; }
 .stat-n { font-family: var(--display); font-size: 48px; font-weight: 500; line-height: 1; letter-spacing: -0.02em; }
 .stat-l { font-family: var(--mono); font-size: 11px; letter-spacing: 0.12em; color: var(--fg-3); margin-top: 8px; text-transform: uppercase; }
 .team-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); }
-.team-card { background: var(--bg); padding: 24px; display: flex; flex-direction: column; gap: 16px; }
+.team-card { background: var(--bg); padding: 24px; display: flex; flex-direction: column; gap: 16px; text-decoration: none; color: inherit; transition: background .2s ease; }
+a.team-card:hover { background: var(--bg-2); }
+a.team-card:hover .team-handle { color: var(--accent); }
 .team-avatar {
   aspect-ratio: 1; position: relative; overflow: hidden; border-radius: 4px;
   display: flex; align-items: end; padding: 16px; color: rgba(0,0,0,0.85);
@@ -418,6 +420,7 @@ button:focus-visible, a:focus-visible { outline-offset: 4px; }
 .team-avatar::after { content: ''; position: absolute; inset: 0; background-image: repeating-linear-gradient(45deg, rgba(0,0,0,0.08) 0 2px, transparent 2px 8px); }
 .team-avatar .name { position: relative; z-index: 2; font-family: var(--display); font-size: 22px; font-weight: 500; }
 .team-role { font-family: var(--mono); font-size: 11px; letter-spacing: 0.12em; color: var(--fg-3); text-transform: uppercase; }
+.team-handle { font-family: var(--mono); font-size: 11px; letter-spacing: 0.04em; color: var(--fg-2); margin-top: -10px; transition: color .2s ease; }
 
 /* === TESTIMONIALS === */
 .testi-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); margin-bottom: 48px; }

@@ -1,0 +1,12 @@
+{
+  "name": "Hoodie",
+  "handle": "hoodie_mojo",
+  "instagram": "https://www.instagram.com/hoodie_mojo/",
+  "color": "#3aa022",
+  "sortOrder": 5,
+  "role": {
+    "fr": "Management",
+    "en": "Management",
+    "nl": "Management"
+  }
+}

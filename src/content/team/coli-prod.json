@@ -1,0 +1,12 @@
+{
+  "name": "Coli",
+  "handle": "Coli_prod",
+  "instagram": "https://www.instagram.com/coli_prod/",
+  "color": "#fd5f2e",
+  "sortOrder": 1,
+  "role": {
+    "fr": "Ingé son / Mix",
+    "en": "Sound Engineer / Mix",
+    "nl": "Geluidstechnicus / Mix"
+  }
+}

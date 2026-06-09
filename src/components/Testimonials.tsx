@@ -1,13 +1,14 @@
 import { useState } from 'react';
 import type { Translations, Lang } from '../i18n/utils';
-import { SERVICE_KEYS } from '../data/services';
+import type { ServiceData } from '../data/services';
 
 interface Testimonial { name: string; role: string; service: string; text: { fr: string; en: string; nl: string }; rating: number; }
 
-interface Props { testimonials: Testimonial[]; t: Translations; lang: Lang; }
+interface Props { testimonials: Testimonial[]; services: ServiceData[]; t: Translations; lang: Lang; }
 
-export default function Testimonials({ testimonials, t, lang }: Props) {
+export default function Testimonials({ testimonials, services, t, lang }: Props) {
   const [items, setItems] = useState(testimonials);
+  const serviceName = (key: string) => services.find(s => s.key === key)?.name[lang] ?? '';
   const [filter, setFilter] = useState('all');
   const [form, setForm] = useState({ name: '', role: '', service: 'rec', message: '', rating: 5 });
   const [done, setDone] = useState(false);
@@ -28,15 +29,15 @@ export default function Testimonials({ testimonials, t, lang }: Props) {
     <>
       <div className="testi-filter">
           <button className={filter === 'all' ? 'active' : ''} onClick={() => setFilter('all')}>{tt.filterAll}</button>
-          {SERVICE_KEYS.filter(k => k !== 'book').map(k => (
-            <button key={k} className={filter === k ? 'active' : ''} onClick={() => setFilter(k)}>{t.services[k].name}</button>
+          {services.filter(s => s.key !== 'book').map(s => (
+            <button key={s.key} className={filter === s.key ? 'active' : ''} onClick={() => setFilter(s.key)}>{s.name[lang]}</button>
           ))}
         </div>
 
         <div className="testi-grid">
           {filtered.slice(0, 6).map((it, i) => (
             <div key={i} className="testi-card">
-              {it.service && <span className="testi-tag">{tt.ratedFor}: {t.services[it.service as keyof typeof t.services]?.name}</span>}
+              {it.service && <span className="testi-tag">{tt.ratedFor}: {serviceName(it.service)}</span>}
               <div className="testi-rating">{'★'.repeat(it.rating)}{'☆'.repeat(5 - it.rating)}</div>
               <p className="testi-text">"{it.text[lang] || it.text.fr}"</p>
               <div className="testi-meta">
@@ -61,7 +62,7 @@ export default function Testimonials({ testimonials, t, lang }: Props) {
           <div>
             <label>{tt.service}</label>
             <select value={form.service} onChange={e => setForm({ ...form, service: e.target.value })}>
-              {SERVICE_KEYS.filter(k => k !== 'book').map(k => <option key={k} value={k}>{t.services[k].name}</option>)}
+              {services.filter(s => s.key !== 'book').map(s => <option key={s.key} value={s.key}>{s.name[lang]}</option>)}
             </select>
           </div>
           <div><label>{tt.message}</label><textarea value={form.message} onChange={e => setForm({ ...form, message: e.target.value })} required /></div>

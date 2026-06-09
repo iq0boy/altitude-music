@@ -1,0 +1,52 @@
+{
+  "key": "coach",
+  "sortOrder": 5,
+  "price": 90,
+  "popular": false,
+  "name": {
+    "fr": "Consulting stratégie",
+    "en": "Strategy Consulting",
+    "nl": "Strategieconsulting"
+  },
+  "unit": {
+    "fr": "/ session",
+    "en": "/ session",
+    "nl": "/ sessie"
+  },
+  "desc": {
+    "fr": "Session d'écoute et audit de ton projet. Stratégie de release, distribution et identité artistique.",
+    "en": "Listening session and audit of your project. Release strategy, distribution and artistic identity.",
+    "nl": "Luistersessie en audit van je project. Releasestrategie, distributie en artistieke identiteit."
+  },
+  "long": {
+    "fr": "Session d'écoute et audit de ton projet au studio. On construit ensemble ta stratégie de release, ton plan de distribution et ton identité artistique. Tu repars avec une feuille de route claire pour ta prochaine sortie.",
+    "en": "Listening session and audit of your project at the studio. Together we build your release strategy, distribution plan and artistic identity. You leave with a clear roadmap for your next drop.",
+    "nl": "Luistersessie en audit van je project in de studio. Samen bouwen we je releasestrategie, distributieplan en artistieke identiteit. Je vertrekt met een duidelijke routekaart voor je volgende release."
+  },
+  "includes": {
+    "fr": [
+      "Session d'écoute studio",
+      "Audit du projet",
+      "Stratégie de release",
+      "Plan de distribution"
+    ],
+    "en": [
+      "Studio listening session",
+      "Project audit",
+      "Release strategy",
+      "Distribution plan"
+    ],
+    "nl": [
+      "Studio luistersessie",
+      "Projectaudit",
+      "Releasestrategie",
+      "Distributieplan"
+    ]
+  },
+  "gallery": [
+    "#3aa022",
+    "#ffff00",
+    "#fd5f2e"
+  ],
+  "video": "dQw4w9WgXcQ"
+}

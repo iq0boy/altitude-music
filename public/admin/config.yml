@@ -1,0 +1,244 @@
+# Sveltia CMS — configuration
+# Doc : https://sveltiacms.app/en/docs
+#
+# Auth : backend GitHub via le provider OAuth natif de Netlify (aucun relay à héberger).
+# Voir docs/cms-setup.md pour la mise en route (OAuth App GitHub + lien Netlify).
+
+backend:
+  name: github
+  repo: iq0boy/altitude-music
+  branch: main
+  commit_messages:
+    create: 'cms: créer {{collection}} "{{slug}}"'
+    update: 'cms: mettre à jour {{collection}} "{{slug}}"'
+    delete: 'cms: supprimer {{collection}} "{{slug}}"'
+
+# Dossier d'upload par défaut (images des médias). Astro copie public/ tel quel.
+media_folder: "public/media"
+public_folder: "/media"
+
+# Active l'éditeur en local (npm run dev) : ouvre http://localhost:4321/admin/ après
+# avoir lancé `npx @sveltia/cms-server` — pratique pour tester sans pousser.
+local_backend: true
+
+collections:
+  # ───────────────────────── JOURNAL (blog) ─────────────────────────
+  # Une entrée par langue. Pour traduire un article, créer une nouvelle
+  # entrée avec le MÊME « Identifiant commun » (postSlug) et une autre langue.
+  # Le fichier généré : src/content/blog/<postSlug>.<lang>.md
+  - name: blog
+    label: Journal
+    label_singular: Article
+    folder: src/content/blog
+    extension: md
+    format: frontmatter
+    create: true
+    slug: "{{fields.postSlug}}.{{fields.lang}}"
+    identifier_field: title
+    summary: "{{fields.title}} · {{fields.lang}}"
+    sortable_fields: [date, title]
+    fields:
+      - { name: title, label: Titre, widget: string }
+      - name: lang
+        label: Langue
+        widget: select
+        options:
+          - { label: Français, value: fr }
+          - { label: English, value: en }
+          - { label: Nederlands, value: nl }
+        default: fr
+      - name: postSlug
+        label: Identifiant commun
+        widget: string
+        hint: "Même valeur pour les 3 langues d'un même article. Ex : movie-2k25"
+        pattern: ['^[a-z0-9]+(?:-[a-z0-9]+)*$', 'minuscules, chiffres et tirets uniquement']
+      - name: tag
+        label: Catégorie
+        widget: select
+        options: [TIPS, SESSION, GEAR, RELEASE]
+        default: SESSION
+      - { name: date, label: Date, widget: datetime, date_format: 'YYYY-MM-DD', time_format: false, picker_utc: true }
+      - { name: readMin, label: Minutes de lecture, widget: number, value_type: int, min: 1, default: 3 }
+      - { name: excerpt, label: Extrait, widget: text, required: false, hint: "Court résumé affiché en aperçu." }
+      - { name: body, label: Contenu, widget: markdown }
+
+  # ───────────────────────── MUSIQUES / ARTISTES ─────────────────────────
+  # src/content/music/<slug>.md — alimente le portfolio (trié par sortOrder).
+  - name: music
+    label: Musiques
+    label_singular: Titre
+    folder: src/content/music
+    extension: md
+    format: frontmatter
+    create: true
+    identifier_field: title
+    summary: "{{fields.sortOrder}} · {{fields.title}} — {{fields.artist}}"
+    sortable_fields: [sortOrder, title, year]
+    fields:
+      - { name: title, label: Titre, widget: string }
+      - { name: artist, label: Artiste(s), widget: string }
+      - { name: duration, label: Durée, widget: string, hint: 'Format m:ss, ex : 2:14' }
+      - { name: bpm, label: BPM, widget: number, value_type: int, default: 0, min: 0 }
+      - { name: genre, label: Genre, widget: string, default: 'Hip-Hop' }
+      - { name: year, label: Année, widget: string }
+      - { name: color, label: Couleur, widget: color, enableAlpha: false }
+      - { name: sortOrder, label: Ordre d'affichage, widget: number, value_type: int }
+      - { name: spotifyUrl, label: Lien Spotify, widget: string, required: false }
+      - { name: spotifyTrackId, label: ID du titre Spotify, widget: string, required: false, hint: "L'identifiant dans l'URL du morceau, pas de la playlist." }
+      - name: audioSrc
+        label: Fichier audio
+        widget: file
+        media_folder: "/public/audio"
+        public_folder: "/audio"
+        hint: "MP3 d'aperçu. Chemin attendu : /audio/<nom>.mp3"
+      - { name: previewDuration, label: Durée de l'aperçu (s), widget: number, value_type: int, default: 30 }
+
+  # ───────────────────────── MÉDIAS (vidéos / images) ─────────────────────────
+  # src/content/media/<slug>.md — grille média (trié par sortOrder).
+  - name: media
+    label: Médias
+    label_singular: Média
+    folder: src/content/media
+    extension: md
+    format: frontmatter
+    create: true
+    identifier_field: title
+    summary: "{{fields.sortOrder}} · {{fields.kind}} — {{fields.title}}"
+    sortable_fields: [sortOrder, kind]
+    fields:
+      - name: type
+        label: Type
+        widget: select
+        options:
+          - { label: Image, value: image }
+          - { label: Vidéo, value: video }
+        default: image
+      - name: src
+        label: Source
+        widget: image
+        hint: "Upload une image, ou colle une URL (image externe ou /media/clip.mp4 pour une vidéo)."
+        choose_url: true
+      - { name: poster, label: Poster (vidéo), widget: image, required: false, choose_url: true, hint: "Image d'aperçu pour les vidéos." }
+      - { name: title, label: Titre, widget: string, required: false }
+      - { name: kind, label: Catégorie, widget: string, hint: 'Ex : SESSION, CLIP, BTS' }
+      - { name: aspect, label: Ratio, widget: string, default: '9/16', hint: 'Ex : 9/16, 3/4, 1/1' }
+      - { name: sortOrder, label: Ordre d'affichage, widget: number, value_type: int }
+
+  # ───────────────────────── SERVICES & TARIFS ─────────────────────────
+  # src/content/services/<key>.json — ensemble fixe de 6 services (création/
+  # suppression désactivées pour ne pas casser le routage par clé). Multilingue.
+  - name: services
+    label: Services & tarifs
+    label_singular: Service
+    folder: src/content/services
+    extension: json
+    format: json
+    create: false
+    delete: false
+    identifier_field: key
+    summary: "{{fields.sortOrder}} · {{fields.name.fr}} — €{{fields.price}}"
+    sortable_fields: [sortOrder]
+    fields:
+      - { name: key, widget: hidden }
+      - { name: sortOrder, label: Ordre d'affichage, widget: number, value_type: int }
+      - { name: price, label: Prix (€), widget: number, value_type: int, hint: '0 = gratuit, -1 = sur devis' }
+      - { name: popular, label: Badge « populaire », widget: boolean, default: false }
+      - name: name
+        label: Nom
+        widget: object
+        fields:
+          - { name: fr, label: FR, widget: string }
+          - { name: en, label: EN, widget: string }
+          - { name: nl, label: NL, widget: string }
+      - name: unit
+        label: Unité de prix
+        widget: object
+        hint: "Ex : / session 1h, / projet, gratuit"
+        fields:
+          - { name: fr, label: FR, widget: string }
+          - { name: en, label: EN, widget: string }
+          - { name: nl, label: NL, widget: string }
+      - name: desc
+        label: Description courte
+        widget: object
+        fields:
+          - { name: fr, label: FR, widget: text }
+          - { name: en, label: EN, widget: text }
+          - { name: nl, label: NL, widget: text }
+      - name: long
+        label: Description longue (fiche détail)
+        widget: object
+        fields:
+          - { name: fr, label: FR, widget: text }
+          - { name: en, label: EN, widget: text }
+          - { name: nl, label: NL, widget: text }
+      - name: includes
+        label: Inclus
+        widget: object
+        fields:
+          - { name: fr, label: FR, widget: list, field: { name: item, label: Élément, widget: string } }
+          - { name: en, label: EN, widget: list, field: { name: item, label: Item, widget: string } }
+          - { name: nl, label: NL, widget: list, field: { name: item, label: Item, widget: string } }
+      - name: gallery
+        label: Couleurs de la galerie (3)
+        widget: list
+        min: 3
+        max: 3
+        field: { name: color, label: Couleur, widget: color }
+      - { name: video, label: ID vidéo YouTube, widget: string, required: false, hint: "L'identifiant après watch?v= — vide = pas de vidéo." }
+
+  # ───────────────────────── ÉQUIPE ─────────────────────────
+  # src/content/team/<slug>.json — crédits affichés dans « À propos ».
+  - name: team
+    label: Équipe
+    label_singular: Membre
+    folder: src/content/team
+    extension: json
+    format: json
+    create: true
+    identifier_field: name
+    summary: "{{fields.sortOrder}} · {{fields.name}} (@{{fields.handle}})"
+    sortable_fields: [sortOrder, name]
+    fields:
+      - { name: name, label: Nom affiché, widget: string }
+      - { name: handle, label: Handle Instagram (sans @), widget: string }
+      - { name: instagram, label: URL du profil Instagram, widget: string }
+      - { name: color, label: Couleur de la carte, widget: color }
+      - { name: sortOrder, label: Ordre d'affichage, widget: number, value_type: int }
+      - name: role
+        label: Rôle
+        widget: object
+        fields:
+          - { name: fr, label: FR, widget: string }
+          - { name: en, label: EN, widget: string }
+          - { name: nl, label: NL, widget: string }
+
+  # ───────────────────────── TÉMOIGNAGES ─────────────────────────
+  # src/content/testimonials/<slug>.json — section « Ils ont signé ».
+  - name: testimonials
+    label: Témoignages
+    label_singular: Témoignage
+    folder: src/content/testimonials
+    extension: json
+    format: json
+    create: true
+    identifier_field: name
+    summary: "{{fields.sortOrder}} · {{fields.name}} — {{fields.service}}"
+    sortable_fields: [sortOrder, name]
+    fields:
+      - { name: name, label: Nom / Alias, widget: string }
+      - { name: role, label: Projet / Rôle, widget: string }
+      - name: service
+        label: Service concerné
+        widget: select
+        options: [rec, mix, cover, prod, coach, book]
+        default: rec
+      - { name: rating, label: Note (1 à 5), widget: number, value_type: int, min: 1, max: 5, default: 5 }
+      - { name: sortOrder, label: Ordre d'affichage, widget: number, value_type: int }
+      - name: text
+        label: Témoignage
+        widget: object
+        fields:
+          - { name: fr, label: FR, widget: text }
+          - { name: en, label: EN, widget: text }
+          - { name: nl, label: NL, widget: text }

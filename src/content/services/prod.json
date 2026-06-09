@@ -1,0 +1,52 @@
+{
+  "key": "prod",
+  "sortOrder": 4,
+  "price": 270,
+  "popular": false,
+  "name": {
+    "fr": "Album / EP",
+    "en": "Album / EP",
+    "nl": "Album / EP"
+  },
+  "unit": {
+    "fr": "/ projet",
+    "en": "/ project",
+    "nl": "/ project"
+  },
+  "desc": {
+    "fr": "Un mixage et mastering global pour donner une vraie identité à votre projet. Cohérence, dynamique et loudness pro assurés.",
+    "en": "A global mix and master to give your project a real identity. Coherence, dynamics and pro loudness guaranteed.",
+    "nl": "Een globale mix en master om je project een echte identiteit te geven. Samenhang, dynamiek en pro loudness verzekerd."
+  },
+  "long": {
+    "fr": "Mixage et mastering pensés à l'échelle du projet entier, pour une vraie cohérence d'écoute du premier au dernier titre. Dynamique maîtrisée, loudness pro adapté au streaming, identité sonore homogène. Forfaits dégressifs : 5 titres 270€, 10 titres 540€.",
+    "en": "Mix and master designed at the scale of the whole project, for real listening coherence from first to last track. Controlled dynamics, pro streaming-ready loudness, a homogeneous sonic identity. Degressive packages: 5 tracks €270, 10 tracks €540.",
+    "nl": "Mix en master ontworpen op schaal van het hele project, voor echte luistersamenhang van eerste tot laatste titel. Beheerste dynamiek, pro streaming-loudness, een homogene klankidentiteit. Degressieve pakketten: 5 titels €270, 10 titels €540."
+  },
+  "includes": {
+    "fr": [
+      "Mix + master global",
+      "Cohérence d'écoute",
+      "Loudness streaming",
+      "Forfaits dégressifs"
+    ],
+    "en": [
+      "Global mix + master",
+      "Listening coherence",
+      "Streaming loudness",
+      "Degressive packages"
+    ],
+    "nl": [
+      "Globale mix + master",
+      "Luistersamenhang",
+      "Streaming loudness",
+      "Degressieve pakketten"
+    ]
+  },
+  "gallery": [
+    "#3206b8",
+    "#000000",
+    "#ffff00"
+  ],
+  "video": "OPf0YbXqDm0"
+}

@@ -17,8 +17,7 @@ import ServiceDetail from '../../components/ServiceDetail';
 import { getCollection } from 'astro:content';
 import { getTranslations, LANGS } from '../../i18n/utils';
 import type { Lang } from '../../i18n/utils';
-import { DEFAULT_PRICES, SERVICE_GALLERY, SERVICE_VIDEOS, SERVICE_LONG, SERVICE_KEYS } from '../../data/services';
-import { TESTIMONIALS } from '../../data/testimonials';
+import type { ServiceData, TeamMember, TestimonialData } from '../../data/services';
 
 
 export function getStaticPaths() {
@@ -42,23 +41,33 @@ const tracks = musicEntries
 const mediaItems = (await getCollection('media'))
   .sort((a, b) => a.data.sortOrder - b.data.sortOrder);
 
+const serviceList = (await getCollection('services'))
+  .map(e => e.data as ServiceData)
+  .sort((a, b) => a.sortOrder - b.sortOrder);
+
+const teamMembers = (await getCollection('team'))
+  .map(e => e.data as TeamMember)
+  .sort((a, b) => a.sortOrder - b.sortOrder);
+
+const testimonials = (await getCollection('testimonials'))
+  .map(e => e.data as TestimonialData)
+  .sort((a, b) => a.sortOrder - b.sortOrder);
+
 const SITE = 'https://altitudemusic.be';
 const inLanguage = lang === 'fr' ? 'fr-BE' : lang === 'nl' ? 'nl-BE' : 'en-BE';
 
-const services = SERVICE_KEYS.map(k => {
-  const s = t.services[k];
-  const price = DEFAULT_PRICES[k];
-  const offer = price === 0
+const serviceNodes = serviceList.map(s => {
+  const offer = s.price === 0
     ? { '@type': 'Offer', price: '0', priceCurrency: 'EUR', availability: 'https://schema.org/InStock' }
-    : price === -1
+    : s.price === -1
       ? { '@type': 'Offer', priceSpecification: { '@type': 'PriceSpecification', priceCurrency: 'EUR' } }
-      : { '@type': 'Offer', price: String(price), priceCurrency: 'EUR', availability: 'https://schema.org/InStock', url: `${SITE}/${lang}/#service/${k}` };
+      : { '@type': 'Offer', price: String(s.price), priceCurrency: 'EUR', availability: 'https://schema.org/InStock', url: `${SITE}/${lang}/#service/${s.key}` };
   return {
     '@type': 'Service',
-    '@id': `${SITE}/${lang}/#service-${k}`,
-    name: s.name,
-    description: s.desc,
-    serviceType: s.name,
+    '@id': `${SITE}/${lang}/#service-${s.key}`,
+    name: s.name[lang],
+    description: s.desc[lang],
+    serviceType: s.name[lang],
     provider: { '@id': `${SITE}/#studio` },
     areaServed: { '@type': 'Country', name: 'Belgium' },
     offers: offer,
@@ -76,7 +85,7 @@ const homeJsonLd = {
       inLanguage,
       publisher: { '@id': `${SITE}/#studio` },
     },
-    ...services,
+    ...serviceNodes,
   ],
 };
 ---
@@ -87,7 +96,7 @@ const homeJsonLd = {
     <Hero t={t} heroVariant="video" />
     <Marquee words={t.marquee} />
     <Marquee words={['ENREGISTREMENT', 'MIX', 'MASTER', 'PROD', 'POCHETTES', 'CLIPS', 'MASTERING', 'LABEL']} variant="outline" />
-    <Services t={t} prices={DEFAULT_PRICES} />
+    <Services t={t} lang={lang} services={serviceList} />
 
     <section class="section" id="work" style="border-top:1px solid var(--line)">
       <div class="container">
@@ -103,12 +112,12 @@ const homeJsonLd = {
       </div>
     </section>
 
-    <About t={t} lang={lang} />
+    <About t={t} lang={lang} team={teamMembers} />
 
     <section class="section" id="testimonials" style="border-top:1px solid var(--line)">
       <div class="container">
         <SectionHead tag="// 06" title={t.sections.testimonials} sub={t.sections.testimonialsSub} />
-        <Testimonials testimonials={TESTIMONIALS} t={t} lang={lang} client:visible />
+        <Testimonials testimonials={testimonials} services={serviceList} t={t} lang={lang} client:visible />
       </div>
     </section>
 
@@ -117,7 +126,7 @@ const homeJsonLd = {
     <section class="section" id="booking" style="border-top:1px solid var(--line)">
       <div class="container">
         <SectionHead tag="// 08" title={t.sections.booking} sub={t.sections.bookingSub} />
-        <Booking t={t} lang={lang} client:visible />
+        <Booking t={t} lang={lang} services={serviceList} client:visible />
       </div>
     </section>
 
@@ -132,11 +141,8 @@ const homeJsonLd = {
   <ServiceDetail
     t={t}
     lang={lang}
-    prices={DEFAULT_PRICES}
-    serviceGallery={SERVICE_GALLERY}
-    serviceVideos={SERVICE_VIDEOS}
-    serviceLong={SERVICE_LONG}
-    testimonials={TESTIMONIALS}
+    services={serviceList}
+    testimonials={testimonials}
     client:load
   />
 </BaseLayout>

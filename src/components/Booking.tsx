@@ -1,17 +1,17 @@
 import { useState } from 'react';
 import type { Translations, Lang } from '../i18n/utils';
-import { SERVICE_KEYS } from '../data/services';
+import type { ServiceData } from '../data/services';
 
-interface Props { t: Translations; lang: Lang; }
+interface Props { t: Translations; lang: Lang; services: ServiceData[]; }
 
-export default function Booking({ t, lang }: Props) {
+export default function Booking({ t, lang, services }: Props) {
   const tb = t.booking;
   const today = new Date();
   const [view, setView] = useState({ y: today.getFullYear(), m: today.getMonth() });
   const [picked, setPicked] = useState<Date | null>(null);
   const [slot, setSlot] = useState<string | null>(null);
   const [duration, setDuration] = useState(tb.durations[1]);
-  const [service, setService] = useState(t.services.rec.name);
+  const [service, setService] = useState(services[0]?.name[lang] ?? '');
   const [confirmed, setConfirmed] = useState(false);
 
   const monthName = new Date(view.y, view.m, 1).toLocaleDateString(lang, { month: 'long', year: 'numeric' });
@@ -64,7 +64,7 @@ export default function Booking({ t, lang }: Props) {
             <div>
               <label style={{ fontFamily: 'var(--mono)', fontSize: 11, letterSpacing: '0.12em', color: 'var(--fg-3)', textTransform: 'uppercase' }}>{tb.service}</label>
               <select value={service} onChange={e => setService(e.target.value)} style={{ width: '100%', marginTop: 8, background: 'var(--bg-2)', border: '1px solid var(--line)', color: 'var(--fg)', padding: '12px 14px', borderRadius: 6, fontFamily: 'inherit', fontSize: 14 }}>
-                {SERVICE_KEYS.map(k => <option key={k}>{t.services[k].name}</option>)}
+                {services.map(s => <option key={s.key}>{s.name[lang]}</option>)}
               </select>
             </div>
             <div>

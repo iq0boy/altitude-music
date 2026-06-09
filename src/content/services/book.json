@@ -1,0 +1,52 @@
+{
+  "key": "book",
+  "sortOrder": 6,
+  "price": 0,
+  "popular": false,
+  "name": {
+    "fr": "Prendre RDV",
+    "en": "Studio Tour",
+    "nl": "Studio Tour"
+  },
+  "unit": {
+    "fr": "gratuit",
+    "en": "free",
+    "nl": "gratis"
+  },
+  "desc": {
+    "fr": "Visite du studio, écoute, brief de projet. Café offert.",
+    "en": "Visit the studio, listen, brief the project. Coffee on us.",
+    "nl": "Bezoek de studio, luister, brief je project. Koffie van het huis."
+  },
+  "long": {
+    "fr": "Visite gratuite du studio. Tu écoutes le matériel, on parle de ton projet, on prend un café. Aucune obligation, aucun engagement.",
+    "en": "Free studio visit. You listen to the gear, we talk about your project, we have a coffee. No obligation, no commitment.",
+    "nl": "Gratis studiobezoek. Je luistert naar het materiaal, we praten over je project, we drinken koffie. Geen verplichtingen, geen engagement."
+  },
+  "includes": {
+    "fr": [
+      "Visite du studio",
+      "Écoute du matériel",
+      "Brief de projet",
+      "Café offert"
+    ],
+    "en": [
+      "Studio tour",
+      "Gear listening",
+      "Project brief",
+      "Coffee on us"
+    ],
+    "nl": [
+      "Studio tour",
+      "Gear beluisteren",
+      "Projectbriefing",
+      "Koffie van het huis"
+    ]
+  },
+  "gallery": [
+    "#a0d4e6",
+    "#ffbdff",
+    "#3206b8"
+  ],
+  "video": ""
+}

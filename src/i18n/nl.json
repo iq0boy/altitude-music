@@ -30,15 +30,7 @@
     "booking": "Afspraak maken",
     "bookingSub": "Kies je moment. Gesynchroniseerd met de studiokalender.",
     "contact": "Contact",
-    "contactSub": "We antwoorden binnen 24u. WhatsApp voor het snelste antwoord."
-  },
-  "services": {
-    "rec":   { "name": "Opname",            "desc": "Zang, instrumenten, live sessies. Behandelde cabine, condensator- en lintmicrofoons.", "unit": "/ sessie 4u" },
-    "mix":   { "name": "Mix & Master",      "desc": "Hybride analoge mix, loudness-aware mastering. Revisies inbegrepen.",                  "unit": "/ track" },
-    "cover": { "name": "Cover Art",         "desc": "Art direction, foto, design. Van single tot EP — wij bouwen je beeld.",                "unit": "/ artwork" },
-    "prod":  { "name": "Productie op maat", "desc": "Beats, instrumentalen, arrangementen. We bouwen rond jouw stem.",                      "unit": "/ beat" },
-    "coach": { "name": "Begeleiding",       "desc": "Releasestrategie, distributie, podiumprestatie. Langetermijnsteun.",                   "unit": "/ maand" },
-    "book":  { "name": "Studio Tour",       "desc": "Bezoek de studio, luister, brief je project. Koffie van het huis.",                    "unit": "gratis" }
+    "contactSub": "We antwoorden snel — Instagram voor het snelste antwoord."
   },
   "servicesUI": { "from": "Vanaf", "quote": "Op aanvraag", "cta": "Boeken", "popular": "POPULAIR" },
   "portfolio": { "filter": "Filter", "all": "Alles", "play": "PLAY", "pause": "PAUZE", "open": "Open in Spotify", "duration": "DUUR", "bpm": "BPM", "genre": "GENRE" },
@@ -52,24 +44,16 @@
     "whatYouGet": "Wat je krijgt", "reviews": "Beoordelingen voor deze dienst", "noReviews": "Nog geen beoordelingen voor deze dienst.",
     "bookNow": "Nu boeken", "learnMore": "Meer info →", "includes": "Inbegrepen", "cta": "Laten we over je project praten"
   },
-  "serviceIncludes": {
-    "rec":   ["Akoestisch behandelde cabine", "Technicus inbegrepen", "Multitrack WAV 24-bit", "30 dagen projectbackup"],
-    "mix":   ["Hybride analoge mix", "Mastering inbegrepen", "2 revisies", "Stems geleverd"],
-    "cover": ["Moodboard & art direction", "Fotoshoot", "DSP-aanpassingen", "3 revisies"],
-    "prod":  ["Exclusieve beat", "WAV stems", "Onderhandelbare credits", "Optionele toplines"],
-    "coach": ["1 sessie/week", "Releasestrategie", "Distributie inbegrepen", "WhatsApp support 7/7"],
-    "book":  ["Studio tour", "Gear beluisteren", "Projectbriefing", "Koffie van het huis"]
-  },
   "contactForm": {
     "name": "Naam", "email": "Email", "project": "Type project", "message": "Bericht",
-    "send": "Versturen", "whatsapp": "WhatsApp openen", "sent": "Bericht verzonden. Tot snel.",
-    "types": ["Opname", "Mix & Master", "Productie", "Cover Art", "Andere"]
+    "send": "Versturen", "whatsapp": "Antwoorden op Instagram", "sent": "Bericht verzonden. Tot snel.",
+    "types": ["Opname", "Mix & Master", "Album / EP", "Cover Art", "Andere"]
   },
   "booking": {
     "pickDate": "Kies een datum", "pickTime": "Kies een tijdslot", "duration": "Duur", "service": "Dienst",
     "confirm": "Boeking bevestigen", "booked": "Boeking bevestigd. Bevestiging per email.", "tz": "Brusselse tijd",
-    "slots": ["10:00", "11:30", "14:00", "15:30", "17:00", "18:30"],
-    "durations": ["1u", "2u", "4u", "Volle dag"]
+    "slots": ["14:00", "15:00", "16:00", "17:00", "18:00", "19:00"],
+    "durations": ["2u", "3u", "4u", "6u"]
   },
   "blog": { "read": "Lezen", "min": "min" },
   "footer": { "rights": "Alle rechten voorbehouden", "made": "Ontworpen en gemasterd in Louvain-la-Neuve" },

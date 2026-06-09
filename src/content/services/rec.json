@@ -1,0 +1,52 @@
+{
+  "key": "rec",
+  "sortOrder": 1,
+  "price": 30,
+  "popular": false,
+  "name": {
+    "fr": "Enregistrement",
+    "en": "Recording",
+    "nl": "Opname"
+  },
+  "unit": {
+    "fr": "/ session 1h",
+    "en": "/ 1h session",
+    "nl": "/ sessie 1u"
+  },
+  "desc": {
+    "fr": "Voix, instruments, sessions live. Cabine traitée. Micro Neumann TLM 103.",
+    "en": "Vocals, instruments, live sessions. Treated booth. Neumann TLM 103 mic.",
+    "nl": "Zang, instrumenten, live sessies. Behandelde cabine. Neumann TLM 103-microfoon."
+  },
+  "long": {
+    "fr": "Sur rendez-vous, 7j/7. Cabine traitée acoustiquement, micro Neumann TLM 103, préamp à lampes. Voix, instruments ou session live — on capte avec la couleur que tu veux : intime, hi-fi, brut. Sessions à l'heure, ingé son inclus, prises directes ou multi-pistes.",
+    "en": "By appointment, 7 days a week. Acoustically treated booth, Neumann TLM 103 mic, tube preamp. Vocals, instruments or live session — captured with the color you want: intimate, hi-fi, raw. Hourly sessions, engineer included, direct or multitrack tracking.",
+    "nl": "Op afspraak, 7/7. Akoestisch behandelde cabine, Neumann TLM 103-microfoon, buisvoorversterker. Zang, instrumenten of live sessie — opgenomen in de kleur die je wil: intiem, hi-fi, ruw. Sessies per uur, technicus inbegrepen, direct of multitrack."
+  },
+  "includes": {
+    "fr": [
+      "Cabine traitée acoustique",
+      "Micro Neumann TLM 103",
+      "Ingé son inclus",
+      "Multi-pistes WAV 24-bit"
+    ],
+    "en": [
+      "Acoustically treated booth",
+      "Neumann TLM 103 mic",
+      "Engineer included",
+      "Multitrack WAV 24-bit"
+    ],
+    "nl": [
+      "Akoestisch behandelde cabine",
+      "Neumann TLM 103-microfoon",
+      "Technicus inbegrepen",
+      "Multitrack WAV 24-bit"
+    ]
+  },
+  "gallery": [
+    "#fd5f2e",
+    "#3206b8",
+    "#000000"
+  ],
+  "video": "9bZkp7q19f0"
+}

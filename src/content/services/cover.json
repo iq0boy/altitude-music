@@ -1,0 +1,52 @@
+{
+  "key": "cover",
+  "sortOrder": 3,
+  "price": 100,
+  "popular": false,
+  "name": {
+    "fr": "Pochettes",
+    "en": "Cover Art",
+    "nl": "Cover Art"
+  },
+  "unit": {
+    "fr": "/ pochette",
+    "en": "/ artwork",
+    "nl": "/ cover"
+  },
+  "desc": {
+    "fr": "Direction artistique, photo, design. Du single à l'EP, on construit ton image.",
+    "en": "Art direction, photo, design. From single to EP, we build your visual.",
+    "nl": "Art direction, foto, design. Van single tot EP — wij bouwen je beeld."
+  },
+  "long": {
+    "fr": "Direction artistique complète : moodboard, shooting, retouche, typographie. On construit une identité qui se lit en miniature comme en 3000×3000. Single, EP, album — adaptés DSP et réseaux. Voir nos pochettes : onoto.studio/portfolio/altitude-music.",
+    "en": "Full art direction: moodboard, shoot, retouching, typography. We build an identity that reads at thumbnail as well as 3000×3000. Single, EP, album — DSP and social adaptations. See our covers: onoto.studio/portfolio/altitude-music.",
+    "nl": "Volledige art direction: moodboard, shoot, retouchering, typografie. We bouwen een identiteit die zowel als thumbnail als op 3000×3000 leesbaar is. Single, EP, album — aangepast voor DSP en socials. Bekijk onze covers: onoto.studio/portfolio/altitude-music."
+  },
+  "includes": {
+    "fr": [
+      "Moodboard & DA",
+      "Shooting photo",
+      "Adaptations DSP",
+      "3 révisions"
+    ],
+    "en": [
+      "Moodboard & art direction",
+      "Photo shoot",
+      "DSP adaptations",
+      "3 revisions"
+    ],
+    "nl": [
+      "Moodboard & art direction",
+      "Fotoshoot",
+      "DSP-aanpassingen",
+      "3 revisies"
+    ]
+  },
+  "gallery": [
+    "#ffbdff",
+    "#ffff00",
+    "#fd5f2e"
+  ],
+  "video": ""
+}

@@ -66,8 +66,8 @@ export default function Contact({ t, lang }: Props) {
               <span className="v">6, Rue Louis de Geer<br />1348, Ottignies–Louvain-la-Neuve</span>
             </div>
             <div className="contact-info-row">
-              <span className="k">WHATSAPP</span>
-              <span className="v"><a href="https://wa.me/32400000000" target="_blank" rel="noopener">+32 4 00 00 00 00</a></span>
+              <span className="k">INSTAGRAM</span>
+              <span className="v"><a href="https://www.instagram.com/alt_itude.music/" target="_blank" rel="noopener">@alt_itude.music</a></span>
             </div>
             <div className="contact-info-row">
               <span className="k">SOCIAL</span>
@@ -97,7 +97,7 @@ export default function Contact({ t, lang }: Props) {
               <div><label>{cf.message}</label><textarea value={form.message} onChange={e => setForm({ ...form, message: e.target.value })} required /></div>
               <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
                 <button className="btn" type="submit">{cf.send}</button>
-                <a className="btn ghost" href="https://wa.me/32400000000" target="_blank" rel="noopener">{cf.whatsapp}</a>
+                <a className="btn ghost" href="https://www.instagram.com/alt_itude.music/" target="_blank" rel="noopener">{cf.whatsapp}</a>
               </div>
               {sent && <div className="form-success">✓ {cf.sent}</div>}
             </form>

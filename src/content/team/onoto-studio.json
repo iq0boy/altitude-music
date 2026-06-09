@@ -1,0 +1,12 @@
+{
+  "name": "Onoto",
+  "handle": "onoto.studio",
+  "instagram": "https://www.instagram.com/onoto.studio/",
+  "color": "#ffff00",
+  "sortOrder": 3,
+  "role": {
+    "fr": "Direction artistique",
+    "en": "Art Director",
+    "nl": "Art Director"
+  }
+}

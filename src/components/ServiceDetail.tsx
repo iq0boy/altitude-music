@@ -1,26 +1,23 @@
 import { useState, useEffect } from 'react';
 import type { Translations, Lang } from '../i18n/utils';
-import { SERVICE_KEYS } from '../data/services';
+import type { ServiceData } from '../data/services';
 
 interface Testimonial { name: string; role: string; service: string; text: { fr: string; en: string; nl: string }; rating: number; }
 
 interface Props {
   t: Translations;
   lang: Lang;
-  prices: Record<string, number>;
-  serviceGallery: Record<string, [string, string, string]>;
-  serviceVideos: Record<string, string | null>;
-  serviceLong: Record<string, { fr: string; en: string; nl: string }>;
+  services: ServiceData[];
   testimonials: Testimonial[];
 }
 
-export default function ServiceDetail({ t, lang, prices, serviceGallery, serviceVideos, serviceLong, testimonials }: Props) {
+export default function ServiceDetail({ t, lang, services, testimonials }: Props) {
   const [serviceKey, setServiceKey] = useState<string | null>(null);
 
   useEffect(() => {
     const sync = () => {
       const m = window.location.hash.match(/^#service\/([a-z]+)/);
-      if (m && t.services[m[1] as keyof typeof t.services]) {
+      if (m && services.some(s => s.key === m[1])) {
         setServiceKey(m[1]);
         window.scrollTo(0, 0);
       } else {
@@ -30,7 +27,7 @@ export default function ServiceDetail({ t, lang, prices, serviceGallery, service
     sync();
     window.addEventListener('hashchange', sync);
     return () => window.removeEventListener('hashchange', sync);
-  }, [t]);
+  }, [services]);
 
   const close = () => {
     history.pushState(null, '', window.location.pathname + window.location.search);
@@ -39,14 +36,17 @@ export default function ServiceDetail({ t, lang, prices, serviceGallery, service
 
   if (!serviceKey) return null;
 
-  const s = t.services[serviceKey as keyof typeof t.services];
-  const p = prices[serviceKey];
-  const colors = serviceGallery[serviceKey] ?? ['#fd5f2e', '#3206b8', '#ffff00'];
-  const videoId = serviceVideos[serviceKey];
-  const longDesc = serviceLong[serviceKey]?.[lang] ?? '';
-  const includes = t.serviceIncludes[serviceKey as keyof typeof t.serviceIncludes] ?? [];
+  const svc = services.find(x => x.key === serviceKey);
+  if (!svc) return null;
+
+  const name = svc.name[lang];
+  const p = svc.price;
+  const colors = svc.gallery;
+  const videoId = svc.video;
+  const longDesc = svc.long[lang];
+  const includes = svc.includes[lang];
   const reviews = testimonials.filter(r => r.service === serviceKey);
-  const idx = SERVICE_KEYS.indexOf(serviceKey as typeof SERVICE_KEYS[number]);
+  const idx = services.findIndex(x => x.key === serviceKey);
   const sd = t.serviceDetail;
 
   return (
@@ -56,15 +56,15 @@ export default function ServiceDetail({ t, lang, prices, serviceGallery, service
 
         <div className="svc-hero">
           <div className="svc-hero-img" style={{ '--c1': colors[0], '--c2': colors[1] } as React.CSSProperties}>
-            <span className="label">SVC / {String(idx + 1).padStart(2, '0')} · {s.name.toUpperCase()}</span>
+            <span className="label">SVC / {String(idx + 1).padStart(2, '0')} · {name.toUpperCase()}</span>
           </div>
           <div className="svc-meta">
             <span className="num">SERVICE / {String(idx + 1).padStart(2, '0')}</span>
-            <h1>{s.name}</h1>
-            <p style={{ color: 'var(--fg-2)', fontSize: 16, lineHeight: 1.5 }}>{s.desc}</p>
+            <h1>{name}</h1>
+            <p style={{ color: 'var(--fg-2)', fontSize: 16, lineHeight: 1.5 }}>{svc.desc[lang]}</p>
             <div className="price-big">
-              {p === 0 ? <span>{s.unit}</span> : p === -1 ? <span>{t.servicesUI.quote}</span> : (
-                <><span className="from">{t.servicesUI.from}</span>€{p}<span className="unit">{s.unit}</span></>
+              {p === 0 ? <span>{svc.unit[lang]}</span> : p === -1 ? <span>{t.servicesUI.quote}</span> : (
+                <><span className="from">{t.servicesUI.from}</span>€{p}<span className="unit">{svc.unit[lang]}</span></>
               )}
             </div>
           </div>
@@ -95,7 +95,7 @@ export default function ServiceDetail({ t, lang, prices, serviceGallery, service
           <div className="svc-section">
             <div className="svc-section-title">{sd.video}</div>
             <div className="svc-video-embed">
-              <iframe src={`https://www.youtube.com/embed/${videoId}?rel=0`} title={s.name} allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen />
+              <iframe src={`https://www.youtube.com/embed/${videoId}?rel=0`} title={name} allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen />
             </div>
           </div>
         )}
@@ -108,7 +108,7 @@ export default function ServiceDetail({ t, lang, prices, serviceGallery, service
             <div className="testi-grid">
               {reviews.map((it, i) => (
                 <div key={i} className="testi-card">
-                  <span className="testi-tag">{s.name}</span>
+                  <span className="testi-tag">{name}</span>
                   <div className="testi-rating">{'★'.repeat(it.rating)}{'☆'.repeat(5 - it.rating)}</div>
                   <p className="testi-text">"{it.text[lang] || it.text.fr}"</p>
                   <div className="testi-meta">
