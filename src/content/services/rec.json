@@ -2,7 +2,7 @@
   "key": "rec",
   "sortOrder": 1,
   "price": 30,
-  "popular": false,
+  "popular": true,
   "name": {
     "fr": "Enregistrement",
     "en": "Recording",
