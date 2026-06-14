@@ -1,6 +1,6 @@
 ---
 import '../styles/global.css';
-import { getCollection } from 'astro:content';
+import { getCollection, getEntry } from 'astro:content';
 
 interface Props {
   lang: string;
@@ -24,12 +24,16 @@ const ratingValue = (ratingSum / ratingCount).toFixed(1);
 const SITE = 'https://altitudemusic.be';
 const DEFAULT_OG = '/og-default.jpg';
 
+const siteSettings = await getEntry('settings', 'site');
+const settingsOg = siteSettings?.data.ogImage;
+const ogDefault = settingsOg && settingsOg.trim() !== '' ? settingsOg : DEFAULT_OG;
+
 const {
   lang,
   title,
   description,
   canonicalPath,
-  ogImage = DEFAULT_OG,
+  ogImage = ogDefault,
   ogType = 'website',
   article,
   jsonLd,
