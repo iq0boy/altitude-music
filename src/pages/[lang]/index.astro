@@ -14,7 +14,7 @@ import Testimonials from '../../components/Testimonials';
 import Booking from '../../components/Booking';
 import Contact from '../../components/Contact';
 import ServiceDetail from '../../components/ServiceDetail';
-import { getCollection } from 'astro:content';
+import { getCollection, getEntry } from 'astro:content';
 import { getTranslations, LANGS } from '../../i18n/utils';
 import type { Lang } from '../../i18n/utils';
 import type { ServiceData, TeamMember, TestimonialData } from '../../data/services';
@@ -26,6 +26,9 @@ export function getStaticPaths() {
 
 const { lang } = Astro.params as { lang: Lang };
 const t = getTranslations(lang);
+
+const siteSettings = await getEntry('settings', 'site');
+const heroVideo = siteSettings?.data.heroVideo;
 
 const allPosts = await getCollection('blog');
 const posts = allPosts
@@ -93,7 +96,7 @@ const homeJsonLd = {
 <BaseLayout lang={lang} title={t.meta.title} description={t.meta.description} jsonLd={homeJsonLd}>
   <Nav lang={lang} t={t.nav} />
   <main>
-    <Hero t={t} heroVariant="video" />
+    <Hero t={t} heroVariant="video" heroVideo={heroVideo} />
     <Marquee words={t.marquee} />
     <Marquee words={['ENREGISTREMENT', 'MIX', 'MASTER', 'PROD', 'POCHETTES', 'CLIPS', 'MASTERING', 'LABEL']} variant="outline" />
     <Services t={t} lang={lang} services={serviceList} />

@@ -90,4 +90,12 @@ const testimonials = defineCollection({
   }),
 });
 
-export const collections = { blog, music, media, services, team, testimonials };
+const settings = defineCollection({
+  loader: glob({ pattern: '**/*.json', base: './src/content/settings' }),
+  schema: z.object({
+    heroVideo: z.string().optional(),   // URL ou /media/<fichier> ; vide = défaut codé
+    ogImage: z.string().optional(),     // URL ou /<fichier> ; vide = /og-default.jpg
+  }),
+});
+
+export const collections = { blog, music, media, services, team, testimonials, settings };

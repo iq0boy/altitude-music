@@ -24,6 +24,27 @@ modification = un commit sur `main` → rebuild Netlify automatique.
 > Le texte des services (nom/desc/unité/inclus/longue) ne vit plus dans `src/i18n/*.json` —
 > tout est dans la collection `services`, multilingue par champ (fr/en/nl).
 
+## Bibliothèque d'assets (upload libre)
+
+Le bouton **« Assets »** (icône média, en haut du CMS) ouvre une bibliothèque où
+l'on peut **déposer des fichiers en vrac** (images surtout) sans créer de fiche,
+puis les retrouver et les réutiliser dans n'importe quel champ image. Les fichiers
+sont stockés dans `public/media/` (`media_folder` global) et servis sous `/media`.
+
+## Réglages · Apparence (visuels globaux)
+
+L'entrée **« Réglages → Apparence »** édite `src/content/settings/site.json` :
+
+| Champ | Effet |
+|---|---|
+| Vidéo du hero | Boucle vidéo affichée en haut de la page d'accueil. Upload (.mp4/.webm) **ou** URL collée. |
+| Image de partage | Aperçu OpenGraph lors d'un partage de lien (réseaux sociaux). |
+
+> Pour une **grosse vidéo**, préférer l'option URL (héberger ailleurs) plutôt que
+> l'upload : Git gère mal les fichiers volumineux. **Un champ laissé vide** fait
+> retomber le site sur la valeur par défaut codée — pas de risque de hero ou
+> d'image manquants.
+
 ## Mise en route (à faire une seule fois)
 
 ### 1. Créer le compte éditeur

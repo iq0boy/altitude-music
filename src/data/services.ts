@@ -41,3 +41,8 @@ export interface TestimonialData {
   sortOrder: number;
   text: Tri;
 }
+
+export interface SiteSettings {
+  heroVideo?: string;
+  ogImage?: string;
+}

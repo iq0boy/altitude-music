@@ -242,3 +242,30 @@ collections:
           - { name: fr, label: FR, widget: text }
           - { name: en, label: EN, widget: text }
           - { name: nl, label: NL, widget: text }
+
+  # ───────────────────────── RÉGLAGES · APPARENCE ─────────────────────────
+  # Fichier unique src/content/settings/site.json — visuels globaux du site.
+  # Champ vide ⇒ le site retombe sur la valeur codée par défaut (aucun risque
+  # de hero ou d'image OG manquants).
+  - name: settings
+    label: Réglages
+    files:
+      - name: site
+        label: Apparence
+        file: src/content/settings/site.json
+        description: Visuels globaux du site (vidéo du hero, image de partage).
+        fields:
+          - name: heroVideo
+            label: Vidéo du hero
+            widget: file
+            required: false
+            choose_url: true
+            media_folder: "/public/media"
+            public_folder: "/media"
+            hint: "Upload une vidéo (.mp4/.webm) OU colle une URL hébergée ailleurs. Vide = vidéo par défaut. Astuce : pour une grosse vidéo, préfère une URL."
+          - name: ogImage
+            label: Image de partage (réseaux sociaux)
+            widget: image
+            required: false
+            choose_url: true
+            hint: "Aperçu affiché quand on partage un lien du site (1200×630 recommandé). Vide = image par défaut."
