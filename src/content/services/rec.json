@@ -2,7 +2,7 @@
   "key": "rec",
   "sortOrder": 1,
   "price": 30,
-  "popular": false,
+  "popular": true,
   "name": {
     "fr": "Enregistrement",
     "en": "Recording",
@@ -48,5 +48,5 @@
     "#3206b8",
     "#000000"
   ],
-  "video": "9bZkp7q19f0"
+  "video": "kNgZRTmoyTI"
 }

@@ -2,7 +2,7 @@
   "key": "mix",
   "sortOrder": 2,
   "price": 30,
-  "popular": true,
+  "popular": false,
   "name": {
     "fr": "Mix & Master",
     "en": "Mix & Master",
@@ -48,5 +48,5 @@
     "#fd5f2e",
     "#a0d4e6"
   ],
-  "video": "kJQP7kiw5Fk"
+  "video": "Uh-yh-J5aGA"
 }
