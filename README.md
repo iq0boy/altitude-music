@@ -131,6 +131,9 @@ arrivent aussi sur `main`, avec un message commençant par `cms:`.
   erreur en local avec `npm run build`, et peut la corriger.
 - Le nom de domaine, le certificat HTTPS et l'authentification de `/admin/`
   sont aussi gérés dans Netlify.
+- Les anciennes adresses du site WordPress (`/home/`, `/contact/`, `/mentions-legales/`…)
+  sont redirigées vers les nouvelles pages par le fichier `public/_redirects`, pour
+  que rien ne casse le jour de la bascule du domaine.
 
 ### Formulaires (contact et témoignages)
 

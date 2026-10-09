@@ -265,7 +265,7 @@ collections:
             choose_url: true
             media_folder: "/public/media"
             public_folder: "/media"
-            hint: "Upload une vidéo (.mp4/.webm) OU colle une URL hébergée ailleurs. Vide = vidéo par défaut. Astuce : pour une grosse vidéo, préfère une URL."
+            hint: "Upload une vidéo (.mp4/.webm) OU colle une URL hébergée ailleurs. Vide = vidéo par défaut (/media/altitude-hero.webm). Astuce : pour une grosse vidéo, préfère une URL."
           - name: ogImage
             label: Image de partage (réseaux sociaux)
             widget: image

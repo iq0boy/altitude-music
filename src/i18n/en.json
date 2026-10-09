@@ -83,5 +83,6 @@
       { "n": "40+",  "l": "Artists supported" },
       { "n": "24/7", "l": "Studio available" }
     ]
-  }
+  },
+  "legal": {"title": "Legal notice", "intro": "Legal information about altitudemusic.be, published by the non-profit Altitude Music ASBL.", "publisher": "Publisher", "registeredOffice": "Registered office", "studio": "Studio", "companyNumber": "Company number (BCE)", "hosting": "Hosting", "privacy": "Personal data", "privacyText": "The site only collects personal data that you send us yourself:", "privacyForms": "Contact and testimonial forms: name, email and message go through Netlify Forms and are kept as long as needed to handle your request.", "privacyBooking": "Bookings: name, email and time slot are processed by Cal.com and stored in the studio's calendar to organise the session.", "privacyEmbeds": "YouTube videos and Instagram posts: nothing is loaded from those services until you click a thumbnail; they may then set their own cookies.", "privacyAnalytics": "No audience measurement tool or advertising cookie is used.", "rights": "You can request access to, correction or deletion of your data at altitudemusic13@gmail.com.", "ip": "Intellectual property", "ipText": "Texts, photos, videos, music and logos on this site belong to Altitude Music ASBL or their respective authors. Any reproduction without permission is prohibited."}
 }

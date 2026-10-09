@@ -1,0 +1,38 @@
+# Racine : langue du navigateur (x-default = fr)
+/            /en/   302!  Language=en
+/            /nl/   302!  Language=nl
+/            /fr/   302!
+
+# Anciennes pages WordPress
+/home        /fr/            301
+/home/       /fr/            301
+/contact     /fr/#contact    301
+/contact/    /fr/#contact    301
+/contact-us  /en/#contact    301
+/contact-us/ /en/#contact    301
+/13-2        /fr/#about      301
+/13-2/       /fr/#about      301
+/test        /fr/            301
+/test/       /fr/            301
+/mentions-legales   /fr/mentions-legales/   301
+/mentions-legales/  /fr/mentions-legales/   301
+/category/*  /fr/blog/       301
+/feed        /fr/blog/       301
+/feed/       /fr/blog/       301
+
+# Médias de l'ancien site encore utilisés
+/wp-content/uploads/2025/08/altitude.webm          /media/altitude-hero.webm   301
+/wp-content/uploads/2023/09/tyler-1-scaled.jpg     /media/tyler-red.jpg        301
+/wp-content/uploads/2025/08/image00007-Grande.jpeg /media/portrait-sunset.jpg  301
+/wp-content/uploads/2023/09/IMG_1594-scaled.jpg    /media/collectif.jpg        301
+/wp-content/uploads/2023/10/alt-jaune.svg          /alt-jaune.svg              301
+/wp-content/*   /fr/   410
+/wp-admin/*     /admin/  301
+/wp-login.php   /admin/  301
+/wp-json/*      /fr/     410
+/xmlrpc.php     /fr/     410
+
+# Chemins sans préfixe de langue
+/services/*  /fr/services/:splat  301
+/blog/*      /fr/blog/:splat      301
+/mentions-legales  /fr/mentions-legales/  301

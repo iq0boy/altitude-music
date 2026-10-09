@@ -83,5 +83,6 @@
       { "n": "40+",  "l": "Artiesten begeleid" },
       { "n": "24/7", "l": "Studio beschikbaar" }
     ]
-  }
+  },
+  "legal": {"title": "Wettelijke vermeldingen", "intro": "Wettelijke informatie over altitudemusic.be, uitgegeven door de vzw Altitude Music ASBL.", "publisher": "Uitgever", "registeredOffice": "Maatschappelijke zetel", "studio": "Studio", "companyNumber": "Ondernemingsnummer (KBO)", "hosting": "Hosting", "privacy": "Persoonsgegevens", "privacyText": "De site verzamelt enkel persoonsgegevens die je ons zelf bezorgt:", "privacyForms": "Contact- en getuigenisformulieren: naam, e-mail en bericht gaan via Netlify Forms en worden bewaard zolang nodig om je aanvraag te behandelen.", "privacyBooking": "Boekingen: naam, e-mail en tijdslot worden verwerkt door Cal.com en opgeslagen in de agenda van de studio om de sessie te organiseren.", "privacyEmbeds": "YouTube-video's en Instagram-posts: er wordt niets van die diensten geladen tot je op een miniatuur klikt; daarna kunnen ze eigen cookies plaatsen.", "privacyAnalytics": "Er wordt geen analysetool of advertentiecookie gebruikt.", "rights": "Je kan inzage, verbetering of verwijdering van je gegevens vragen via altitudemusic13@gmail.com.", "ip": "Intellectuele eigendom", "ipText": "Teksten, foto's, video's, muziek en logo's op deze site zijn eigendom van Altitude Music ASBL of van hun respectieve auteurs. Elke reproductie zonder toestemming is verboden."}
 }

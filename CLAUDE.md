@@ -20,7 +20,7 @@ To run the CMS locally: `npx @sveltia/cms-server` in one terminal, `npm run dev`
 
 ## Deployment
 
-Netlify, auto-deploy on push to `main` (`netlify.toml` holds the build command, Node version and cache/security headers). Forms (`contact`, `testimonial`) rely on Netlify Forms: the `<form data-netlify>` markup must stay in the prerendered HTML and every field needs a `name`. CMS edits made by the studio also land directly on `main` as commits prefixed `cms:` — pull before starting work.
+Netlify, auto-deploy on push to `main` (`netlify.toml` holds the build command, Node version and cache/security headers). `public/_redirects` holds the Netlify redirects: language-based root redirect (forced, `302!`), old WordPress URLs → new pages (301), old `/wp-content/*` → 410, and no-prefix `/services/*`, `/blog/*` → `/fr/...`. `/[lang]/mentions-legales/` is the legal + privacy page (strings in `i18n.legal`). Forms (`contact`, `testimonial`) rely on Netlify Forms: the `<form data-netlify>` markup must stay in the prerendered HTML and every field needs a `name`. CMS edits made by the studio also land directly on `main` as commits prefixed `cms:` — pull before starting work.
 
 ## Architecture
 

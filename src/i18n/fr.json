@@ -83,5 +83,6 @@
       { "n": "40+",  "l": "Artistes accompagnés" },
       { "n": "24/7", "l": "Studio dispo" }
     ]
-  }
+  },
+  "legal": {"title": "Mentions légales", "intro": "Informations légales relatives au site altitudemusic.be, édité par l'ASBL Altitude Music.", "publisher": "Éditeur", "registeredOffice": "Siège social", "studio": "Studio", "companyNumber": "Numéro d'entreprise (BCE)", "hosting": "Hébergement", "privacy": "Données personnelles", "privacyText": "Le site ne collecte des données personnelles que lorsque tu nous les transmets volontairement :", "privacyForms": "Formulaires de contact et de témoignage : nom, email et message sont transmis à Netlify Forms et conservés le temps de traiter ta demande.", "privacyBooking": "Prise de rendez-vous : nom, email et créneau sont traités par Cal.com et enregistrés dans l'agenda du studio pour organiser la session.", "privacyEmbeds": "Vidéos YouTube et posts Instagram : rien n'est chargé depuis ces services avant que tu cliques sur une vignette ; ils peuvent alors déposer leurs propres cookies.", "privacyAnalytics": "Aucun outil de mesure d'audience ni cookie publicitaire n'est utilisé.", "rights": "Tu peux demander l'accès, la rectification ou la suppression de tes données à altitudemusic13@gmail.com.", "ip": "Propriété intellectuelle", "ipText": "Les textes, photos, vidéos, musiques et logos présents sur ce site appartiennent à Altitude Music ASBL ou à leurs auteurs respectifs. Toute reproduction sans autorisation est interdite."}
 }

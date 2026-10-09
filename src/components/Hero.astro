@@ -3,7 +3,7 @@ import type { Translations } from '../i18n/utils';
 
 interface Props { t: Translations; heroVariant?: 'video' | 'minimal'; heroVideo?: string; }
 const { t, heroVariant = 'video', heroVideo } = Astro.props;
-const HERO_VIDEO_FALLBACK = 'https://altitudemusic.be/wp-content/uploads/2025/08/altitude.webm#t=1';
+const HERO_VIDEO_FALLBACK = '/media/altitude-hero.webm';
 const heroVideoSrc = heroVideo && heroVideo.trim() !== '' ? heroVideo : HERO_VIDEO_FALLBACK;
 
 function splitText(text: string, delay = 0, step = 0.025) {

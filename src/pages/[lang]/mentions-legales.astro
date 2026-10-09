@@ -1,0 +1,51 @@
+---
+// Legal notice + privacy summary. Replaces the old WordPress /mentions-legales/ page.
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import { getTranslations, LANGS } from '../../i18n/utils';
+import type { Lang } from '../../i18n/utils';
+
+export function getStaticPaths() {
+  return LANGS.map(lang => ({ params: { lang } }));
+}
+
+const { lang } = Astro.params as { lang: Lang };
+const t = getTranslations(lang);
+const L = t.legal;
+---
+<BaseLayout lang={lang} title={`${L.title} — Altitude Music`} description={L.intro}>
+  <Nav lang={lang} t={t.nav} />
+  <main style="padding-top: 80px;">
+    <article class="container prose" style="padding-top: var(--pad-y); padding-bottom: var(--pad-y);">
+      <h1 style="font-family:var(--display);font-size:clamp(36px,6vw,64px);font-weight:500;letter-spacing:-0.03em;line-height:1;margin-bottom:32px">{L.title}</h1>
+      <p>{L.intro}</p>
+
+      <h2>{L.publisher}</h2>
+      <p>
+        <strong>Altitude Music ASBL</strong><br />
+        {L.registeredOffice} : 8, rue du Facteur, 1348 Ottignies-Louvain-la-Neuve, Belgique<br />
+        {L.studio} : 6, rue Louis de Geer, 1348 Ottignies-Louvain-la-Neuve<br />
+        {L.companyNumber} : 0804.938.959 · TVA BE0804938959<br />
+        Contact : <a href="mailto:altitudemusic13@gmail.com">altitudemusic13@gmail.com</a>
+      </p>
+
+      <h2>{L.hosting}</h2>
+      <p>Netlify, Inc. — 512 2nd Street, Suite 200, San Francisco, CA 94107, USA — <a href="https://www.netlify.com" target="_blank" rel="noopener">netlify.com</a></p>
+
+      <h2>{L.privacy}</h2>
+      <p>{L.privacyText}</p>
+      <ul>
+        <li>{L.privacyForms}</li>
+        <li>{L.privacyBooking}</li>
+        <li>{L.privacyEmbeds}</li>
+        <li>{L.privacyAnalytics}</li>
+      </ul>
+      <p>{L.rights}</p>
+
+      <h2>{L.ip}</h2>
+      <p>{L.ipText}</p>
+    </article>
+  </main>
+  <Footer t={t} lang={lang} />
+</BaseLayout>
