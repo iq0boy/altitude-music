@@ -1,0 +1,16 @@
+---
+// Compact uniform grid of Instagram posts (service pages). Click opens the lightbox.
+import { Image } from 'astro:assets';
+import type { InstagramPost } from '../utils/instagram';
+
+interface Props { posts: InstagramPost[]; }
+const { posts } = Astro.props;
+---
+<div class="ig-grid">
+  {posts.map(p => (
+    <button type="button" class="ig-tile" data-ig-embed={p.permalink} aria-label={p.caption.slice(0, 80) || 'Instagram'}>
+      <Image src={p.picture} inferSize width={480} alt={p.caption.slice(0, 80)} loading="lazy" decoding="async" />
+      {p.type === 'reel' && <span class="play-badge small" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg></span>}
+    </button>
+  ))}
+</div>

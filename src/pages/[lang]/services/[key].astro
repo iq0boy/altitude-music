@@ -6,6 +6,9 @@ import Nav from '../../../components/Nav.astro';
 import Footer from '../../../components/Footer.astro';
 import Booking from '../../../components/Booking';
 import YouTube from '../../../components/YouTube.astro';
+import InstagramGrid from '../../../components/InstagramGrid.astro';
+import InstagramLightbox from '../../../components/InstagramLightbox.astro';
+import { getInstagramPosts } from '../../../utils/instagram';
 import { youtubeId, youtubeAspect, youtubeThumb } from '../../../utils/youtube';
 import { getCollection, getEntry } from 'astro:content';
 import { getTranslations, LANGS } from '../../../i18n/utils';
@@ -51,6 +54,7 @@ const title = `${name} — Altitude Music | Louvain-la-Neuve`;
 const description = svc.desc[lang];
 const num = String(idx + 1).padStart(2, '0');
 const videoId = youtubeId(svc.video);
+const igPosts = (await getInstagramPosts()).filter(p => p.services.includes(svc.key)).slice(0, 6);
 const videoAspect = youtubeAspect(svc.video);
 const heroImage = svc.image?.trim() || (videoId ? youtubeThumb(videoId, videoAspect) : null);
 
@@ -137,6 +141,13 @@ const jsonLd = {
         </section>
       )}
 
+      {igPosts.length > 0 && (
+        <section class="svc-section">
+          <h2 class="svc-section-title">{t.sections.instagram}</h2>
+          <InstagramGrid posts={igPosts} />
+        </section>
+      )}
+
       <section class="svc-section">
         <h2 class="svc-section-title">{sd.reviews} ({reviews.length})</h2>
         {reviews.length === 0 ? (
@@ -187,4 +198,5 @@ const jsonLd = {
     </div>
   </main>
   <Footer t={t} lang={lang} />
+  <InstagramLightbox />
 </BaseLayout>

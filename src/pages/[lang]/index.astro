@@ -10,7 +10,8 @@ import Footer from '../../components/Footer.astro';
 import SectionHead from '../../components/SectionHead.astro';
 import Portfolio from '../../components/Portfolio';
 import MediaGrid from '../../components/MediaGrid.astro';
-import InstagramFeed from '../../components/InstagramFeed.astro';
+import InstagramLightbox from '../../components/InstagramLightbox.astro';
+import { getInstagramPosts } from '../../utils/instagram';
 import Testimonials from '../../components/Testimonials';
 import Booking from '../../components/Booking';
 import Contact from '../../components/Contact';
@@ -45,6 +46,8 @@ const tracks = musicEntries
 
 const mediaItems = (await getCollection('media'))
   .sort((a, b) => a.data.sortOrder - b.data.sortOrder);
+const igAll = await getInstagramPosts();
+const igHome = igAll.slice(0, 9);
 
 const serviceList = (await getCollection('services'))
   .map(e => e.data as ServiceData)
@@ -114,8 +117,12 @@ const homeJsonLd = {
     <section class="section" id="videos" style="border-top:1px solid var(--line)">
       <div class="container">
         <SectionHead tag="// 04" title={t.sections.videos} sub={t.sections.videosSub} />
-        <MediaGrid items={mediaItems} />
-        <InstagramFeed t={t} />
+        <MediaGrid items={mediaItems} posts={igHome} allPosts={igAll} />
+        {igAll.length > 0 && (
+          <div class="media-more">
+            <a class="btn ghost" href="https://www.instagram.com/alt_itude.music/" target="_blank" rel="noopener">{t.sections.instagramMore}</a>
+          </div>
+        )}
       </div>
     </section>
 
@@ -145,6 +152,7 @@ const homeJsonLd = {
     </section>
   </main>
   <Footer t={t} lang={lang} />
+  <InstagramLightbox />
   <ServiceDetail
     t={t}
     lang={lang}

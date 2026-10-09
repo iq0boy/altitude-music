@@ -28,7 +28,7 @@ Static-rendered (SSG) Astro site for the Altitude Music studio in Louvain-la-Neu
 
 ### Rendering strategy: islands
 
-Static, zero-JS sections are `.astro` components: `Nav`, `Hero`, `Marquee`, `Services`, `MediaGrid`, `About`, `Blog`, `Footer`, `SectionHead`. `InstagramFeed.astro` renders `src/data/instagram.json` + `src/assets/instagram/*.jpg` (optimised with `<Image>`), both written by `scripts/sync-instagram.mjs` (daily `.github/workflows/sync-instagram.yml`, needs the `INSTAGRAM_TOKEN` secret; `GH_PAT` lets it refresh the 60-day token). It renders nothing when the JSON is empty. They render at build time and ship no JavaScript.
+Static, zero-JS sections are `.astro` components: `Nav`, `Hero`, `Marquee`, `Services`, `MediaGrid`, `About`, `Blog`, `Footer`, `SectionHead`. Instagram posts are fetched **at build time** by `src/utils/instagram.ts` (`INSTAGRAM_TOKEN` env var on Netlify, 60-day token, 50 posts, classified per service by `#alt*` hashtags then caption keywords); `MediaGrid.astro` merges CMS tiles and the latest posts, `InstagramGrid.astro` shows a service's posts, `InstagramLightbox.astro` opens Instagram's official embed in a `<dialog>`. Pictures are remote URLs optimised by `<Image>` (see `image.remotePatterns`). No token → empty feed, build still passes. They render at build time and ship no JavaScript.
 
 Interactive sections are React islands (`.tsx`) hydrated only when needed:
 

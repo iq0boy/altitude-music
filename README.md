@@ -172,32 +172,33 @@ Pas à pas : [`docs/cms-setup.md`, section « Réservation en ligne »](./docs/c
 
 ---
 
-## 5 bis. Instagram : les derniers posts sur le site
+## 5 bis. Instagram : les posts sur le site
 
-La section « Sur Instagram » de la page d'accueil (sous les vidéos) affiche
-automatiquement les 12 derniers posts du compte `@alt_itude.music`. Chaque matin,
-un robot GitHub (`.github/workflows/sync-instagram.yml`) interroge Instagram,
-enregistre les nouveautés dans le projet et redéploie le site. Les reels affichent
-leur image de couverture et renvoient vers Instagram.
+À chaque construction du site, Netlify interroge Instagram et récupère les 50
+derniers posts du compte `@alt_itude.music` :
 
-Mise en place, une fois (environ 20 minutes) :
+- la section **Médias** de la page d'accueil mêle les tuiles choisies dans `/admin/`
+  et les 9 derniers posts Instagram ; un clic sur un post ou un reel l'ouvre dans
+  une fenêtre, lu par le lecteur officiel d'Instagram ;
+- chaque **fiche service** affiche jusqu'à 6 posts qui la concernent. Le classement
+  se fait d'abord par **hashtag** dans la légende du post : `#altrec` (enregistrement),
+  `#altmix`, `#altdesign`, `#altprod`, `#altcoach`, `#altcustom`. Sans hashtag, des
+  mots-clés de la légende sont utilisés (« mix », « album », « pochette »…) ;
+- dans `/admin/` → Médias, un **lien Instagram** collé dans « Source » devient une
+  tuile de la grille, avec l'image du post si c'est un post du compte.
 
-1. **Compte professionnel** : dans l'app Instagram, Paramètres → Type de compte →
-   passer en compte Créateur ou Entreprise (gratuit).
-2. **Application Meta** : sur <https://developers.facebook.com>, créer une app
-   (type « Autre » → « Entreprise »), ajouter le produit **Instagram**, puis dans
-   *Configuration de l'API avec connexion Instagram* : ajouter le compte du studio
-   comme testeur (et accepter l'invitation dans l'app Instagram, Paramètres →
-   Site web et apps → Invitations de testeur), puis **Générer un jeton**.
-3. **Secret GitHub** : dépôt `iq0boy/altitude-music` → Settings → Secrets and
-   variables → Actions → New repository secret : `INSTAGRAM_TOKEN` = le jeton.
-4. Onglet *Actions* → « Sync Instagram » → *Run workflow* pour la première récupération.
+Le site n'est **pas** reconstruit automatiquement quand le studio publie : les
+nouveaux posts apparaissent au prochain déploiement, c'est-à-dire à la prochaine
+modification dans `/admin/` ou via Claude Code, ou en cliquant *Deploys → Trigger
+deploy* dans Netlify.
 
-Le jeton expire après 60 jours. Pour qu'il se renouvelle tout seul, ajouter un
-second secret `GH_PAT` : un jeton GitHub « fine-grained » limité à ce dépôt avec
-la permission *Secrets : Read and write* (Settings du compte → Developer settings
-→ Personal access tokens). Sans lui, il faudra régénérer `INSTAGRAM_TOKEN` tous
-les deux mois ; le site garde simplement les derniers posts connus.
+Réglage : la variable d'environnement **`INSTAGRAM_TOKEN`** dans Netlify (Site
+configuration → Environment variables) doit contenir un jeton Instagram valide.
+Il est obtenu sur <https://developers.facebook.com> → app « Altitude Music site » →
+Instagram → *Configuration de l'API avec la connexion Instagram* → **Générer un
+token**, et il **expire après 60 jours** : il faut alors en générer un nouveau et
+remplacer la valeur dans Netlify, puis redéployer. Sans jeton valide, le site se
+construit normalement, simplement sans posts Instagram.
 
 ## 6. Où sont les choses
 
@@ -208,7 +209,6 @@ src/content/        tout le contenu éditable (aussi via /admin/)
   music/            titres du portfolio (synchro Spotify automatique chaque lundi)
   media/            vidéos et photos de la grille
   team/             membres de l'équipe
-  instagram/        (src/assets) photos des posts Instagram synchronisés
   testimonials/     témoignages
   settings/         vidéo du hero, image de partage, utilisateur Cal.com
 src/i18n/           textes de l'interface (menus, titres, boutons) FR/EN/NL

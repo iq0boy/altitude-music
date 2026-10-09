@@ -1,0 +1,28 @@
+---
+// One per page: a <dialog> that loads Instagram's official embed of a post when
+// any element with data-ig-embed="<permalink>" is clicked. Nothing is loaded
+// from Instagram until then.
+---
+<dialog class="ig-lightbox" id="ig-lightbox" aria-label="Instagram">
+  <button type="button" class="ig-close" data-ig-close aria-label="Fermer">×</button>
+  <iframe title="Instagram" allow="encrypted-media; picture-in-picture" allowfullscreen></iframe>
+</dialog>
+<script>
+  const dialog = document.getElementById('ig-lightbox') as HTMLDialogElement | null;
+  if (dialog) {
+    const frame = dialog.querySelector('iframe') as HTMLIFrameElement;
+    const close = () => { dialog.close(); frame.src = 'about:blank'; };
+    document.addEventListener('click', (e) => {
+      const target = e.target as HTMLElement;
+      const opener = target.closest<HTMLElement>('[data-ig-embed]');
+      if (opener) {
+        e.preventDefault();
+        frame.src = `${opener.dataset.igEmbed}embed/`;
+        dialog.showModal();
+        return;
+      }
+      if (target.closest('[data-ig-close]') || target === dialog) close();
+    });
+    dialog.addEventListener('close', () => { frame.src = 'about:blank'; });
+  }
+</script>

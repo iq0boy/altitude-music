@@ -1,28 +1,69 @@
 ---
+// Unified media masonry: curated CMS tiles (YouTube, local video, image, or an
+// Instagram link) followed by the latest Instagram posts fetched at build time.
 import type { CollectionEntry } from 'astro:content';
+import { Image } from 'astro:assets';
 import YouTube from './YouTube.astro';
 import { isYoutube, youtubeId } from '../utils/youtube';
+import { isInstagram, normalizePermalink, type InstagramPost } from '../utils/instagram';
 
-interface Props { items: CollectionEntry<'media'>[]; }
-const { items } = Astro.props;
+interface Props { items: CollectionEntry<'media'>[]; posts?: InstagramPost[]; allPosts?: InstagramPost[]; }
+const { items, posts = [], allPosts = posts } = Astro.props;
+
+const byPermalink = new Map(allPosts.map(p => [p.permalink, p]));
+const igLabel = (p: Pick<InstagramPost, 'type'>) => p.type === 'reel' ? 'INSTAGRAM · REEL' : p.type === 'carousel' ? 'INSTAGRAM · CARROUSEL' : 'INSTAGRAM';
 ---
 <div class="media-grid">
-  {items.map(it => (
-    <figure class="media-tile">
-      {it.data.type === 'video' ? (
-        isYoutube(it.data.src) ? (
-          <YouTube id={youtubeId(it.data.src)!} title={it.data.title || it.data.kind} aspect={it.data.aspect === '9/16' ? '9/16' : '16/9'} class="media-embed" />
+  {items.map(it => {
+    const src = it.data.src;
+    if (isInstagram(src)) {
+      const link = normalizePermalink(src);
+      const post = byPermalink.get(link);
+      return (
+        <figure class="media-tile is-instagram">
+          <button type="button" class="media-embed ig-open" data-ig-embed={link} aria-label={it.data.title || 'Instagram'}>
+            {post
+              ? <Image src={post.picture} inferSize width={640} alt={it.data.title || post.caption.slice(0, 80)} loading="lazy" decoding="async" />
+              : <span class="ig-placeholder" style={`aspect-ratio:${it.data.aspect}`}>INSTAGRAM</span>}
+            {(post?.type === 'reel' || it.data.type === 'video') && <span class="play-badge" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg></span>}
+          </button>
+          <figcaption class="media-tag-row">
+            <span class="media-tag">{it.data.kind}</span>
+            {it.data.title && <span class="media-title">{it.data.title}</span>}
+          </figcaption>
+        </figure>
+      );
+    }
+    return (
+      <figure class="media-tile">
+        {it.data.type === 'video' ? (
+          isYoutube(src) ? (
+            <YouTube id={youtubeId(src)!} title={it.data.title || it.data.kind} aspect={it.data.aspect === '9/16' ? '9/16' : '16/9'} class="media-embed" />
+          ) : (
+            <div class="media-embed" style={`aspect-ratio:${it.data.aspect}`}>
+              <video src={src} poster={it.data.poster} controls preload="metadata" playsinline />
+            </div>
+          )
         ) : (
-          <div class="media-embed" style={`aspect-ratio:${it.data.aspect}`}>
-            <video src={it.data.src} poster={it.data.poster} controls preload="metadata" playsinline />
-          </div>
-        )
-      ) : (
-        <img class="media-img" src={it.data.src} alt={it.data.title ?? ''} loading="lazy" decoding="async" />
-      )}
+          <img class="media-img" src={src} alt={it.data.title ?? ''} loading="lazy" decoding="async" />
+        )}
+        <figcaption class="media-tag-row">
+          <span class="media-tag">{it.data.kind}</span>
+          {it.data.title && <span class="media-title">{it.data.title}</span>}
+        </figcaption>
+      </figure>
+    );
+  })}
+
+  {posts.map(p => (
+    <figure class="media-tile is-instagram">
+      <button type="button" class="media-embed ig-open" data-ig-embed={p.permalink} aria-label={p.caption.slice(0, 80) || 'Instagram'}>
+        <Image src={p.picture} inferSize width={640} alt={p.caption.slice(0, 80)} loading="lazy" decoding="async" />
+        {p.type === 'reel' && <span class="play-badge" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg></span>}
+      </button>
       <figcaption class="media-tag-row">
-        <span class="media-tag">{it.data.kind}</span>
-        {it.data.title && <span class="media-title">{it.data.title}</span>}
+        <span class="media-tag">{igLabel(p)}</span>
+        {p.caption && <span class="media-title">{p.caption}</span>}
       </figcaption>
     </figure>
   ))}

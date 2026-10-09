@@ -31,6 +31,13 @@ export default defineConfig({
       },
     }),
   ],
+  image: {
+    // Instagram pictures are remote URLs optimised at build time (utils/instagram.ts).
+    remotePatterns: [
+      { protocol: 'https', hostname: '**.cdninstagram.com' },
+      { protocol: 'https', hostname: '**.fbcdn.net' },
+    ],
+  },
   i18n: {
     defaultLocale: 'fr',
     locales: ['fr', 'en', 'nl'],
