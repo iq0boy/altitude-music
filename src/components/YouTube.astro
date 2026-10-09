@@ -1,13 +1,14 @@
 ---
 // Click-to-load YouTube facade: a thumbnail + play button, the iframe is only
 // created on click (no third-party JS or cookies until then).
-import { youtubeThumb } from '../utils/youtube';
+import { youtubeBestThumb } from '../utils/youtube';
 
 interface Props { id: string; title?: string; aspect?: '16/9' | '9/16'; class?: string; }
 const { id, title = 'YouTube', aspect = '16/9', class: cls = '' } = Astro.props;
+const thumb = await youtubeBestThumb(id, aspect);
 ---
 <div class={`yt ${cls}`} style={`aspect-ratio:${aspect}`} data-yt={id} data-title={title}>
-  <img src={youtubeThumb(id, aspect)} alt={title} loading="lazy" decoding="async" />
+  <img src={thumb} alt={title} loading="lazy" decoding="async" />
   <button type="button" class="yt-play" aria-label={`▶ ${title}`}>
     <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" /></svg>
   </button>

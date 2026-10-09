@@ -5,6 +5,14 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { loadEnv } from 'vite';
+import sharp from 'sharp';
+
+// Perceptual hash (8x8 grayscale average hash) so near-identical covers count as duplicates.
+async function pHash(file) {
+  const px = await sharp(file).resize(8, 8, { fit: 'fill' }).grayscale().raw().toBuffer();
+  const avg = px.reduce((a, b) => a + b, 0) / px.length;
+  return [...px].map(v => (v > avg ? '1' : '0')).join('');
+}
 
 const LIMIT = 50;
 const ASSETS = path.resolve('src/assets/instagram');
@@ -53,7 +61,16 @@ export async function syncInstagram(token) {
         await fs.writeFile(dest, Buffer.from(await r.arrayBuffer()));
       } catch (err) { console.warn(`[instagram] image ${m.id} ignorée :`, err.message); continue; }
     }
+    let hash = String(m.id);
+    try {
+      // Skip covers that are essentially black frames (nothing to show on a tile).
+      const { channels } = await sharp(dest).stats();
+      const brightness = channels.slice(0, 3).reduce((a, c) => a + c.mean, 0) / 3;
+      if (brightness < 12) { console.warn(`[instagram] ${m.id} ignoré : couverture noire`); await fs.unlink(dest); continue; }
+      hash = await pHash(dest);
+    } catch {}
     posts.push({
+      hash,
       id: String(m.id),
       type: m.media_type === 'VIDEO' ? 'reel' : m.media_type === 'CAROUSEL_ALBUM' ? 'carousel' : 'image',
       permalink: m.permalink,

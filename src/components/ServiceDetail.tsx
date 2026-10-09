@@ -64,7 +64,7 @@ export default function ServiceDetail({ t, lang, services, testimonials }: Props
           </div>
           <div className="svc-meta">
             <span className="num">SERVICE / {String(idx + 1).padStart(2, '0')}</span>
-            <h1>{name}</h1>
+            <h1 className={name.length >= 13 && !name.includes(' ') ? 'long' : undefined}>{name}</h1>
             <p style={{ color: 'var(--fg-2)', fontSize: 16, lineHeight: 1.5 }}>{svc.desc[lang]}</p>
             <div className="price-big">
               {p === 0 ? <span>{svc.unit[lang]}</span> : p === -1 ? <span>{t.servicesUI.quote}</span> : (

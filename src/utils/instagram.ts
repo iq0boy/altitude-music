@@ -7,6 +7,7 @@ import raw from '../data/instagram.json';
 
 export interface InstagramPost {
   id: string;
+  hash: string;           // md5 of the picture, to drop repeated covers
   type: 'reel' | 'image' | 'carousel';
   permalink: string;      // https://www.instagram.com/reel/<code>/ or /p/<code>/
   caption: string;
@@ -44,10 +45,20 @@ export function normalizePermalink(url: string): string {
 
 const pictures = import.meta.glob<{ default: ImageMetadata }>('../assets/instagram/*.jpg', { eager: true });
 
-type Raw = { id: string; type: InstagramPost['type']; permalink: string; caption: string; timestamp: string; image: string };
+type Raw = { id: string; hash?: string; type: InstagramPost['type']; permalink: string; caption: string; timestamp: string; image: string };
 const posts: InstagramPost[] = (raw as Raw[]).flatMap(p => {
   const picture = pictures[`../assets/instagram/${p.image}`]?.default;
-  return picture ? [{ ...p, permalink: normalizePermalink(p.permalink), picture, services: classify(p.caption) }] : [];
+  return picture ? [{ ...p, hash: p.hash ?? p.id, permalink: normalizePermalink(p.permalink), picture, services: classify(p.caption) }] : [];
 });
 
 export function getInstagramPosts(): InstagramPost[] { return posts; }
+
+// Drop posts whose cover is (nearly) the same picture as one already kept (Hamming distance on the 64-bit hash).
+export function dedupeByCover(list: InstagramPost[], maxDistance = 10): InstagramPost[] {
+  const kept: InstagramPost[] = [];
+  for (const p of list) {
+    const dup = kept.some(k => k.hash.length === p.hash.length && [...k.hash].filter((c, i) => c !== p.hash[i]).length <= maxDistance);
+    if (!dup) kept.push(p);
+  }
+  return kept;
+}
