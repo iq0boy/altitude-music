@@ -1,46 +1,46 @@
 {
   "key": "book",
   "sortOrder": 6,
-  "price": 0,
+  "price": -1,
   "popular": false,
   "name": {
-    "fr": "Prendre RDV",
-    "en": "Studio Tour",
-    "nl": "Studio Tour"
+    "fr": "Demande custom",
+    "en": "Custom Request",
+    "nl": "Aanvraag op maat"
   },
   "unit": {
-    "fr": "gratuit",
-    "en": "free",
-    "nl": "gratis"
+    "fr": "sur devis",
+    "en": "on request",
+    "nl": "op offerte"
   },
   "desc": {
-    "fr": "Visite du studio, écoute, brief de projet. Café offert.",
-    "en": "Visit the studio, listen, brief the project. Coffee on us.",
-    "nl": "Bezoek de studio, luister, brief je project. Koffie van het huis."
+    "fr": "Un projet qui sort des forfaits ? Clip, direction artistique, album complet : on construit l'offre avec toi.",
+    "en": "A project outside the packages? Music video, art direction, full album: we build the offer with you.",
+    "nl": "Een project buiten de pakketten? Clip, art direction, volledig album: we bouwen het aanbod samen met jou."
   },
   "long": {
-    "fr": "Visite gratuite du studio. Tu écoutes le matériel, on parle de ton projet, on prend un café. Aucune obligation, aucun engagement.",
-    "en": "Free studio visit. You listen to the gear, we talk about your project, we have a coffee. No obligation, no commitment.",
-    "nl": "Gratis studiobezoek. Je luistert naar het materiaal, we praten over je project, we drinken koffie. Geen verplichtingen, geen engagement."
+    "fr": "Chaque projet est différent. Si ton besoin ne rentre dans aucun forfait — clip, album complet, direction artistique, accompagnement sur la durée — on en parle au studio, on définit ensemble le périmètre et on te remet un devis clair. Premier échange gratuit, sans engagement.",
+    "en": "Every project is different. If your needs don't fit any package — music video, full album, art direction, long-term support — we talk it through at the studio, define the scope together and send you a clear quote. First conversation is free, no commitment.",
+    "nl": "Elk project is anders. Past je vraag in geen enkel pakket — clip, volledig album, art direction, begeleiding op lange termijn — dan bespreken we het in de studio, bepalen we samen de scope en krijg je een duidelijke offerte. Eerste gesprek gratis, zonder verplichtingen."
   },
   "includes": {
     "fr": [
-      "Visite du studio",
-      "Écoute du matériel",
-      "Brief de projet",
-      "Café offert"
+      "Premier échange gratuit",
+      "Brief et cadrage du projet",
+      "Devis détaillé",
+      "Équipe adaptée au projet"
     ],
     "en": [
-      "Studio tour",
-      "Gear listening",
-      "Project brief",
-      "Coffee on us"
+      "Free first conversation",
+      "Project brief and scoping",
+      "Detailed quote",
+      "Team tailored to the project"
     ],
     "nl": [
-      "Studio tour",
-      "Gear beluisteren",
-      "Projectbriefing",
-      "Koffie van het huis"
+      "Gratis eerste gesprek",
+      "Briefing en scope van het project",
+      "Gedetailleerde offerte",
+      "Team op maat van het project"
     ]
   },
   "gallery": [

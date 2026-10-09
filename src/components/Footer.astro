@@ -29,7 +29,7 @@ const services = (await getCollection('services'))
         <h5>{t.nav.services}</h5>
         <ul>
           {services.slice(0, 5).map(s => (
-            <li><a href={`/${lang}/#services`}>{s.name[lang]}</a></li>
+            <li><a href={`/${lang}/services/${s.key}/`}>{s.name[lang]}</a></li>
           ))}
         </ul>
       </div>

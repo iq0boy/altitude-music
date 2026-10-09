@@ -2,16 +2,17 @@ import { useState } from 'react';
 import type { Translations, Lang } from '../i18n/utils';
 import type { ServiceData } from '../data/services';
 
-interface Props { t: Translations; lang: Lang; services: ServiceData[]; }
+interface Props { t: Translations; lang: Lang; services: ServiceData[]; initialServiceKey?: string; }
 
-export default function Booking({ t, lang, services }: Props) {
+export default function Booking({ t, lang, services, initialServiceKey }: Props) {
   const tb = t.booking;
   const today = new Date();
   const [view, setView] = useState({ y: today.getFullYear(), m: today.getMonth() });
   const [picked, setPicked] = useState<Date | null>(null);
   const [slot, setSlot] = useState<string | null>(null);
   const [duration, setDuration] = useState(tb.durations[1]);
-  const [service, setService] = useState(services[0]?.name[lang] ?? '');
+  const initial = services.find(s => s.key === initialServiceKey) ?? services[0];
+  const [service, setService] = useState(initial?.name[lang] ?? '');
   const [confirmed, setConfirmed] = useState(false);
 
   const monthName = new Date(view.y, view.m, 1).toLocaleDateString(lang, { month: 'long', year: 'numeric' });

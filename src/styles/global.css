@@ -581,6 +581,10 @@ a.team-card:hover .team-handle { color: var(--accent); }
 /* === SERVICE DETAIL PAGE === */
 .svc-page { position: fixed; inset: 0; z-index: 200; background: var(--bg); overflow-y: auto; animation: alt-fade .25s ease; }
 .svc-page-inner { max-width: var(--grid); margin: 0 auto; padding: 32px var(--pad-x) 80px; }
+.svc-static { padding-top: 80px; }
+.svc-static .svc-section-title { margin: 0 0 16px; font-weight: 400; }
+.svc-static .svc-back { display: inline-block; text-decoration: none; }
+.testi-avatar { width: 36px; height: 36px; border-radius: 50%; background: var(--accent); color: #0a0a0a; display: flex; align-items: center; justify-content: center; font-family: var(--display); font-weight: 600; }
 .svc-back { font-family: var(--mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--fg-2); background: transparent; border: 0; padding: 8px 0; margin-bottom: 24px; }
 .svc-back:hover { color: var(--accent); }
 .svc-hero { display: grid; grid-template-columns: 1.4fr 1fr; gap: 32px; align-items: end; border-bottom: 1px solid var(--line); padding-bottom: 32px; margin-bottom: 48px; }

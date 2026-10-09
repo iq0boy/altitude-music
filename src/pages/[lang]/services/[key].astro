@@ -1,0 +1,190 @@
+---
+// Static, indexable page per service (/{lang}/services/{key}/). Mirrors the
+// ServiceDetail modal's content; the modal stays for legacy #service/<key> links.
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Nav from '../../../components/Nav.astro';
+import Footer from '../../../components/Footer.astro';
+import Booking from '../../../components/Booking';
+import { getCollection } from 'astro:content';
+import { getTranslations, LANGS } from '../../../i18n/utils';
+import type { Lang } from '../../../i18n/utils';
+import type { ServiceData, TestimonialData } from '../../../data/services';
+
+export async function getStaticPaths() {
+  const services = (await getCollection('services'))
+    .map(e => e.data as ServiceData)
+    .sort((a, b) => a.sortOrder - b.sortOrder);
+  const testimonials = (await getCollection('testimonials'))
+    .map(e => e.data as TestimonialData)
+    .sort((a, b) => a.sortOrder - b.sortOrder);
+
+  return LANGS.flatMap(lang =>
+    services.map((service, idx) => ({
+      params: { lang, key: service.key },
+      props: {
+        service,
+        services,
+        idx,
+        others: services.filter(s => s.key !== service.key),
+        reviews: testimonials.filter(r => r.service === service.key),
+      },
+    })),
+  );
+}
+
+interface Props { service: ServiceData; services: ServiceData[]; idx: number; others: ServiceData[]; reviews: TestimonialData[]; }
+
+const { lang } = Astro.params as { lang: Lang };
+const { service: svc, services, idx, others, reviews } = Astro.props;
+const t = getTranslations(lang);
+const sd = t.serviceDetail;
+
+const name = svc.name[lang];
+const price = svc.price;
+const SITE = 'https://altitudemusic.be';
+const url = `${SITE}/${lang}/services/${svc.key}/`;
+const title = `${name} — Altitude Music | Louvain-la-Neuve`;
+const description = svc.desc[lang];
+const num = String(idx + 1).padStart(2, '0');
+
+const offer = price === 0
+  ? { '@type': 'Offer', price: '0', priceCurrency: 'EUR', availability: 'https://schema.org/InStock', url }
+  : price === -1
+    ? { '@type': 'Offer', priceSpecification: { '@type': 'PriceSpecification', priceCurrency: 'EUR' }, url }
+    : { '@type': 'Offer', price: String(price), priceCurrency: 'EUR', availability: 'https://schema.org/InStock', url };
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Service',
+      '@id': `${url}#service`,
+      name,
+      description: svc.long[lang],
+      serviceType: name,
+      url,
+      provider: { '@id': `${SITE}/#studio` },
+      areaServed: { '@type': 'Country', name: 'Belgium' },
+      offers: offer,
+      ...(reviews.length > 0 && {
+        aggregateRating: {
+          '@type': 'AggregateRating',
+          ratingValue: (reviews.reduce((s, r) => s + r.rating, 0) / reviews.length).toFixed(1),
+          reviewCount: reviews.length,
+          bestRating: 5,
+          worstRating: 1,
+        },
+      }),
+    },
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Altitude Music', item: `${SITE}/${lang}/` },
+        { '@type': 'ListItem', position: 2, name: t.nav.services, item: `${SITE}/${lang}/#services` },
+        { '@type': 'ListItem', position: 3, name, item: url },
+      ],
+    },
+  ],
+};
+---
+
+<BaseLayout lang={lang} title={title} description={description} jsonLd={jsonLd}>
+  <Nav lang={lang} t={t.nav} />
+  <main class="svc-static">
+    <div class="svc-page-inner">
+      <a href={`/${lang}/#services`} class="svc-back">{sd.back}</a>
+
+      <div class="svc-hero">
+        <div class="svc-hero-img" style={`--c1:${svc.gallery[0]};--c2:${svc.gallery[1]}`}>
+          <span class="label">SVC / {num} · {name.toUpperCase()}</span>
+        </div>
+        <div class="svc-meta">
+          <span class="num">SERVICE / {num}</span>
+          <h1>{name}</h1>
+          <p style="color:var(--fg-2);font-size:16px;line-height:1.5">{svc.desc[lang]}</p>
+          <div class="price-big">
+            {price === 0
+              ? <span>{svc.unit[lang]}</span>
+              : price === -1
+                ? <span>{t.servicesUI.quote}</span>
+                : <><span class="from">{t.servicesUI.from}</span>€{price}<span class="unit">{svc.unit[lang]}</span></>}
+          </div>
+        </div>
+      </div>
+
+      <section class="svc-section">
+        <h2 class="svc-section-title">{sd.whatYouGet}</h2>
+        <p class="svc-desc">{svc.long[lang]}</p>
+      </section>
+
+      <section class="svc-section">
+        <h2 class="svc-section-title">{sd.includes}</h2>
+        <div class="svc-includes">{svc.includes[lang].map(inc => <div>{inc}</div>)}</div>
+      </section>
+
+      {svc.video && (
+        <section class="svc-section">
+          <h2 class="svc-section-title">{sd.video}</h2>
+          <div class="svc-video-embed">
+            <iframe
+              src={`https://www.youtube-nocookie.com/embed/${svc.video}?rel=0`}
+              title={name}
+              loading="lazy"
+              allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+            />
+          </div>
+        </section>
+      )}
+
+      <section class="svc-section">
+        <h2 class="svc-section-title">{sd.reviews} ({reviews.length})</h2>
+        {reviews.length === 0 ? (
+          <div class="svc-reviews-empty">{sd.noReviews}</div>
+        ) : (
+          <div class="testi-grid">
+            {reviews.map(r => (
+              <div class="testi-card">
+                <span class="testi-tag">{name}</span>
+                <div class="testi-rating" aria-label={`${r.rating}/5`}>{'★'.repeat(r.rating)}{'☆'.repeat(5 - r.rating)}</div>
+                <p class="testi-text">"{r.text[lang] || r.text.fr}"</p>
+                <div class="testi-meta">
+                  <div class="testi-avatar">{r.name[0]}</div>
+                  <div><div class="name">{r.name}</div><div class="role">{r.role}</div></div>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </section>
+
+      <div class="svc-cta-row" style="margin-bottom:48px">
+        <span class="text">{sd.cta}</span>
+        <div style="display:flex;gap:8px">
+          <a href="#booking" class="btn accent">{sd.bookNow}</a>
+          <a href={`/${lang}/#contact`} class="btn ghost">{t.nav.contact}</a>
+        </div>
+      </div>
+
+      <section class="svc-section" id="booking">
+        <h2 class="svc-section-title">{t.sections.booking} · {name}</h2>
+        <p class="svc-desc" style="margin-bottom:20px;font-size:16px;color:var(--fg-2)">{t.sections.bookingSub}</p>
+        <Booking t={t} lang={lang} services={services} initialServiceKey={svc.key} client:visible />
+      </section>
+
+      <section class="svc-section">
+        <h2 class="svc-section-title">{sd.otherServices}</h2>
+        <nav class="services-grid" aria-label={sd.otherServices}>
+          {others.map(s => (
+            <a href={`/${lang}/services/${s.key}/`} class="service-card">
+              <div class="service-name">{s.name[lang]}</div>
+              <div class="service-desc">{s.desc[lang]}</div>
+              <span class="service-cta">{sd.learnMore}</span>
+            </a>
+          ))}
+        </nav>
+      </section>
+    </div>
+  </main>
+  <Footer t={t} lang={lang} />
+</BaseLayout>

@@ -12,7 +12,7 @@ const { t, lang, services } = Astro.props;
     <div class="services-grid">
       {services.map((s, i) => (
         <a
-          href={`#service/${s.key}`}
+          href={`/${lang}/services/${s.key}/`}
           class={`service-card ${s.popular ? 'popular' : ''}`}
           data-popular={t.servicesUI.popular}
           aria-label={`${s.name[lang]} — ${t.serviceDetail.learnMore}`}

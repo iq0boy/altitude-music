@@ -4,9 +4,9 @@
   "price": 100,
   "popular": false,
   "name": {
-    "fr": "Pochettes",
-    "en": "Cover Art",
-    "nl": "Cover Art"
+    "fr": "Design visuel",
+    "en": "Visual Design",
+    "nl": "Visueel design"
   },
   "unit": {
     "fr": "/ pochette",

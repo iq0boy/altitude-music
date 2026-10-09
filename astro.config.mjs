@@ -21,6 +21,8 @@ export default defineConfig({
         if (url.pathname === '/fr/' || url.pathname === '/en/' || url.pathname === '/nl/') {
           item.priority = 1.0;
           item.changefreq = 'weekly';
+        } else if (url.pathname.includes('/services/')) {
+          item.priority = 0.8;
         } else if (url.pathname.includes('/blog/') && url.pathname !== '/fr/blog/' && url.pathname !== '/en/blog/' && url.pathname !== '/nl/blog/') {
           item.priority = 0.6;
           item.changefreq = 'monthly';

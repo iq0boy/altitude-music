@@ -64,10 +64,11 @@ const serviceNodes = serviceList.map(s => {
     ? { '@type': 'Offer', price: '0', priceCurrency: 'EUR', availability: 'https://schema.org/InStock' }
     : s.price === -1
       ? { '@type': 'Offer', priceSpecification: { '@type': 'PriceSpecification', priceCurrency: 'EUR' } }
-      : { '@type': 'Offer', price: String(s.price), priceCurrency: 'EUR', availability: 'https://schema.org/InStock', url: `${SITE}/${lang}/#service/${s.key}` };
+      : { '@type': 'Offer', price: String(s.price), priceCurrency: 'EUR', availability: 'https://schema.org/InStock', url: `${SITE}/${lang}/services/${s.key}/` };
   return {
     '@type': 'Service',
-    '@id': `${SITE}/${lang}/#service-${s.key}`,
+    '@id': `${SITE}/${lang}/services/${s.key}/#service`,
+    url: `${SITE}/${lang}/services/${s.key}/`,
     name: s.name[lang],
     description: s.desc[lang],
     serviceType: s.name[lang],
