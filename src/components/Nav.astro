@@ -14,12 +14,13 @@ const { lang, t } = Astro.props;
       </svg>
       ALTITUDE.MUSIC
     </a>
-    <div class="nav-links">
+    <div class="nav-links" id="nav-links">
       <a href={`/${lang}/#services`}>{t.services}</a>
       <a href={`/${lang}/#work`}>{t.work}</a>
       <a href={`/${lang}/#about`}>{t.about}</a>
       <a href={`/${lang}/blog/`}>{t.blog}</a>
       <a href={`/${lang}/#contact`}>{t.contact}</a>
+      <a href={`/${lang}/#booking`} class="btn accent nav-links-book">{t.book}</a>
     </div>
     <div class="nav-right">
       <div class="lang-switch">
@@ -27,7 +28,22 @@ const { lang, t } = Astro.props;
           <a href={`/${l}/`} class={lang === l ? 'active' : ''}>{l.toUpperCase()}</a>
         ))}
       </div>
-      <a href={`/${lang}/#booking`} class="btn accent">{t.book}</a>
+      <a href={`/${lang}/#booking`} class="btn accent nav-book">{t.book}</a>
+      <button type="button" class="nav-burger" aria-label="Menu" aria-expanded="false" aria-controls="nav-links">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </div>
 </nav>
+<script>
+  // Mobile menu: toggles the links panel; closes on link click, Escape, or resize to desktop.
+  const nav = document.querySelector('.nav');
+  const burger = nav?.querySelector<HTMLButtonElement>('.nav-burger');
+  if (nav && burger) {
+    const set = (open: boolean) => { nav.classList.toggle('open', open); burger.setAttribute('aria-expanded', String(open)); document.body.classList.toggle('nav-open', open); };
+    burger.addEventListener('click', () => set(!nav.classList.contains('open')));
+    nav.querySelectorAll('.nav-links a').forEach(a => a.addEventListener('click', () => set(false)));
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') set(false); });
+    window.matchMedia('(min-width: 901px)').addEventListener('change', e => { if (e.matches) set(false); });
+  }
+</script>

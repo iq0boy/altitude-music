@@ -43,7 +43,7 @@
   "serviceDetail": {
     "back": "← Terug naar diensten", "gallery": "Galerij", "video": "Video", "pricing": "Tarief",
     "whatYouGet": "Wat je krijgt", "reviews": "Beoordelingen voor deze dienst", "noReviews": "Nog geen beoordelingen voor deze dienst.",
-    "bookNow": "Nu boeken", "learnMore": "Meer info →", "includes": "Inbegrepen", "cta": "Laten we over je project praten", "otherServices": "Andere diensten"
+    "bookNow": "Nu boeken", "learnMore": "Meer info", "includes": "Inbegrepen", "cta": "Laten we over je project praten", "otherServices": "Andere diensten"
   },
   "contactForm": {
     "name": "Naam", "email": "Email", "project": "Type project", "message": "Bericht",

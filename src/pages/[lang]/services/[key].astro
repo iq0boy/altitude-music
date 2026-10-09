@@ -185,7 +185,7 @@ const jsonLd = {
 
       <section class="svc-section">
         <h2 class="svc-section-title">{sd.otherServices}</h2>
-        <nav class="services-grid" aria-label={sd.otherServices}>
+        <nav class="services-grid others" aria-label={sd.otherServices}>
           {others.map(s => (
             <a href={`/${lang}/services/${s.key}/`} class="service-card">
               <div class="service-name">{s.name[lang]}</div>

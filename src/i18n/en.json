@@ -43,7 +43,7 @@
   "serviceDetail": {
     "back": "← Back to services", "gallery": "Gallery", "video": "Video", "pricing": "Pricing",
     "whatYouGet": "What you get", "reviews": "Reviews for this service", "noReviews": "No reviews yet for this service.",
-    "bookNow": "Book now", "learnMore": "Learn more →", "includes": "Includes", "cta": "Let's talk about your project", "otherServices": "Other services"
+    "bookNow": "Book now", "learnMore": "Learn more", "includes": "Includes", "cta": "Let's talk about your project", "otherServices": "Other services"
   },
   "contactForm": {
     "name": "Name", "email": "Email", "project": "Project type", "message": "Message",
