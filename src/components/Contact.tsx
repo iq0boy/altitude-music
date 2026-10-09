@@ -88,7 +88,7 @@ export default function Contact({ t, lang }: Props) {
                 <a href="https://www.tiktok.com/@altitudemusic13" target="_blank" rel="noopener" title="TikTok">
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19.6 7.5a5.5 5.5 0 01-3.4-1.2v8.4a5.7 5.7 0 11-5.7-5.7v2.7a3 3 0 103 3V2h2.7a5.5 5.5 0 005.5 5.5v0z"/></svg>
                 </a>
-                <a href="https://open.spotify.com/playlist/5WLi8GndFcqKUgNoIuDeEE" target="_blank" rel="noopener" title="Spotify">
+                <a href="https://open.spotify.com/playlist/2B4GNjjI37Y2t1OGQj8LkD" target="_blank" rel="noopener" title="Spotify">
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" strokeWidth="2"/><path d="M7 10c3-1 7-1 10 1M7.5 13c2.5-.8 6-.5 8.5 1M8 16c2-.5 4.5-.3 6.5 1" stroke="currentColor" strokeWidth="1.5" fill="none" strokeLinecap="round"/></svg>
                 </a>
               </div>

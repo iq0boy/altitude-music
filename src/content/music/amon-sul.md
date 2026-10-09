@@ -1,14 +1,14 @@
 ---
-title: "Iced Tea"
-artist: "Tyler Oni"
-duration: "2:07"
+title: "Amon Sûl"
+artist: "Ginko"
+duration: "2:12"
 bpm: 0
 genre: "Hip-Hop"
 year: "2025"
 color: "#3206b8"
-sortOrder: 2
+sortOrder: 8
 spotifyUrl: "https://open.spotify.com/playlist/2B4GNjjI37Y2t1OGQj8LkD"
-spotifyTrackId: "7tIXh2Djs8hg9DDMWesC6e"
-audioSrc: "/audio/iced-tea.mp3"
+spotifyTrackId: "5eVJEWha4M33ClbJ3msu3S"
+audioSrc: "/audio/amon-sul.mp3"
 previewDuration: 30
 ---

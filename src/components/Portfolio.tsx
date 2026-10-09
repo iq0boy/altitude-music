@@ -24,7 +24,7 @@ interface Props {
   layout?: 'list' | 'grid';
 }
 
-const PLAYLIST_URL = 'https://open.spotify.com/playlist/5WLi8GndFcqKUgNoIuDeEE';
+const PLAYLIST_URL = 'https://open.spotify.com/playlist/2B4GNjjI37Y2t1OGQj8LkD';
 
 function CoverArt({ track }: { track: Track }) {
   const c2 = `color-mix(in srgb, ${track.color} 50%, #000)`;

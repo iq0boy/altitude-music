@@ -5,7 +5,7 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-const PLAYLIST_ID = '5WLi8GndFcqKUgNoIuDeEE';
+const PLAYLIST_ID = '2B4GNjjI37Y2t1OGQj8LkD';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.join(__dirname, '..');
 const OUT_DIR = path.join(ROOT, 'src', 'content', 'music');
