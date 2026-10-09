@@ -36,7 +36,7 @@ Interactive sections are React islands (`.tsx`) hydrated only when needed:
 |---|---|---|
 | `Portfolio.tsx` | `client:visible` | Genre filter, HTML5 audio player over local preview MP3s, sticky now-playing bar |
 | `Testimonials.tsx` | `client:visible` | Filter + submit form |
-| `Booking.tsx` | `client:visible` | Calendar, slot selection |
+| `Booking.tsx` | `client:visible` | Demo calendar (no backend). Replaced by the static `CalEmbed.astro` Cal.com widget when `settings.calUsername` and the service's `calEvent` are set |
 | `Contact.tsx` | `client:visible` | Form + mailto, Leaflet map |
 | `ServiceDetail.tsx` | `client:load` | Listens to `hashchange` for legacy `#service/<key>` deep links (modal) — must be live before user interaction |
 
@@ -51,7 +51,7 @@ Defined in `src/content.config.ts` (Astro v6 location — **not** the legacy `sr
 - **`media`** — one markdown per video/image tile of the grid; files live in `public/media/`. Sorted by `sortOrder`.
 - **`services`**, **`team`**, **`testimonials`** — JSON files (one per entry) holding **multilingual content** with shape `{ fr, en, nl }` per text field. `services` is a fixed set of 6 files keyed by `ServiceKey`; the filename = the key.
   Each service also gets a static, indexable page at `/<lang>/services/<key>/` from `[lang]/services/[key].astro` (same content as the modal, zero JS). Service cards, footer links and JSON-LD offers point to those pages.
-- **`settings`** — a single file, `src/content/settings/site.json` (`heroVideo`, `ogImage`), read with `getEntry('settings', 'site')`. An empty field means "use the coded default": `Hero.astro` falls back to `HERO_VIDEO_FALLBACK`, `BaseLayout.astro` to `/og-default.jpg`. Keep that fallback behaviour when adding settings.
+- **`settings`** — a single file, `src/content/settings/site.json` (`heroVideo`, `ogImage`, `calUsername`), read with `getEntry('settings', 'site')`. An empty field means "use the coded default": `Hero.astro` falls back to `HERO_VIDEO_FALLBACK`, `BaseLayout.astro` to `/og-default.jpg`. Keep that fallback behaviour when adding settings.
 
 To render markdown body, import `render` from `astro:content` and call `render(entry)` (the v5 `entry.render()` does not exist on glob-loaded entries).
 

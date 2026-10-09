@@ -492,6 +492,7 @@ a.team-card:hover .team-handle { color: var(--accent); }
 .blog-card .meta { font-family: var(--mono); font-size: 11px; color: var(--fg-3); display: flex; justify-content: space-between; padding-top: 12px; border-top: 1px solid var(--line-2); }
 
 /* === BOOKING === */
+.cal-embed { min-height: 640px; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; background: var(--bg-2); }
 .booking-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
 @media (max-width: 900px) { .booking-grid { grid-template-columns: 1fr; } }
 .booking-cal { background: var(--bg-2); padding: 28px; }

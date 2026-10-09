@@ -63,6 +63,7 @@ const services = defineCollection({
     includes: triList,
     gallery: z.tuple([z.string(), z.string(), z.string()]),  // 3 couleurs de la galerie
     video: z.string().default(''),                            // id YouTube, '' = aucune
+    calEvent: z.string().optional(),                          // slug du type d'événement Cal.com, '' = calendrier simulé
   }),
 });
 
@@ -95,6 +96,7 @@ const settings = defineCollection({
   schema: z.object({
     heroVideo: z.string().optional(),   // URL ou /media/<fichier> ; vide = défaut codé
     ogImage: z.string().optional(),     // URL ou /<fichier> ; vide = /og-default.jpg
+    calUsername: z.string().optional(), // nom d'utilisateur Cal.com ; vide = calendrier simulé
   }),
 });
 

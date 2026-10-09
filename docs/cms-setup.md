@@ -45,6 +45,38 @@ L'entrée **« Réglages → Apparence »** édite `src/content/settings/site.js
 > retomber le site sur la valeur par défaut codée — pas de risque de hero ou
 > d'image manquants.
 
+## Réservation en ligne (Cal.com ↔ Google Agenda)
+
+Le calendrier de la page d'accueil et des pages services est une **démonstration**
+tant que rien n'est configuré : il n'envoie rien. Pour de vraies réservations
+synchronisées avec l'agenda Google du studio (`altitudemusic13@gmail.com`) et des
+confirmations par email, le site intègre [Cal.com](https://cal.com) (gratuit pour
+un utilisateur, types d'événements illimités).
+
+### Mise en place (une fois, par le studio)
+
+1. Créer un compte sur <https://cal.com/signup> avec `altitudemusic13@gmail.com`.
+   Choisir un **nom d'utilisateur** court, ex. `altitude-music` → l'URL publique
+   devient `cal.com/altitude-music`.
+2. **Apps → Google Calendar → Install**, autoriser l'accès à l'agenda Gmail.
+   Vérifier dans *Settings → Calendars* que cet agenda est coché pour les
+   conflits **et** sélectionné comme destination des événements.
+3. *Settings → Availability* : renseigner les horaires du studio (ex. lun–sam 14h–21h,
+   fuseau Europe/Brussels).
+4. **Event Types** : créer un type d'événement **par service** (durée, description,
+   lieu = adresse du studio). Noter le **slug** de chacun (la fin de l'URL,
+   ex. `cal.com/altitude-music/enregistrement` → slug `enregistrement`).
+   Les confirmations email (studio + client) et le rappel sont activés par défaut.
+5. Dans le CMS :
+   - **Réglages → Apparence → Utilisateur Cal.com** : `altitude-music`.
+   - **Services & tarifs → chaque service → Événement Cal.com** : le slug correspondant.
+   Un service sans slug (et la page d'accueil) affiche la liste de tous les types
+   d'événements du compte. Sans utilisateur Cal.com, c'est le calendrier de démonstration.
+
+> Cal.com embarque le widget en thème sombre avec la couleur de la charte.
+> Pour vider le calendrier et revenir à la démonstration, effacer le champ
+> « Utilisateur Cal.com ».
+
 ## Mise en route (à faire une seule fois)
 
 ### 1. Créer le compte éditeur

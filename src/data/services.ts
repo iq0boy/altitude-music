@@ -22,6 +22,7 @@ export interface ServiceData {
   includes: TriList;
   gallery: [string, string, string];
   video: string;
+  calEvent?: string;
 }
 
 export interface TeamMember {
@@ -45,4 +46,5 @@ export interface TestimonialData {
 export interface SiteSettings {
   heroVideo?: string;
   ogImage?: string;
+  calUsername?: string;
 }
