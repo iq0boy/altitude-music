@@ -136,8 +136,7 @@ arrivent aussi sur `main`, avec un message commençant par `cms:`.
 
 ## 5. Cal.com : les rendez-vous
 
-Le calendrier du site est une **démonstration** tant que Cal.com n'est pas configuré.
-Une fois configuré, chaque réservation :
+Le calendrier du site (accueil et pages services) est branché sur Cal.com. Chaque réservation :
 
 - apparaît dans **Google Agenda** du studio (`altitudemusic13@gmail.com`) et évite
   les créneaux déjà occupés ;

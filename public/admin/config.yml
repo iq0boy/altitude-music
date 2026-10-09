@@ -186,7 +186,7 @@ collections:
         max: 3
         field: { name: color, label: Couleur, widget: color }
       - { name: video, label: ID vidéo YouTube, widget: string, required: false, hint: "L'identifiant après watch?v= — vide = pas de vidéo." }
-      - { name: calEvent, label: Événement Cal.com, widget: string, required: false, hint: "Slug du type d'événement Cal.com pour ce service (la fin de l'URL cal.com/<utilisateur>/<slug>). Vide = liste de tous les événements du compte." }
+      - { name: calEvent, label: Événement Cal.com, widget: string, required: false, hint: "Slug du type d'événement Cal.com pour ce service (la fin de l'URL cal.com/<utilisateur>/<slug>). Sans slug, le service n'est pas proposé dans le calendrier." }
 
   # ───────────────────────── ÉQUIPE ─────────────────────────
   # src/content/team/<slug>.json — crédits affichés dans « À propos ».
@@ -274,4 +274,4 @@ collections:
             label: Utilisateur Cal.com
             widget: string
             required: false
-            hint: "Nom d'utilisateur du compte Cal.com du studio (cal.com/<utilisateur>). Active les vraies réservations synchronisées avec Google Agenda. Vide = calendrier de démonstration. Voir docs/cms-setup.md."
+            hint: "Nom d'utilisateur du compte Cal.com du studio (cal.com/<utilisateur>). Active le calendrier de réservation (synchronisé avec Google Agenda). Vide = réservation en ligne désactivée. Voir docs/cms-setup.md."

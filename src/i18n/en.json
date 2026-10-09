@@ -50,10 +50,24 @@
     "types": ["Recording", "Mix & Master", "Album / EP", "Cover Art", "Other"]
   },
   "booking": {
-    "pickDate": "Pick a date", "pickTime": "Pick a slot", "duration": "Duration", "service": "Service",
-    "confirm": "Confirm booking", "booked": "Booking confirmed. Email confirmation sent.", "tz": "Brussels time",
-    "slots": ["14:00", "15:00", "16:00", "17:00", "18:00", "19:00"],
-    "durations": ["2h", "3h", "4h", "6h"]
+    "pickDate": "Pick a date in the calendar first.",
+    "pickTime": "Pick a slot",
+    "service": "Service",
+    "duration": "Duration",
+    "time": "Time",
+    "confirm": "Confirm booking",
+    "submitting": "Confirming…",
+    "booked": "Booking confirmed! A confirmation email is on its way.",
+    "error": "We couldn't confirm this slot. Try again, or contact us.",
+    "tz": "Brussels time",
+    "loading": "Loading availability…",
+    "noSlots": "No slot available that day.",
+    "noSlotsMonth": "No availability this month — try the next one.",
+    "name": "Your name",
+    "email": "Your email",
+    "notes": "Your project (optional)",
+    "minutes": "min",
+    "unavailable": "Online booking is coming soon. In the meantime, contact us to book a session."
   },
   "blog": { "read": "Read", "min": "min" },
   "footer": { "rights": "All rights reserved", "made": "Designed and mastered in Louvain-la-Neuve" },

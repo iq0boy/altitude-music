@@ -47,11 +47,11 @@ L'entrée **« Réglages → Apparence »** édite `src/content/settings/site.js
 
 ## Réservation en ligne (Cal.com ↔ Google Agenda)
 
-Le calendrier de la page d'accueil et des pages services est une **démonstration**
-tant que rien n'est configuré : il n'envoie rien. Pour de vraies réservations
-synchronisées avec l'agenda Google du studio (`altitudemusic13@gmail.com`) et des
-confirmations par email, le site intègre [Cal.com](https://cal.com) (gratuit pour
-un utilisateur, types d'événements illimités).
+Le calendrier de la page d'accueil et des pages services est le calendrier du site
+(même design que le reste), branché sur [Cal.com](https://cal.com) : il lit les
+disponibilités réelles et crée la réservation dans l'agenda Google du studio
+(`altitudemusic13@gmail.com`), avec confirmation par email au client et au studio.
+Tant que Cal.com n'est pas configuré, la section affiche un message renvoyant au contact.
 
 ### Mise en place (une fois, par le studio)
 
@@ -70,12 +70,12 @@ un utilisateur, types d'événements illimités).
 5. Dans le CMS :
    - **Réglages → Apparence → Utilisateur Cal.com** : `altitude-music`.
    - **Services & tarifs → chaque service → Événement Cal.com** : le slug correspondant.
-   Un service sans slug (et la page d'accueil) affiche la liste de tous les types
-   d'événements du compte. Sans utilisateur Cal.com, c'est le calendrier de démonstration.
+   Un service sans slug n'est pas proposé dans le menu du calendrier. Sans
+   utilisateur Cal.com, la réservation en ligne est désactivée.
 
-> Cal.com embarque le widget en thème sombre avec la couleur de la charte.
-> Pour vider le calendrier et revenir à la démonstration, effacer le champ
-> « Utilisateur Cal.com ».
+> Les horaires proposés viennent de Cal.com (*Availability*) et la durée de chaque
+> rendez-vous du type d'événement. Pour désactiver la réservation en ligne, effacer
+> le champ « Utilisateur Cal.com ».
 
 ## Mise en route (à faire une seule fois)
 

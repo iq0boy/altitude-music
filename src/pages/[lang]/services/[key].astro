@@ -5,7 +5,6 @@ import BaseLayout from '../../../layouts/BaseLayout.astro';
 import Nav from '../../../components/Nav.astro';
 import Footer from '../../../components/Footer.astro';
 import Booking from '../../../components/Booking';
-import CalEmbed from '../../../components/CalEmbed.astro';
 import { getCollection, getEntry } from 'astro:content';
 import { getTranslations, LANGS } from '../../../i18n/utils';
 import type { Lang } from '../../../i18n/utils';
@@ -41,8 +40,6 @@ const t = getTranslations(lang);
 const sd = t.serviceDetail;
 
 const calUsername = (await getEntry('settings', 'site'))?.data.calUsername?.trim();
-// Service event when its slug is set, otherwise the account's full event list.
-const calLink = calUsername ? (svc.calEvent?.trim() ? `${calUsername}/${svc.calEvent.trim()}` : calUsername) : null;
 
 const name = svc.name[lang];
 const price = svc.price;
@@ -174,9 +171,7 @@ const jsonLd = {
       <section class="svc-section" id="booking">
         <h2 class="svc-section-title">{t.sections.booking} · {name}</h2>
         <p class="svc-desc" style="margin-bottom:20px;font-size:16px;color:var(--fg-2)">{t.sections.bookingSub}</p>
-        {calLink
-          ? <CalEmbed calLink={calLink} ns={`svc-${svc.key}`} lang={lang} />
-          : <Booking t={t} lang={lang} services={services} initialServiceKey={svc.key} client:visible />}
+        <Booking t={t} lang={lang} services={services} calUsername={calUsername} initialServiceKey={svc.key} client:visible />
       </section>
 
       <section class="svc-section">

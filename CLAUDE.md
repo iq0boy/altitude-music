@@ -36,7 +36,7 @@ Interactive sections are React islands (`.tsx`) hydrated only when needed:
 |---|---|---|
 | `Portfolio.tsx` | `client:visible` | Genre filter, HTML5 audio player over local preview MP3s, sticky now-playing bar |
 | `Testimonials.tsx` | `client:visible` | Filter + submit form |
-| `Booking.tsx` | `client:visible` | Demo calendar (no backend). Replaced by the static `CalEmbed.astro` Cal.com widget when `settings.calUsername` and the service's `calEvent` are set |
+| `Booking.tsx` | `client:visible` | Calendar + slot picker wired to Cal.com public API v2 from the browser (`GET /slots`, `POST /bookings`, no key). Needs `settings.calUsername` and each service's `calEvent` slug; shows a contact notice otherwise |
 | `Contact.tsx` | `client:visible` | Form + mailto, Leaflet map |
 | `ServiceDetail.tsx` | `client:load` | Listens to `hashchange` for legacy `#service/<key>` deep links (modal) — must be live before user interaction |
 

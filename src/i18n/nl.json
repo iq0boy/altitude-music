@@ -50,10 +50,24 @@
     "types": ["Opname", "Mix & Master", "Album / EP", "Cover Art", "Andere"]
   },
   "booking": {
-    "pickDate": "Kies een datum", "pickTime": "Kies een tijdslot", "duration": "Duur", "service": "Dienst",
-    "confirm": "Boeking bevestigen", "booked": "Boeking bevestigd. Bevestiging per email.", "tz": "Brusselse tijd",
-    "slots": ["14:00", "15:00", "16:00", "17:00", "18:00", "19:00"],
-    "durations": ["2u", "3u", "4u", "6u"]
+    "pickDate": "Kies eerst een datum in de kalender.",
+    "pickTime": "Kies een tijdslot",
+    "service": "Dienst",
+    "duration": "Duur",
+    "time": "Uur",
+    "confirm": "Boeking bevestigen",
+    "submitting": "Bevestigen…",
+    "booked": "Boeking bevestigd! Je ontvangt een bevestiging per email.",
+    "error": "Dit tijdslot kon niet bevestigd worden. Probeer opnieuw of contacteer ons.",
+    "tz": "Brusselse tijd",
+    "loading": "Beschikbaarheid laden…",
+    "noSlots": "Geen tijdslot beschikbaar die dag.",
+    "noSlotsMonth": "Geen beschikbaarheid deze maand — probeer de volgende.",
+    "name": "Je naam",
+    "email": "Je email",
+    "notes": "Je project (optioneel)",
+    "minutes": "min",
+    "unavailable": "Online boeken komt binnenkort. Contacteer ons intussen om een sessie te boeken."
   },
   "blog": { "read": "Lezen", "min": "min" },
   "footer": { "rights": "Alle rechten voorbehouden", "made": "Ontworpen en gemasterd in Louvain-la-Neuve" },

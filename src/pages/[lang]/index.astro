@@ -12,7 +12,6 @@ import Portfolio from '../../components/Portfolio';
 import MediaGrid from '../../components/MediaGrid.astro';
 import Testimonials from '../../components/Testimonials';
 import Booking from '../../components/Booking';
-import CalEmbed from '../../components/CalEmbed.astro';
 import Contact from '../../components/Contact';
 import ServiceDetail from '../../components/ServiceDetail';
 import { getCollection, getEntry } from 'astro:content';
@@ -132,9 +131,7 @@ const homeJsonLd = {
     <section class="section" id="booking" style="border-top:1px solid var(--line)">
       <div class="container">
         <SectionHead tag="// 08" title={t.sections.booking} sub={t.sections.bookingSub} />
-        {calUsername
-          ? <CalEmbed calLink={calUsername} ns="home" lang={lang} />
-          : <Booking t={t} lang={lang} services={serviceList} client:visible />}
+        <Booking t={t} lang={lang} services={serviceList} calUsername={calUsername} client:visible />
       </div>
     </section>
 
