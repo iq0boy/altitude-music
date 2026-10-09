@@ -5,6 +5,10 @@ file is referenced from a markdown entry in `src/content/media/`.
 
 ## Conventions
 
+- **YouTube**: for a video tile, `src` can simply be a YouTube link
+  (`https://youtu.be/<id>` or `https://youtube.com/shorts/<id>`); the grid shows
+  the thumbnail and loads the player on click. Set `aspect: "9/16"` for shorts.
+
 - **Videos**: MP4 (H.264 + AAC) — universally supported. WebM also works.
   Aim for ~5 MB max per clip; longer clips should live on Vimeo and you
   can re-introduce iframe embeds in the schema later.

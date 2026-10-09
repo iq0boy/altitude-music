@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import type { Translations, Lang } from '../i18n/utils';
 import type { ServiceData } from '../data/services';
+import { youtubeId, youtubeAspect } from '../utils/youtube';
 
 interface Testimonial { name: string; role: string; service: string; text: { fr: string; en: string; nl: string }; rating: number; }
 
@@ -42,7 +43,8 @@ export default function ServiceDetail({ t, lang, services, testimonials }: Props
   const name = svc.name[lang];
   const p = svc.price;
   const colors = svc.gallery;
-  const videoId = svc.video;
+  const videoId = youtubeId(svc.video);
+  const vertical = youtubeAspect(svc.video) === '9/16';
   const longDesc = svc.long[lang];
   const includes = svc.includes[lang];
   const reviews = testimonials.filter(r => r.service === serviceKey);
@@ -94,8 +96,8 @@ export default function ServiceDetail({ t, lang, services, testimonials }: Props
         {videoId && (
           <div className="svc-section">
             <div className="svc-section-title">{sd.video}</div>
-            <div className="svc-video-embed">
-              <iframe src={`https://www.youtube.com/embed/${videoId}?rel=0`} title={name} allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen />
+            <div className={`svc-video-embed${vertical ? ' vertical' : ''}`}>
+              <iframe src={`https://www.youtube-nocookie.com/embed/${videoId}?rel=0`} loading="lazy" title={name} allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen />
             </div>
           </div>
         )}

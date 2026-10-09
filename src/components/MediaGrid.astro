@@ -1,5 +1,7 @@
 ---
 import type { CollectionEntry } from 'astro:content';
+import YouTube from './YouTube.astro';
+import { isYoutube, youtubeId } from '../utils/youtube';
 
 interface Props { items: CollectionEntry<'media'>[]; }
 const { items } = Astro.props;
@@ -8,15 +10,13 @@ const { items } = Astro.props;
   {items.map(it => (
     <figure class="media-tile">
       {it.data.type === 'video' ? (
-        <div class="media-embed" style={`aspect-ratio:${it.data.aspect}`}>
-          <video
-            src={it.data.src}
-            poster={it.data.poster}
-            controls
-            preload="metadata"
-            playsinline
-          />
-        </div>
+        isYoutube(it.data.src) ? (
+          <YouTube id={youtubeId(it.data.src)!} title={it.data.title || it.data.kind} aspect={it.data.aspect === '9/16' ? '9/16' : '16/9'} class="media-embed" />
+        ) : (
+          <div class="media-embed" style={`aspect-ratio:${it.data.aspect}`}>
+            <video src={it.data.src} poster={it.data.poster} controls preload="metadata" playsinline />
+          </div>
+        )
       ) : (
         <img class="media-img" src={it.data.src} alt={it.data.title ?? ''} loading="lazy" decoding="async" />
       )}

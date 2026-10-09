@@ -116,7 +116,7 @@ collections:
       - name: src
         label: Source
         widget: image
-        hint: "Upload une image, ou colle une URL (image externe ou /media/clip.mp4 pour une vidéo)."
+        hint: "Upload une image, ou colle une URL : image externe, /media/clip.mp4, ou un lien YouTube (vidéo ou short) pour le type Vidéo."
         choose_url: true
       - { name: poster, label: Poster (vidéo), widget: image, required: false, choose_url: true, hint: "Image d'aperçu pour les vidéos." }
       - { name: title, label: Titre, widget: string, required: false }
@@ -185,7 +185,7 @@ collections:
         min: 3
         max: 3
         field: { name: color, label: Couleur, widget: color }
-      - { name: video, label: ID vidéo YouTube, widget: string, required: false, hint: "L'identifiant après watch?v= — vide = pas de vidéo." }
+      - { name: video, label: Vidéo YouTube, widget: string, required: false, hint: "Lien YouTube (vidéo ou short) ou identifiant — vide = pas de vidéo. Un lien /shorts/ s'affiche en vertical." }
       - { name: calEvent, label: Événement Cal.com, widget: string, required: false, hint: "Slug du type d'événement Cal.com pour ce service (la fin de l'URL cal.com/<utilisateur>/<slug>). Sans slug, le service n'est pas proposé dans le calendrier." }
 
   # ───────────────────────── ÉQUIPE ─────────────────────────

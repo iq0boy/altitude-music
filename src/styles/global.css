@@ -385,6 +385,13 @@ button:focus-visible, a:focus-visible { outline-offset: 4px; }
 .media-embed { background: #000; position: relative; overflow: hidden; }
 .media-embed video { width: 100%; height: 100%; object-fit: cover; display: block; }
 .media-img { width: 100%; height: auto; display: block; }
+.yt { position: relative; background: #000; overflow: hidden; cursor: pointer; }
+.yt img { width: 100%; height: 100%; object-fit: cover; display: block; opacity: .85; transition: opacity .2s, transform .4s; }
+.yt:hover img { opacity: 1; transform: scale(1.03); }
+.yt iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.yt-play { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 56px; height: 56px; border-radius: 50%; border: 0; background: var(--accent); color: #0a0a0a; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 30px rgba(0,0,0,.5); transition: transform .15s; }
+.yt-play svg { width: 24px; height: 24px; fill: currentColor; margin-left: 3px; }
+.yt:hover .yt-play { transform: translate(-50%, -50%) scale(1.08); }
 .media-tag-row {
   padding: 10px 14px 14px; display: flex; align-items: center;
   justify-content: space-between; gap: 12px;
@@ -631,6 +638,7 @@ a.team-card:hover .team-handle { color: var(--accent); }
 .svc-gallery .tile .ph { position: absolute; bottom: 12px; left: 12px; font-family: var(--mono); font-size: 10px; color: rgba(0,0,0,0.6); letter-spacing: 0.12em; text-transform: uppercase; }
 .svc-video-embed { aspect-ratio: 16/9; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; background: #000; }
 .svc-video-embed iframe { width: 100%; height: 100%; border: 0; }
+.svc-video-embed.vertical { aspect-ratio: 9/16; max-width: 380px; }
 .svc-cta-row { display: flex; gap: 12px; flex-wrap: wrap; padding: 28px; border: 1px solid var(--line); border-radius: 8px; background: var(--bg-2); align-items: center; justify-content: space-between; }
 .svc-cta-row .text { font-family: var(--display); font-size: 22px; font-weight: 500; }
 .svc-reviews-empty { color: var(--fg-3); font-style: italic; padding: 24px; border: 1px dashed var(--line); border-radius: 8px; text-align: center; font-family: var(--mono); font-size: 12px; letter-spacing: 0.06em; }

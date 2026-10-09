@@ -5,6 +5,8 @@ import BaseLayout from '../../../layouts/BaseLayout.astro';
 import Nav from '../../../components/Nav.astro';
 import Footer from '../../../components/Footer.astro';
 import Booking from '../../../components/Booking';
+import YouTube from '../../../components/YouTube.astro';
+import { youtubeId, youtubeAspect } from '../../../utils/youtube';
 import { getCollection, getEntry } from 'astro:content';
 import { getTranslations, LANGS } from '../../../i18n/utils';
 import type { Lang } from '../../../i18n/utils';
@@ -48,6 +50,8 @@ const url = `${SITE}/${lang}/services/${svc.key}/`;
 const title = `${name} — Altitude Music | Louvain-la-Neuve`;
 const description = svc.desc[lang];
 const num = String(idx + 1).padStart(2, '0');
+const videoId = youtubeId(svc.video);
+const videoAspect = youtubeAspect(svc.video);
 
 const offer = price === 0
   ? { '@type': 'Offer', price: '0', priceCurrency: 'EUR', availability: 'https://schema.org/InStock', url }
@@ -124,18 +128,10 @@ const jsonLd = {
         <div class="svc-includes">{svc.includes[lang].map(inc => <div>{inc}</div>)}</div>
       </section>
 
-      {svc.video && (
+      {videoId && (
         <section class="svc-section">
           <h2 class="svc-section-title">{sd.video}</h2>
-          <div class="svc-video-embed">
-            <iframe
-              src={`https://www.youtube-nocookie.com/embed/${svc.video}?rel=0`}
-              title={name}
-              loading="lazy"
-              allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen
-            />
-          </div>
+          <YouTube id={videoId} title={name} aspect={videoAspect} class={`svc-video-embed${videoAspect === '9/16' ? ' vertical' : ''}`} />
         </section>
       )}
 

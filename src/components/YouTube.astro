@@ -1,0 +1,28 @@
+---
+// Click-to-load YouTube facade: a thumbnail + play button, the iframe is only
+// created on click (no third-party JS or cookies until then).
+import { youtubeThumb } from '../utils/youtube';
+
+interface Props { id: string; title?: string; aspect?: '16/9' | '9/16'; class?: string; }
+const { id, title = 'YouTube', aspect = '16/9', class: cls = '' } = Astro.props;
+---
+<div class={`yt ${cls}`} style={`aspect-ratio:${aspect}`} data-yt={id} data-title={title}>
+  <img src={youtubeThumb(id, aspect)} alt={title} loading="lazy" decoding="async" />
+  <button type="button" class="yt-play" aria-label={`▶ ${title}`}>
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" /></svg>
+  </button>
+</div>
+<script>
+  // Hoisted by Astro: bundled and included once per page however many facades there are.
+  document.addEventListener('click', (e) => {
+    const box = (e.target as HTMLElement).closest<HTMLElement>('.yt[data-yt]');
+    if (!box) return;
+    const iframe = document.createElement('iframe');
+    iframe.src = `https://www.youtube-nocookie.com/embed/${box.dataset.yt}?autoplay=1&rel=0&playsinline=1`;
+    iframe.title = box.dataset.title || 'YouTube';
+    iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+    iframe.allowFullscreen = true;
+    box.replaceChildren(iframe);
+    box.removeAttribute('data-yt');
+  });
+</script>
