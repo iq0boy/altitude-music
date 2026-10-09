@@ -64,6 +64,7 @@ const services = defineCollection({
     gallery: z.tuple([z.string(), z.string(), z.string()]),  // 3 couleurs de la galerie
     video: z.string().default(''),                            // id YouTube, '' = aucune
     calEvent: z.string().optional(),                          // slug du type d'événement Cal.com, '' = calendrier simulé
+    image: z.string().optional(),                             // visuel de la fiche ; vide = vignette de la vidéo, sinon dégradé
   }),
 });
 

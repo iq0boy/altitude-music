@@ -617,6 +617,9 @@ a.team-card:hover .team-handle { color: var(--accent); }
 .svc-hero-img { aspect-ratio: 4/3; position: relative; overflow: hidden; border-radius: 8px; background: linear-gradient(135deg, var(--c1), var(--c2)); }
 .svc-hero-img::after { content: ''; position: absolute; inset: 0; background: repeating-linear-gradient(45deg, rgba(0,0,0,0.05) 0 2px, transparent 2px 12px); }
 .svc-hero-img .label { position: absolute; top: 20px; left: 20px; font-family: var(--mono); font-size: 11px; letter-spacing: 0.16em; color: rgba(0,0,0,0.7); text-transform: uppercase; }
+.svc-hero-img img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+.svc-hero-img.has-img::after { background: linear-gradient(to bottom, rgba(0,0,0,0.45), transparent 45%); }
+.svc-hero-img.has-img .label { color: var(--fg); z-index: 1; }
 .svc-meta { display: flex; flex-direction: column; gap: 16px; }
 .svc-meta .num { font-family: var(--mono); font-size: 11px; color: var(--fg-3); letter-spacing: 0.14em; }
 .svc-meta h1 { font-family: var(--display); font-size: clamp(48px, 7vw, 96px); font-weight: 500; line-height: 0.95; letter-spacing: -0.03em; }

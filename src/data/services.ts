@@ -23,6 +23,7 @@ export interface ServiceData {
   gallery: [string, string, string];
   video: string;
   calEvent?: string;
+  image?: string;
 }
 
 export interface TeamMember {

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import type { Translations, Lang } from '../i18n/utils';
 import type { ServiceData } from '../data/services';
-import { youtubeId, youtubeAspect } from '../utils/youtube';
+import { youtubeId, youtubeAspect, youtubeThumb } from '../utils/youtube';
 
 interface Testimonial { name: string; role: string; service: string; text: { fr: string; en: string; nl: string }; rating: number; }
 
@@ -45,6 +45,7 @@ export default function ServiceDetail({ t, lang, services, testimonials }: Props
   const colors = svc.gallery;
   const videoId = youtubeId(svc.video);
   const vertical = youtubeAspect(svc.video) === '9/16';
+  const heroImage = svc.image?.trim() || (videoId ? youtubeThumb(videoId, vertical ? '9/16' : '16/9') : null);
   const longDesc = svc.long[lang];
   const includes = svc.includes[lang];
   const reviews = testimonials.filter(r => r.service === serviceKey);
@@ -57,7 +58,8 @@ export default function ServiceDetail({ t, lang, services, testimonials }: Props
         <button className="svc-back" onClick={close}>{sd.back}</button>
 
         <div className="svc-hero">
-          <div className="svc-hero-img" style={{ '--c1': colors[0], '--c2': colors[1] } as React.CSSProperties}>
+          <div className={`svc-hero-img${heroImage ? ' has-img' : ''}`} style={{ '--c1': colors[0], '--c2': colors[1] } as React.CSSProperties}>
+            {heroImage && <img src={heroImage} alt={name} />}
             <span className="label">SVC / {String(idx + 1).padStart(2, '0')} · {name.toUpperCase()}</span>
           </div>
           <div className="svc-meta">

@@ -6,7 +6,7 @@ import Nav from '../../../components/Nav.astro';
 import Footer from '../../../components/Footer.astro';
 import Booking from '../../../components/Booking';
 import YouTube from '../../../components/YouTube.astro';
-import { youtubeId, youtubeAspect } from '../../../utils/youtube';
+import { youtubeId, youtubeAspect, youtubeThumb } from '../../../utils/youtube';
 import { getCollection, getEntry } from 'astro:content';
 import { getTranslations, LANGS } from '../../../i18n/utils';
 import type { Lang } from '../../../i18n/utils';
@@ -52,6 +52,7 @@ const description = svc.desc[lang];
 const num = String(idx + 1).padStart(2, '0');
 const videoId = youtubeId(svc.video);
 const videoAspect = youtubeAspect(svc.video);
+const heroImage = svc.image?.trim() || (videoId ? youtubeThumb(videoId, videoAspect) : null);
 
 const offer = price === 0
   ? { '@type': 'Offer', price: '0', priceCurrency: 'EUR', availability: 'https://schema.org/InStock', url }
@@ -101,7 +102,8 @@ const jsonLd = {
       <a href={`/${lang}/#services`} class="svc-back">{sd.back}</a>
 
       <div class="svc-hero">
-        <div class="svc-hero-img" style={`--c1:${svc.gallery[0]};--c2:${svc.gallery[1]}`}>
+        <div class={`svc-hero-img${heroImage ? ' has-img' : ''}`} style={`--c1:${svc.gallery[0]};--c2:${svc.gallery[1]}`}>
+          {heroImage && <img src={heroImage} alt={name} fetchpriority="high" decoding="async" />}
           <span class="label">SVC / {num} · {name.toUpperCase()}</span>
         </div>
         <div class="svc-meta">

@@ -186,6 +186,7 @@ collections:
         max: 3
         field: { name: color, label: Couleur, widget: color }
       - { name: video, label: Vidéo YouTube, widget: string, required: false, hint: "Lien YouTube (vidéo ou short) ou identifiant — vide = pas de vidéo. Un lien /shorts/ s'affiche en vertical." }
+      - { name: image, label: Image de la fiche, widget: image, required: false, choose_url: true, hint: "Visuel en haut de la page du service (format 4:3 conseillé). Vide = vignette de la vidéo du service." }
       - { name: calEvent, label: Événement Cal.com, widget: string, required: false, hint: "Slug du type d'événement Cal.com pour ce service (la fin de l'URL cal.com/<utilisateur>/<slug>). Sans slug, le service n'est pas proposé dans le calendrier." }
 
   # ───────────────────────── ÉQUIPE ─────────────────────────
