@@ -445,12 +445,16 @@ a.team-card:hover .team-handle { color: var(--accent); }
 }
 .team-avatar::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, var(--c) 0%, color-mix(in srgb, var(--c) 50%, #000) 100%); }
 .team-avatar::after { content: ''; position: absolute; inset: 0; background-image: repeating-linear-gradient(45deg, rgba(0,0,0,0.08) 0 2px, transparent 2px 8px); }
+.team-avatar img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; }
+.team-avatar.has-photo::after { background: linear-gradient(to top, rgba(0,0,0,.6), transparent 55%); z-index: 1; }
+.team-avatar.has-photo { color: var(--fg); }
 .team-avatar .name { position: relative; z-index: 2; font-family: var(--display); font-size: 22px; font-weight: 500; }
 .team-role { font-family: var(--mono); font-size: 11px; letter-spacing: 0.12em; color: var(--fg-3); text-transform: uppercase; }
 .team-handle { font-family: var(--mono); font-size: 11px; letter-spacing: 0.04em; color: var(--fg-2); margin-top: -10px; transition: color .2s ease; }
 
 /* === TESTIMONIALS === */
 .testi-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); margin-bottom: 48px; }
+.testi-grid > .testi-card:last-child:nth-child(odd) { grid-column: 1 / -1; }
 @media (max-width: 768px) { .testi-grid { grid-template-columns: 1fr; } }
 .testi-card {
   background: var(--bg); padding: 32px; display: flex; flex-direction: column; gap: 16px;
@@ -499,7 +503,7 @@ a.team-card:hover .team-handle { color: var(--accent); }
 .form-success { border: 1px solid var(--ok); background: color-mix(in srgb, var(--ok) 10%, var(--bg)); color: var(--ok); padding: 12px; border-radius: 6px; font-family: var(--mono); font-size: 12px; letter-spacing: 0.06em; }
 
 /* === BLOG === */
-.blog-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); }
+.blog-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); }
 @media (max-width: 900px) { .blog-grid { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 600px) { .blog-grid { grid-template-columns: 1fr; } }
 .blog-card {
@@ -578,6 +582,7 @@ a.team-card:hover .team-handle { color: var(--accent); }
 .socials a:hover { border-color: var(--accent); color: var(--accent); }
 .map-wrap { border: 1px solid var(--line); border-radius: 8px; overflow: hidden; aspect-ratio: 1; background: var(--bg-2); position: relative; min-height: 320px; }
 .map-leaflet { width: 100%; height: 100%; background: var(--bg-2); }
+.map-leaflet .leaflet-tile-pane { filter: invert(1) hue-rotate(180deg) brightness(0.8) contrast(0.95) saturate(0.25); }
 .map-leaflet .leaflet-control-attribution {
   background: rgba(10, 10, 10, 0.6); color: var(--fg-3); font-family: var(--mono); font-size: 9px;
 }
@@ -683,9 +688,13 @@ a.team-card:hover .team-handle { color: var(--accent); }
 .reveal.in { opacity: 1; transform: translateY(0); }
 [data-anim="off"] .reveal { opacity: 1; transform: none; filter: none; }
 
-.section-title.reveal { clip-path: inset(0 100% 0 0); opacity: 1; transform: none; transition: clip-path 1.1s cubic-bezier(.7,.05,.2,1); }
-.section-title.reveal.in { clip-path: inset(0 0 0 0); }
-[data-anim="off"] .section-title.reveal { clip-path: none; }
+/* The wipe is applied to the inner span: a clip-path on the observed h2 itself would
+   make IntersectionObserver report no intersection (Chromium), so it never revealed. */
+.section-title.reveal { opacity: 1; transform: none; transition: none; }
+.section-title-inner { display: inline-block; }
+.section-title.reveal .section-title-inner { clip-path: inset(0 100% 0 0); transition: clip-path 1.1s cubic-bezier(.7,.05,.2,1); }
+.section-title.reveal.in .section-title-inner { clip-path: inset(0 0 0 0); }
+[data-anim="off"] .section-title.reveal .section-title-inner { clip-path: none; }
 
 .hero-tag, .hero-sub, .hero-cta { animation: alt-blur 1s cubic-bezier(.2,.7,.2,1) both; }
 .hero-tag { animation-delay: 0.1s; }

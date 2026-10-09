@@ -75,6 +75,7 @@ const team = defineCollection({
     handle: z.string(),
     instagram: z.string(),
     color: z.string(),
+    photo: z.string().optional(),   // portrait ; vide = carte de couleur
     sortOrder: z.number(),
     role: tri,
   }),

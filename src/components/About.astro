@@ -25,7 +25,8 @@ const { t, lang, team } = Astro.props;
       <div class="team-grid">
         {team.map(m => (
           <a class="team-card" href={m.instagram} target="_blank" rel="noopener" aria-label={`${m.name} — @${m.handle} · ${m.role[lang]}`}>
-            <div class="team-avatar" style={`--c:${m.color}`}>
+            <div class={`team-avatar${m.photo ? ' has-photo' : ''}`} style={`--c:${m.color}`}>
+              {m.photo && <img src={m.photo} alt={m.name} loading="lazy" decoding="async" />}
               <span class="name">{m.name}</span>
             </div>
             <span class="team-role">{m.role[lang]}</span>

@@ -128,7 +128,7 @@ export default function Portfolio({ tracks, t, layout = 'list' }: Props) {
             <span>#</span><span></span><span>TITLE</span>
             <span className="col-hide">ARTIST</span>
             <span className="col-hide">{tp.genre}</span>
-            <span className="col-hide">{tp.bpm}</span>
+            <span className="col-hide">{tp.bpm || '—'}</span>
             <span className="col-hide">{tp.duration}</span>
             <span></span>
           </div>
@@ -146,7 +146,7 @@ export default function Portfolio({ tracks, t, layout = 'list' }: Props) {
                 </div>
                 <span className="artist col-hide">{tr.artist}</span>
                 <span className="meta col-hide">{tr.genre}</span>
-                <span className="meta col-hide">{tr.bpm}</span>
+                <span className="meta col-hide">{tr.bpm || '—'}</span>
                 <span className="meta col-hide">{tr.duration}</span>
                 <a href={tr.spotifyUrl ?? PLAYLIST_URL} target="_blank" rel="noopener" className="open-link" title={tp.open}>↗</a>
               </div>

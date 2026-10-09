@@ -31,6 +31,7 @@ export interface TeamMember {
   handle: string;
   instagram: string;
   color: string;
+  photo?: string;
   sortOrder: number;
   role: Tri;
 }

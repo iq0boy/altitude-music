@@ -22,3 +22,7 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# Instagram cache written at build/dev start by scripts/instagram-integration.mjs
+src/assets/instagram/
+src/data/instagram.json

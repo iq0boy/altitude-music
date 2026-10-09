@@ -206,6 +206,7 @@ collections:
       - { name: handle, label: Handle Instagram (sans @), widget: string }
       - { name: instagram, label: URL du profil Instagram, widget: string }
       - { name: color, label: Couleur de la carte, widget: color }
+      - { name: photo, label: Photo (portrait carré), widget: image, required: false, choose_url: true, hint: "Vide = carte de couleur avec le nom." }
       - { name: sortOrder, label: Ordre d'affichage, widget: number, value_type: int }
       - name: role
         label: Rôle

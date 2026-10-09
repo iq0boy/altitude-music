@@ -2,10 +2,12 @@
 import { defineConfig } from 'astro/config';
 import react from '@astrojs/react';
 import sitemap from '@astrojs/sitemap';
+import instagramSync from './scripts/instagram-integration.mjs';
 
 export default defineConfig({
   site: 'https://altitudemusic.be',
   integrations: [
+    instagramSync(),
     react(),
     sitemap({
       // The bare root is a 301 to /fr/ — listing it duplicates the fr-BE alternate.
@@ -31,13 +33,6 @@ export default defineConfig({
       },
     }),
   ],
-  image: {
-    // Instagram pictures are remote URLs optimised at build time (utils/instagram.ts).
-    remotePatterns: [
-      { protocol: 'https', hostname: '**.cdninstagram.com' },
-      { protocol: 'https', hostname: '**.fbcdn.net' },
-    ],
-  },
   i18n: {
     defaultLocale: 'fr',
     locales: ['fr', 'en', 'nl'],

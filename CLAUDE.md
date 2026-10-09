@@ -28,7 +28,7 @@ Static-rendered (SSG) Astro site for the Altitude Music studio in Louvain-la-Neu
 
 ### Rendering strategy: islands
 
-Static, zero-JS sections are `.astro` components: `Nav`, `Hero`, `Marquee`, `Services`, `MediaGrid`, `About`, `Blog`, `Footer`, `SectionHead`. Instagram posts are fetched **at build time** by `src/utils/instagram.ts` (`INSTAGRAM_TOKEN` env var on Netlify, 60-day token, 50 posts, classified per service by `#alt*` hashtags then caption keywords); `MediaGrid.astro` merges CMS tiles and the latest posts, `InstagramGrid.astro` shows a service's posts, `InstagramLightbox.astro` opens Instagram's official embed in a `<dialog>`. Pictures are remote URLs optimised by `<Image>` (see `image.remotePatterns`). No token → empty feed, build still passes. They render at build time and ship no JavaScript.
+Static, zero-JS sections are `.astro` components: `Nav`, `Hero`, `Marquee`, `Services`, `MediaGrid`, `About`, `Blog`, `Footer`, `SectionHead`. Instagram posts are synced **at startup of dev/build** by the `scripts/instagram-integration.mjs` Astro integration (`INSTAGRAM_TOKEN` env var on Netlify or in `.env`, 60-day token, 50 posts): pictures go to `src/assets/instagram/` and metadata to `src/data/instagram.json`, both gitignored. `src/utils/instagram.ts` reads them (classification per service by `#alt*` hashtags then caption keywords); `MediaGrid.astro` interleaves CMS tiles and the latest posts, `InstagramGrid.astro` shows a service's posts, `InstagramLightbox.astro` opens Instagram's official embed in a `<dialog>`. Downloads retry and failures skip the post: no token or no network → empty feed, build still passes. They render at build time and ship no JavaScript.
 
 Interactive sections are React islands (`.tsx`) hydrated only when needed:
 
@@ -79,7 +79,7 @@ Uploads go to `public/media/` (`media_folder`), except `music.audioSrc` which ta
 
 ### Scroll reveal
 
-Elements with `class="reveal"` get a `.in` class added when they enter the viewport, via a small `IntersectionObserver` script at the bottom of `BaseLayout.astro`. No React needed for this.
+Elements with `class="reveal"` get a `.in` class added when they enter the viewport, via a small `IntersectionObserver` script at the bottom of `BaseLayout.astro`. No React needed for this. Never put a `clip-path` on an observed element itself (Chromium applies it to the intersection geometry and the element never reveals); `SectionHead` clips an inner span instead.
 
 ### Legacy code
 

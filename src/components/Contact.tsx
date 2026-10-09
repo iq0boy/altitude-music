@@ -29,10 +29,10 @@ export default function Contact({ t, lang }: Props) {
         zoomControl: true,
         scrollWheelZoom: false,
       });
-      L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-        subdomains: 'abcd',
+      // OpenStreetMap tiles (no API key); the dark look comes from a CSS filter on the tile pane.
+      L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19,
-        attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> · © <a href="https://carto.com/attributions">CARTO</a>',
+        attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
       }).addTo(map);
       L.circleMarker([STUDIO_LAT, STUDIO_LNG], {
         radius: 10,

@@ -12,9 +12,33 @@ const { items, posts = [], allPosts = posts } = Astro.props;
 
 const byPermalink = new Map(allPosts.map(p => [p.permalink, p]));
 const igLabel = (p: Pick<InstagramPost, 'type'>) => p.type === 'reel' ? 'INSTAGRAM · REEL' : p.type === 'carousel' ? 'INSTAGRAM · CARROUSEL' : 'INSTAGRAM';
+
+// Interleave curated CMS tiles and Instagram posts so they mix in the masonry.
+type Tile = { kind: 'cms'; item: CollectionEntry<'media'> } | { kind: 'ig'; post: InstagramPost };
+const tiles: Tile[] = [];
+for (let i = 0; i < Math.max(items.length, posts.length); i++) {
+  if (items[i]) tiles.push({ kind: 'cms', item: items[i] });
+  if (posts[i]) tiles.push({ kind: 'ig', post: posts[i] });
+}
 ---
 <div class="media-grid">
-  {items.map(it => {
+  {tiles.map(tile => {
+    if (tile.kind === 'ig') {
+      const p = tile.post;
+      return (
+        <figure class="media-tile is-instagram">
+          <button type="button" class="media-embed ig-open" data-ig-embed={p.permalink} aria-label={p.caption.slice(0, 80) || 'Instagram'}>
+            <Image src={p.picture} width={640} alt={p.caption.slice(0, 80)} loading="lazy" decoding="async" />
+            {p.type === 'reel' && <span class="play-badge" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg></span>}
+          </button>
+          <figcaption class="media-tag-row">
+            <span class="media-tag">{igLabel(p)}</span>
+            {p.caption && <span class="media-title">{p.caption}</span>}
+          </figcaption>
+        </figure>
+      );
+    }
+    const it = tile.item;
     const src = it.data.src;
     if (isInstagram(src)) {
       const link = normalizePermalink(src);
@@ -23,7 +47,7 @@ const igLabel = (p: Pick<InstagramPost, 'type'>) => p.type === 'reel' ? 'INSTAGR
         <figure class="media-tile is-instagram">
           <button type="button" class="media-embed ig-open" data-ig-embed={link} aria-label={it.data.title || 'Instagram'}>
             {post
-              ? <Image src={post.picture} inferSize width={640} alt={it.data.title || post.caption.slice(0, 80)} loading="lazy" decoding="async" />
+              ? <Image src={post.picture} width={640} alt={it.data.title || post.caption.slice(0, 80)} loading="lazy" decoding="async" />
               : <span class="ig-placeholder" style={`aspect-ratio:${it.data.aspect}`}>INSTAGRAM</span>}
             {(post?.type === 'reel' || it.data.type === 'video') && <span class="play-badge" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg></span>}
           </button>
@@ -55,16 +79,4 @@ const igLabel = (p: Pick<InstagramPost, 'type'>) => p.type === 'reel' ? 'INSTAGR
     );
   })}
 
-  {posts.map(p => (
-    <figure class="media-tile is-instagram">
-      <button type="button" class="media-embed ig-open" data-ig-embed={p.permalink} aria-label={p.caption.slice(0, 80) || 'Instagram'}>
-        <Image src={p.picture} inferSize width={640} alt={p.caption.slice(0, 80)} loading="lazy" decoding="async" />
-        {p.type === 'reel' && <span class="play-badge" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg></span>}
-      </button>
-      <figcaption class="media-tag-row">
-        <span class="media-tag">{igLabel(p)}</span>
-        {p.caption && <span class="media-title">{p.caption}</span>}
-      </figcaption>
-    </figure>
-  ))}
 </div>

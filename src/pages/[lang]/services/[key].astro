@@ -54,7 +54,7 @@ const title = `${name} — Altitude Music | Louvain-la-Neuve`;
 const description = svc.desc[lang];
 const num = String(idx + 1).padStart(2, '0');
 const videoId = youtubeId(svc.video);
-const igPosts = (await getInstagramPosts()).filter(p => p.services.includes(svc.key)).slice(0, 6);
+const igPosts = getInstagramPosts().filter(p => p.services.includes(svc.key)).slice(0, 6);
 const videoAspect = youtubeAspect(svc.video);
 const heroImage = svc.image?.trim() || (videoId ? youtubeThumb(videoId, videoAspect) : null);
 
