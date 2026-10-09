@@ -10,6 +10,7 @@ import Footer from '../../components/Footer.astro';
 import SectionHead from '../../components/SectionHead.astro';
 import Portfolio from '../../components/Portfolio';
 import MediaGrid from '../../components/MediaGrid.astro';
+import InstagramFeed from '../../components/InstagramFeed.astro';
 import Testimonials from '../../components/Testimonials';
 import Booking from '../../components/Booking';
 import Contact from '../../components/Contact';
@@ -114,6 +115,7 @@ const homeJsonLd = {
       <div class="container">
         <SectionHead tag="// 04" title={t.sections.videos} sub={t.sections.videosSub} />
         <MediaGrid items={mediaItems} />
+        <InstagramFeed t={t} />
       </div>
     </section>
 

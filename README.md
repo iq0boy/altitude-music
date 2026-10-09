@@ -172,6 +172,33 @@ Pas à pas : [`docs/cms-setup.md`, section « Réservation en ligne »](./docs/c
 
 ---
 
+## 5 bis. Instagram : les derniers posts sur le site
+
+La section « Sur Instagram » de la page d'accueil (sous les vidéos) affiche
+automatiquement les 12 derniers posts du compte `@alt_itude.music`. Chaque matin,
+un robot GitHub (`.github/workflows/sync-instagram.yml`) interroge Instagram,
+enregistre les nouveautés dans le projet et redéploie le site. Les reels affichent
+leur image de couverture et renvoient vers Instagram.
+
+Mise en place, une fois (environ 20 minutes) :
+
+1. **Compte professionnel** : dans l'app Instagram, Paramètres → Type de compte →
+   passer en compte Créateur ou Entreprise (gratuit).
+2. **Application Meta** : sur <https://developers.facebook.com>, créer une app
+   (type « Autre » → « Entreprise »), ajouter le produit **Instagram**, puis dans
+   *Configuration de l'API avec connexion Instagram* : ajouter le compte du studio
+   comme testeur (et accepter l'invitation dans l'app Instagram, Paramètres →
+   Site web et apps → Invitations de testeur), puis **Générer un jeton**.
+3. **Secret GitHub** : dépôt `iq0boy/altitude-music` → Settings → Secrets and
+   variables → Actions → New repository secret : `INSTAGRAM_TOKEN` = le jeton.
+4. Onglet *Actions* → « Sync Instagram » → *Run workflow* pour la première récupération.
+
+Le jeton expire après 60 jours. Pour qu'il se renouvelle tout seul, ajouter un
+second secret `GH_PAT` : un jeton GitHub « fine-grained » limité à ce dépôt avec
+la permission *Secrets : Read and write* (Settings du compte → Developer settings
+→ Personal access tokens). Sans lui, il faudra régénérer `INSTAGRAM_TOKEN` tous
+les deux mois ; le site garde simplement les derniers posts connus.
+
 ## 6. Où sont les choses
 
 ```
@@ -181,6 +208,7 @@ src/content/        tout le contenu éditable (aussi via /admin/)
   music/            titres du portfolio (synchro Spotify automatique chaque lundi)
   media/            vidéos et photos de la grille
   team/             membres de l'équipe
+  instagram/        (src/assets) photos des posts Instagram synchronisés
   testimonials/     témoignages
   settings/         vidéo du hero, image de partage, utilisateur Cal.com
 src/i18n/           textes de l'interface (menus, titres, boutons) FR/EN/NL

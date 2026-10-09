@@ -28,7 +28,7 @@ Static-rendered (SSG) Astro site for the Altitude Music studio in Louvain-la-Neu
 
 ### Rendering strategy: islands
 
-Static, zero-JS sections are `.astro` components: `Nav`, `Hero`, `Marquee`, `Services`, `MediaGrid`, `About`, `Blog`, `Footer`, `SectionHead`. They render at build time and ship no JavaScript.
+Static, zero-JS sections are `.astro` components: `Nav`, `Hero`, `Marquee`, `Services`, `MediaGrid`, `About`, `Blog`, `Footer`, `SectionHead`. `InstagramFeed.astro` renders `src/data/instagram.json` + `src/assets/instagram/*.jpg` (optimised with `<Image>`), both written by `scripts/sync-instagram.mjs` (daily `.github/workflows/sync-instagram.yml`, needs the `INSTAGRAM_TOKEN` secret; `GH_PAT` lets it refresh the 60-day token). It renders nothing when the JSON is empty. They render at build time and ship no JavaScript.
 
 Interactive sections are React islands (`.tsx`) hydrated only when needed:
 
