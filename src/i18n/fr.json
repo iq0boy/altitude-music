@@ -3,7 +3,7 @@
     "title": "Altitude Music — Studio d'enregistrement & label | Louvain-la-Neuve",
     "description": "Studio d'enregistrement et label dédié aux artistes émergents à Louvain-la-Neuve. Enregistrement, mix, mastering, production sur-mesure, pochettes. Depuis 2018."
   },
-  "nav": { "work": "Artistes", "services": "Services", "about": "À propos", "blog": "Journal", "contact": "Contact", "book": "Prendre RDV" },
+  "nav": { "work": "Musique", "services": "Services", "about": "À propos", "blog": "Journal", "contact": "Contact", "book": "Prendre RDV" },
   "hero": {
     "tag": "STUDIO + LABEL // LOUVAIN-LA-NEUVE // EST. 2018",
     "title": "Le son qui te ressemble.",
@@ -17,8 +17,8 @@
   "sections": {
     "services": "Services & Tarifs",
     "servicesSub": "Forfaits clairs, devis sur mesure pour les projets ambitieux.",
-    "portfolio": "Nos artistes",
-    "portfolioSub": "Une scène en mouvement — des talents qu'on accompagne du premier son jusqu'à la sortie, avec une vision et une identité fortes.",
+    "portfolio": "Nos sorties",
+    "portfolioSub": "Les derniers titres sortis du studio. Écoute, puis retrouve-les sur Spotify.",
     "videos": "Médias",
     "videosSub": "Sessions, clips, coulisses et derniers posts Instagram.",
     "instagram": "Sur Instagram", "instagramMore": "Voir plus sur Instagram →",

@@ -3,7 +3,7 @@
     "title": "Altitude Music — Opnamestudio & Label | Louvain-la-Neuve",
     "description": "Opnamestudio en label gewijd aan opkomende artiesten in Louvain-la-Neuve. Opname, mix, mastering, productie op maat, cover art. Sinds 2018."
   },
-  "nav": { "work": "Artiesten", "services": "Diensten", "about": "Over ons", "blog": "Journaal", "contact": "Contact", "book": "Boeken" },
+  "nav": { "work": "Muziek", "services": "Diensten", "about": "Over ons", "blog": "Journaal", "contact": "Contact", "book": "Boeken" },
   "hero": {
     "tag": "STUDIO + LABEL // LOUVAIN-LA-NEUVE // EST. 2018",
     "title": "Geluid dat op jou lijkt.",
@@ -17,8 +17,8 @@
   "sections": {
     "services": "Diensten & Tarieven",
     "servicesSub": "Heldere pakketten, offertes op maat voor ambitieuze projecten.",
-    "portfolio": "Onze artiesten",
-    "portfolioSub": "Een scene in beweging — talent dat we begeleiden van het eerste geluid tot de release, met een sterke visie en identiteit.",
+    "portfolio": "Releases",
+    "portfolioSub": "De nieuwste tracks uit de studio. Luister, en vind ze daarna op Spotify.",
     "videos": "Media",
     "videosSub": "Sessies, clips, behind the scenes en de laatste Instagram-posts.",
     "instagram": "Op Instagram", "instagramMore": "Meer op Instagram →",

@@ -3,7 +3,7 @@
     "title": "Altitude Music — Recording Studio & Label | Louvain-la-Neuve",
     "description": "Recording studio and label dedicated to emerging artists in Louvain-la-Neuve. Recording, mix, mastering, custom production, cover art. Since 2018."
   },
-  "nav": { "work": "Artists", "services": "Services", "about": "About", "blog": "Journal", "contact": "Contact", "book": "Book" },
+  "nav": { "work": "Music", "services": "Services", "about": "About", "blog": "Journal", "contact": "Contact", "book": "Book" },
   "hero": {
     "tag": "STUDIO + LABEL // LOUVAIN-LA-NEUVE // EST. 2018",
     "title": "Sound that sounds like you.",
@@ -17,8 +17,8 @@
   "sections": {
     "services": "Services & Pricing",
     "servicesSub": "Clear packages, custom quotes for ambitious projects.",
-    "portfolio": "Our artists",
-    "portfolioSub": "A scene in motion — talent we walk from first sound to release, with a strong vision and identity.",
+    "portfolio": "Releases",
+    "portfolioSub": "The latest tracks out of the studio. Listen, then find them on Spotify.",
     "videos": "Media",
     "videosSub": "Sessions, clips, behind the scenes and latest Instagram posts.",
     "instagram": "On Instagram", "instagramMore": "See more on Instagram →",
