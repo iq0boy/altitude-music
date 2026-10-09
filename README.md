@@ -178,7 +178,7 @@ Pas à pas : [`docs/cms-setup.md`, section « Réservation en ligne »](./docs/c
 src/content/        tout le contenu éditable (aussi via /admin/)
   blog/             articles du journal, un fichier par langue
   services/         les 6 services (nom, prix, textes FR/EN/NL, événement Cal.com)
-  music/            titres du portfolio (générés par `npm run sync:music`)
+  music/            titres du portfolio (synchro Spotify automatique chaque lundi)
   media/            vidéos et photos de la grille
   team/             membres de l'équipe
   testimonials/     témoignages
@@ -199,7 +199,11 @@ CLAUDE.md           notes techniques lues par Claude Code
   Node ≥ 22.12. Détails d'architecture dans [`CLAUDE.md`](./CLAUDE.md).
 - Commandes : `npm run dev` (serveur local), `npm run build` (vérification + build),
   `npm run preview`, `npx astro check`, `npm run sync:music` (réimporte la playlist
-  Spotify et **écrase** `src/content/music/`).
+  Spotify dans `src/content/music/` en conservant BPM/genre/année/couleur édités).
+- La synchro Spotify tourne aussi toute seule chaque lundi matin via GitHub Actions
+  (`.github/workflows/sync-music.yml`, lancement manuel possible depuis l'onglet
+  *Actions*). Elle pousse sur `main` si la playlist a changé, ce qui redéploie le site.
+  Pour changer de playlist : `PLAYLIST_ID` dans `scripts/sync-music.mjs`.
 - Un changement de schéma de contenu se fait en trois endroits :
   `src/content.config.ts` (validation), `public/admin/config.yml` (formulaire CMS),
   `src/data/services.ts` (types).

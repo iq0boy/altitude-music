@@ -14,7 +14,7 @@ npm run sync:music   # Re-pull the Spotify playlist → src/content/music/*.md +
 
 Node >= 22.12.0 is required. There is no test suite or linter; `npm run build` is the verification step — it fails on Zod schema errors in content files and on missing i18n keys.
 
-`sync:music` **deletes and rewrites every file** in `src/content/music/` and seeds `bpm`/`genre`/`year`/`color` with defaults, so hand-edited values on those fields are lost. The playlist id is hard-coded at the top of `scripts/sync-music.mjs`.
+`sync:music` rewrites every file in `src/content/music/` from the playlist and prunes unreferenced MP3s in `public/audio/`; it keeps hand-edited `bpm`/`genre`/`year`/`color` for tracks matched by `spotifyTrackId`. The playlist id is hard-coded at the top of `scripts/sync-music.mjs`. It also runs weekly via `.github/workflows/sync-music.yml` (Monday 06:00 UTC, `workflow_dispatch` for manual runs) and pushes to `main` when the playlist changed.
 
 To run the CMS locally: `npx @sveltia/cms-server` in one terminal, `npm run dev` in another, then open `http://localhost:4321/admin/` (writes to local files, no commits).
 

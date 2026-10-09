@@ -1,0 +1,41 @@
+# Synchronise la playlist Spotify chaque semaine : régénère src/content/music/
+# et public/audio/, puis pousse sur main si quelque chose a changé (→ déploiement Netlify).
+# Lancement manuel possible : onglet Actions → « Sync Spotify playlist » → Run workflow.
+name: Sync Spotify playlist
+
+on:
+  schedule:
+    - cron: '0 6 * * 1'   # lundi 06:00 UTC (08:00 Bruxelles en été, 07:00 en hiver)
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sync-music
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Sync playlist
+        run: node scripts/sync-music.mjs
+
+      - name: Commit and push if changed
+        run: |
+          git add -A src/content/music public/audio
+          if git diff --cached --quiet; then
+            echo "Playlist inchangée, rien à pousser."
+            exit 0
+          fi
+          git config user.name "altitude-bot"
+          git config user.email "altitudemusic13@gmail.com"
+          git commit -m "chore(music): synchro Spotify hebdomadaire"
+          git push

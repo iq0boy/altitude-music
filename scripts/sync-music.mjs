@@ -48,8 +48,21 @@ console.log(`Found ${tracks.length} tracks`);
 await fs.mkdir(OUT_DIR, { recursive: true });
 await fs.mkdir(AUDIO_DIR, { recursive: true });
 
+// Keep hand-edited fields (CMS) for tracks already known, matched by Spotify track id.
+const KEEP = ['bpm', 'genre', 'year', 'color'];
+const previous = new Map();
 for (const f of await fs.readdir(OUT_DIR)) {
-  if (f.endsWith('.md')) await fs.unlink(path.join(OUT_DIR, f));
+  if (!f.endsWith('.md')) continue;
+  const text = await fs.readFile(path.join(OUT_DIR, f), 'utf8');
+  const id = text.match(/^spotifyTrackId:\s*"?([^"\n]+)"?/m)?.[1];
+  if (!id) continue;
+  const kept = {};
+  for (const k of KEEP) {
+    const m = text.match(new RegExp(`^${k}:\\s*(.+)$`, 'm'));
+    if (m) kept[k] = m[1].trim().replace(/^['"]|['"]$/g, '');
+  }
+  previous.set(id, kept);
+  await fs.unlink(path.join(OUT_DIR, f));
 }
 
 let downloaded = 0, skippedNoPreview = 0;
@@ -77,15 +90,16 @@ await Promise.all(tracks.map(async (t, i) => {
     console.warn(`  ! ${slug}: no audioPreview available`);
   }
 
+  const kept = previous.get(id) ?? {};
   const fm = [
     '---',
     `title: ${yamlEscape(t.title)}`,
     `artist: ${yamlEscape(t.subtitle)}`,
     `duration: ${yamlEscape(fmtDuration(t.duration))}`,
-    `bpm: 0`,
-    `genre: "Hip-Hop"`,
-    `year: "2025"`,
-    `color: "${color}"`,
+    `bpm: ${Number(kept.bpm) || 0}`,
+    `genre: ${yamlEscape(kept.genre || 'Hip-Hop')}`,
+    `year: ${yamlEscape(kept.year || '2025')}`,
+    `color: "${kept.color || color}"`,
     `sortOrder: ${i + 1}`,
     `spotifyUrl: "${PLAYLIST_URL}"`,
     `spotifyTrackId: "${id}"`,
@@ -99,4 +113,15 @@ await Promise.all(tracks.map(async (t, i) => {
   console.log(`  wrote ${slug}.md${audioPath ? ' + audio' : ''}`);
 }));
 
-console.log(`Done — ${tracks.length} tracks, ${downloaded} previews downloaded, ${skippedNoPreview} without preview.`);
+// Remove previews that no track references any more.
+const referenced = new Set();
+for (const f of await fs.readdir(OUT_DIR)) {
+  const m = (await fs.readFile(path.join(OUT_DIR, f), 'utf8')).match(/^audioSrc:\s*"\/audio\/([^"]+)"/m);
+  if (m) referenced.add(m[1]);
+}
+let removed = 0;
+for (const f of await fs.readdir(AUDIO_DIR)) {
+  if (!referenced.has(f)) { await fs.unlink(path.join(AUDIO_DIR, f)); removed++; }
+}
+
+console.log(`Done — ${tracks.length} tracks, ${downloaded} previews downloaded, ${skippedNoPreview} without preview, ${removed} old preview(s) removed.`);
