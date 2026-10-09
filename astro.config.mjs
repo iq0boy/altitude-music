@@ -8,6 +8,8 @@ export default defineConfig({
   integrations: [
     react(),
     sitemap({
+      // The bare root is a 301 to /fr/ — listing it duplicates the fr-BE alternate.
+      filter: (page) => page !== 'https://altitudemusic.be/',
       i18n: {
         defaultLocale: 'fr',
         locales: { fr: 'fr-BE', en: 'en-BE', nl: 'nl-BE' },

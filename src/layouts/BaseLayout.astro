@@ -40,6 +40,9 @@ const {
 } = Astro.props;
 
 const canonical = `${SITE}${canonicalPath ?? Astro.url.pathname}`;
+// Same page in each locale: strip the leading /<lang>/ segment, re-prefix per locale.
+const pathWithoutLang = (canonicalPath ?? Astro.url.pathname).replace(/^\/(fr|en|nl)(?=\/|$)/, '');
+const localizedPath = (l: string) => `${SITE}/${l}${pathWithoutLang || '/'}`;
 const ogImageAbs = ogImage.startsWith('http') ? ogImage : `${SITE}${ogImage}`;
 const langs = ['fr', 'en', 'nl'];
 const ogLocale = lang === 'fr' ? 'fr_BE' : lang === 'nl' ? 'nl_BE' : 'en_BE';
@@ -52,7 +55,7 @@ const studioJsonLd = {
   name: 'Altitude Music',
   alternateName: 'Altitude Music ASBL',
   url: SITE,
-  logo: `${SITE}/favicon.svg`,
+  logo: `${SITE}/icon-192.jpg`,
   image: ogImageAbs,
   email: 'altitudemusic13@gmail.com',
   priceRange: '€€',
@@ -125,9 +128,9 @@ const studioJsonLd = {
 
   <!-- hreflang -->
   {langs.map(l => (
-    <link rel="alternate" hreflang={l === 'fr' ? 'fr-BE' : l === 'en' ? 'en-BE' : 'nl-BE'} href={`${SITE}/${l}/`} />
+    <link rel="alternate" hreflang={l === 'fr' ? 'fr-BE' : l === 'en' ? 'en-BE' : 'nl-BE'} href={localizedPath(l)} />
   ))}
-  <link rel="alternate" hreflang="x-default" href={`${SITE}/fr/`} />
+  <link rel="alternate" hreflang="x-default" href={localizedPath('fr')} />
 
   <!-- JSON-LD -->
   <script type="application/ld+json" set:html={JSON.stringify(studioJsonLd)} />
