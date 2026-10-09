@@ -37,7 +37,7 @@
   "testi": {
     "formTitle": "Laisse ton témoignage", "name": "Ton nom / Alias", "role": "Projet / Rôle",
     "service": "Service utilisé", "message": "Ton retour", "rating": "Note",
-    "submit": "Envoyer", "thanks": "Merci ! On valide et on publie.", "filterAll": "Tout", "ratedFor": "À propos de"
+    "submit": "Envoyer", "thanks": "Merci ! On valide et on publie.", "sending": "Envoi…", "error": "L'envoi a échoué. Réessaie dans un instant.", "filterAll": "Tout", "ratedFor": "À propos de"
   },
   "serviceDetail": {
     "back": "← Retour aux services", "gallery": "Galerie", "video": "Vidéo", "pricing": "Tarification",
@@ -46,7 +46,7 @@
   },
   "contactForm": {
     "name": "Nom", "email": "Email", "project": "Type de projet", "message": "Message",
-    "send": "Envoyer", "whatsapp": "Répondre sur Instagram", "sent": "Message envoyé. À très vite.",
+    "send": "Envoyer", "whatsapp": "Répondre sur Instagram", "sent": "Message envoyé. À très vite.", "sending": "Envoi…", "error": "Le message n'est pas parti. Réessaie, ou écris-nous directement :",
     "types": ["Enregistrement", "Mix & Master", "Album / EP", "Pochette", "Autre"]
   },
   "booking": {

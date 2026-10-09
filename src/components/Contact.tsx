@@ -11,7 +11,7 @@ const GMAPS_URL = `https://www.google.com/maps/dir/?api=1&destination=${encodeUR
 export default function Contact({ t, lang }: Props) {
   const cf = t.contactForm;
   const [form, setForm] = useState({ name: '', email: '', project: cf.types[0], message: '' });
-  const [sent, setSent] = useState(false);
+  const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
   const mapRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -45,13 +45,23 @@ export default function Contact({ t, lang }: Props) {
     return () => { cancelled = true; if (map) map.remove(); };
   }, []);
 
-  const submit = (e: React.FormEvent) => {
+  // Netlify Forms: POST the urlencoded fields to the site itself; Netlify stores the
+  // submission and emails the studio (form detection must be enabled on Netlify).
+  const submit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const subject = encodeURIComponent(`[${form.project}] ${form.name}`);
-    const body = encodeURIComponent(`${form.message}\n\n— ${form.name}\n${form.email}`);
-    window.location.href = `mailto:altitudemusic13@gmail.com?subject=${subject}&body=${body}`;
-    setSent(true);
-    setTimeout(() => setSent(false), 4000);
+    setStatus('sending');
+    try {
+      const res = await fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams({ 'form-name': 'contact', lang, ...form }).toString(),
+      });
+      if (!res.ok) throw new Error(String(res.status));
+      setStatus('success');
+      setForm({ name: '', email: '', project: cf.types[0], message: '' });
+    } catch {
+      setStatus('error');
+    }
   };
 
   return (
@@ -83,23 +93,27 @@ export default function Contact({ t, lang }: Props) {
                 </a>
               </div>
             </div>
-            <form onSubmit={submit} style={{ display: 'flex', flexDirection: 'column', gap: 12, marginTop: 8 }}>
+            <form name="contact" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" onSubmit={submit} style={{ display: 'flex', flexDirection: 'column', gap: 12, marginTop: 8 }}>
+              <input type="hidden" name="form-name" value="contact" />
+              <input type="hidden" name="lang" value={lang} />
+              <p hidden><label>Ne pas remplir : <input name="bot-field" /></label></p>
               <div className="form-row">
-                <div><label>{cf.name}</label><input value={form.name} onChange={e => setForm({ ...form, name: e.target.value })} required /></div>
-                <div><label>{cf.email}</label><input type="email" value={form.email} onChange={e => setForm({ ...form, email: e.target.value })} required /></div>
+                <div><label>{cf.name}</label><input name="name" value={form.name} onChange={e => setForm({ ...form, name: e.target.value })} autoComplete="name" required /></div>
+                <div><label>{cf.email}</label><input name="email" type="email" value={form.email} onChange={e => setForm({ ...form, email: e.target.value })} autoComplete="email" required /></div>
               </div>
               <div>
                 <label>{cf.project}</label>
-                <select value={form.project} onChange={e => setForm({ ...form, project: e.target.value })}>
+                <select name="project" value={form.project} onChange={e => setForm({ ...form, project: e.target.value })}>
                   {cf.types.map(p => <option key={p}>{p}</option>)}
                 </select>
               </div>
-              <div><label>{cf.message}</label><textarea value={form.message} onChange={e => setForm({ ...form, message: e.target.value })} required /></div>
+              <div><label>{cf.message}</label><textarea name="message" value={form.message} onChange={e => setForm({ ...form, message: e.target.value })} required /></div>
               <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
-                <button className="btn" type="submit">{cf.send}</button>
+                <button className="btn" type="submit" disabled={status === 'sending'}>{status === 'sending' ? cf.sending : cf.send}</button>
                 <a className="btn ghost" href="https://www.instagram.com/alt_itude.music/" target="_blank" rel="noopener">{cf.whatsapp}</a>
               </div>
-              {sent && <div className="form-success">✓ {cf.sent}</div>}
+              {status === 'success' && <div className="form-success">✓ {cf.sent}</div>}
+              {status === 'error' && <div className="form-error">{cf.error} <a href="mailto:altitudemusic13@gmail.com">altitudemusic13@gmail.com</a></div>}
             </form>
           </div>
           <div className="map-wrap">

@@ -37,7 +37,7 @@
   "testi": {
     "formTitle": "Drop a testimonial", "name": "Name / Alias", "role": "Project / Role",
     "service": "Service used", "message": "Your feedback", "rating": "Rating",
-    "submit": "Submit", "thanks": "Thanks! We'll review and publish.", "filterAll": "All", "ratedFor": "About"
+    "submit": "Submit", "thanks": "Thanks! We'll review and publish.", "sending": "Sending…", "error": "Sending failed. Please try again in a moment.", "filterAll": "All", "ratedFor": "About"
   },
   "serviceDetail": {
     "back": "← Back to services", "gallery": "Gallery", "video": "Video", "pricing": "Pricing",
@@ -46,7 +46,7 @@
   },
   "contactForm": {
     "name": "Name", "email": "Email", "project": "Project type", "message": "Message",
-    "send": "Send", "whatsapp": "Reply on Instagram", "sent": "Message sent. Talk soon.",
+    "send": "Send", "whatsapp": "Reply on Instagram", "sent": "Message sent. Talk soon.", "sending": "Sending…", "error": "The message didn't go through. Try again, or email us directly:",
     "types": ["Recording", "Mix & Master", "Album / EP", "Cover Art", "Other"]
   },
   "booking": {

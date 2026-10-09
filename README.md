@@ -132,6 +132,28 @@ arrivent aussi sur `main`, avec un message commençant par `cms:`.
 - Le nom de domaine, le certificat HTTPS et l'authentification de `/admin/`
   sont aussi gérés dans Netlify.
 
+### Formulaires (contact et témoignages)
+
+Les deux formulaires du site passent par **Netlify Forms** : chaque envoi est stocké
+dans le tableau de bord Netlify (*Forms*) et notifié par email. Gratuit jusqu'à
+100 envois par mois. Réglage, une seule fois, dans Netlify :
+
+1. *Site configuration → Forms → **Enable form detection***, puis redéployer.
+2. *Forms → Form notifications → Add notification → Email* : `altitudemusic13@gmail.com`,
+   pour les formulaires `contact` et `testimonial`.
+
+Un témoignage reçu n'est pas publié automatiquement : le studio le relit, puis
+l'ajoute dans `/admin/` → Témoignages.
+
+### Horaires d'ouverture
+
+Les horaires transmis à Google (données structurées) sont lus sur Cal.com à chaque
+déploiement : sans réglage, ils sont déduits des créneaux réellement réservables ;
+avec une clé API Cal.com (Settings → Developer → API keys) placée dans Netlify
+(*Environment variables → `CAL_API_KEY`*), ce sont exactement les horaires du
+planning par défaut. Un changement d'horaires sur Cal.com apparaît donc au
+prochain déploiement (toute modification dans `/admin/` en déclenche un).
+
 ---
 
 ## 5. Cal.com : les rendez-vous

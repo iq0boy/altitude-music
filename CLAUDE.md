@@ -20,7 +20,7 @@ To run the CMS locally: `npx @sveltia/cms-server` in one terminal, `npm run dev`
 
 ## Deployment
 
-Netlify, auto-deploy on push to `main` (`netlify.toml` holds the build command, Node version and cache/security headers). CMS edits made by the studio also land directly on `main` as commits prefixed `cms:` — pull before starting work.
+Netlify, auto-deploy on push to `main` (`netlify.toml` holds the build command, Node version and cache/security headers). Forms (`contact`, `testimonial`) rely on Netlify Forms: the `<form data-netlify>` markup must stay in the prerendered HTML and every field needs a `name`. CMS edits made by the studio also land directly on `main` as commits prefixed `cms:` — pull before starting work.
 
 ## Architecture
 
@@ -35,9 +35,9 @@ Interactive sections are React islands (`.tsx`) hydrated only when needed:
 | Component | Hydration | Why |
 |---|---|---|
 | `Portfolio.tsx` | `client:visible` | Genre filter, HTML5 audio player over local preview MP3s, sticky now-playing bar |
-| `Testimonials.tsx` | `client:visible` | Filter + submit form |
+| `Testimonials.tsx` | `client:visible` | Filter + submit form (Netlify Forms `testimonial`, reviewed by the studio) |
 | `Booking.tsx` | `client:visible` | Calendar + slot picker wired to Cal.com public API v2 from the browser (`GET /slots`, `POST /bookings`, no key). Needs `settings.calUsername` and each service's `calEvent` slug; shows a contact notice otherwise |
-| `Contact.tsx` | `client:visible` | Form + mailto, Leaflet map |
+| `Contact.tsx` | `client:visible` | Form posted to Netlify Forms (`contact`, honeypot `bot-field`), Leaflet map |
 | `ServiceDetail.tsx` | `client:load` | Listens to `hashchange` for legacy `#service/<key>` deep links (modal) — must be live before user interaction |
 
 Add new interactive sections as `.tsx` islands. Add new static sections as `.astro` components. Keep `client:load` only for things that respond to URL state on first paint.
@@ -75,7 +75,7 @@ Uploads go to `public/media/` (`media_folder`), except `music.audioSrc` which ta
 
 ### SEO
 
-`BaseLayout.astro` emits canonical URL, OG tags, hreflang links for all three locales (+ `x-default`), and a `MusicRecordingStudio` JSON-LD block whose aggregate rating is computed from the `testimonials` collection. `[lang]/index.astro` adds per-service `Service` nodes. The site URL is hard-coded as `https://altitudemusic.be` in `astro.config.mjs`, the layout and the index page. The sitemap integration auto-generates per-locale sitemaps.
+`BaseLayout.astro` emits canonical URL, OG tags, hreflang links for all three locales (+ `x-default`), and a `MusicRecordingStudio` JSON-LD block whose aggregate rating is computed from the `testimonials` collection. Its `openingHoursSpecification` is fetched at build time from Cal.com by `src/utils/calHours.ts` (exact schedule with the `CAL_API_KEY` env var, otherwise derived from public slots, otherwise a coded fallback) — the build hits the Cal.com API once. `[lang]/index.astro` adds per-service `Service` nodes. The site URL is hard-coded as `https://altitudemusic.be` in `astro.config.mjs`, the layout and the index page. The sitemap integration auto-generates per-locale sitemaps.
 
 ### Scroll reveal
 

@@ -1,6 +1,8 @@
 ---
 import '../styles/global.css';
 import { getCollection, getEntry } from 'astro:content';
+import { getOpeningHours } from '../utils/calHours';
+import type { ServiceData } from '../data/services';
 
 interface Props {
   lang: string;
@@ -27,6 +29,12 @@ const DEFAULT_OG = '/og-default.jpg';
 const siteSettings = await getEntry('settings', 'site');
 const settingsOg = siteSettings?.data.ogImage;
 const ogDefault = settingsOg && settingsOg.trim() !== '' ? settingsOg : DEFAULT_OG;
+
+// Opening hours come from Cal.com at build time (see utils/calHours.ts).
+const calUsername = siteSettings?.data.calUsername?.trim();
+const firstBookable = (await getCollection('services')).map(e => e.data as ServiceData)
+  .sort((a, b) => a.sortOrder - b.sortOrder).find(s => s.calEvent?.trim());
+const openingHours = await getOpeningHours(calUsername, firstBookable?.calEvent?.trim());
 
 const {
   lang,
@@ -72,14 +80,7 @@ const studioJsonLd = {
     latitude: 50.6705,
     longitude: 4.6150,
   },
-  openingHoursSpecification: [
-    {
-      '@type': 'OpeningHoursSpecification',
-      dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
-      opens: '13:00',
-      closes: '23:59',
-    },
-  ],
+  openingHoursSpecification: openingHours,
   sameAs: [
     'https://www.instagram.com/alt_itude.music/',
     'https://www.tiktok.com/@altitudemusic13',

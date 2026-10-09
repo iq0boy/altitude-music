@@ -7,19 +7,28 @@ interface Testimonial { name: string; role: string; service: string; text: { fr:
 interface Props { testimonials: Testimonial[]; services: ServiceData[]; t: Translations; lang: Lang; }
 
 export default function Testimonials({ testimonials, services, t, lang }: Props) {
-  const [items, setItems] = useState(testimonials);
+  const items = testimonials;
   const serviceName = (key: string) => services.find(s => s.key === key)?.name[lang] ?? '';
   const [filter, setFilter] = useState('all');
   const [form, setForm] = useState({ name: '', role: '', service: 'rec', message: '', rating: 5 });
-  const [done, setDone] = useState(false);
+  const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
 
-  const submit = (e: React.FormEvent) => {
+  const submit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!form.name || !form.message) return;
-    setItems([{ name: form.name, role: form.role, service: form.service, text: { fr: form.message, en: form.message, nl: form.message }, rating: form.rating }, ...items]);
-    setForm({ name: '', role: '', service: 'rec', message: '', rating: 5 });
-    setDone(true);
-    setTimeout(() => setDone(false), 4000);
+    setStatus('sending');
+    try {
+      const res = await fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams({ 'form-name': 'testimonial', lang, name: form.name, role: form.role, service: form.service, message: form.message, rating: String(form.rating) }).toString(),
+      });
+      if (!res.ok) throw new Error(String(res.status));
+      setStatus('success');
+      setForm({ name: '', role: '', service: 'rec', message: '', rating: 5 });
+    } catch {
+      setStatus('error');
+    }
   };
 
   const filtered = filter === 'all' ? items : items.filter(it => it.service === filter);
@@ -53,19 +62,23 @@ export default function Testimonials({ testimonials, services, t, lang }: Props)
           ))}
         </div>
 
-        <form className="form" onSubmit={submit}>
+        <form className="form" name="testimonial" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" onSubmit={submit}>
+          <input type="hidden" name="form-name" value="testimonial" />
+          <input type="hidden" name="lang" value={lang} />
+          <input type="hidden" name="rating" value={form.rating} />
+          <p hidden><label>Ne pas remplir : <input name="bot-field" /></label></p>
           <h4>{tt.formTitle}</h4>
           <div className="form-row">
-            <div><label>{tt.name}</label><input value={form.name} onChange={e => setForm({ ...form, name: e.target.value })} required /></div>
-            <div><label>{tt.role}</label><input value={form.role} onChange={e => setForm({ ...form, role: e.target.value })} /></div>
+            <div><label>{tt.name}</label><input name="name" value={form.name} onChange={e => setForm({ ...form, name: e.target.value })} required /></div>
+            <div><label>{tt.role}</label><input name="role" value={form.role} onChange={e => setForm({ ...form, role: e.target.value })} /></div>
           </div>
           <div>
             <label>{tt.service}</label>
-            <select value={form.service} onChange={e => setForm({ ...form, service: e.target.value })}>
+            <select name="service" value={form.service} onChange={e => setForm({ ...form, service: e.target.value })}>
               {services.filter(s => s.key !== 'book').map(s => <option key={s.key} value={s.key}>{s.name[lang]}</option>)}
             </select>
           </div>
-          <div><label>{tt.message}</label><textarea value={form.message} onChange={e => setForm({ ...form, message: e.target.value })} required /></div>
+          <div><label>{tt.message}</label><textarea name="message" value={form.message} onChange={e => setForm({ ...form, message: e.target.value })} required /></div>
           <div>
             <label>{tt.rating}</label>
             <div className="rating-input">
@@ -75,8 +88,9 @@ export default function Testimonials({ testimonials, services, t, lang }: Props)
             </div>
           </div>
           <div style={{ display: 'flex', gap: 12, alignItems: 'center', marginTop: 8 }}>
-            <button type="submit" className="btn">{tt.submit}</button>
-            {done && <div className="form-success">✓ {tt.thanks}</div>}
+            <button type="submit" className="btn" disabled={status === 'sending'}>{status === 'sending' ? tt.sending : tt.submit}</button>
+            {status === 'success' && <div className="form-success">✓ {tt.thanks}</div>}
+            {status === 'error' && <div className="form-error">{tt.error}</div>}
           </div>
         </form>
     </>
