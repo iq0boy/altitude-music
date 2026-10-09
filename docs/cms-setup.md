@@ -61,7 +61,7 @@ Tant que Cal.com n'est pas configuré, la section affiche un message renvoyant a
 2. **Apps → Google Calendar → Install**, autoriser l'accès à l'agenda Gmail.
    Vérifier dans *Settings → Calendars* que cet agenda est coché pour les
    conflits **et** sélectionné comme destination des événements.
-3. *Settings → Availability* : renseigner les horaires du studio (ex. lun–sam 14h–21h,
+3. *Settings → Availability* : renseigner les horaires du studio (lun–sam 13h–24h,
    fuseau Europe/Brussels).
 4. **Event Types** : créer un type d'événement **par service** (durée, description,
    lieu = adresse du studio). Noter le **slug** de chacun (la fin de l'URL,
