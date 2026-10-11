@@ -5,6 +5,7 @@ import BaseLayout from '../../../layouts/BaseLayout.astro';
 import Nav from '../../../components/Nav.astro';
 import Footer from '../../../components/Footer.astro';
 import Booking from '../../../components/Booking';
+import Contact from '../../../components/Contact';
 import YouTube from '../../../components/YouTube.astro';
 import InstagramGrid from '../../../components/InstagramGrid.astro';
 import InstagramLightbox from '../../../components/InstagramLightbox.astro';
@@ -30,21 +31,22 @@ export async function getStaticPaths() {
         service,
         services,
         idx,
-        others: services.filter(s => s.key !== service.key),
         reviews: testimonials.filter(r => r.service === service.key),
       },
     })),
   );
 }
 
-interface Props { service: ServiceData; services: ServiceData[]; idx: number; others: ServiceData[]; reviews: TestimonialData[]; }
+interface Props { service: ServiceData; services: ServiceData[]; idx: number; reviews: TestimonialData[]; }
 
 const { lang } = Astro.params as { lang: Lang };
-const { service: svc, services, idx, others, reviews } = Astro.props;
+const { service: svc, services, idx, reviews } = Astro.props;
 const t = getTranslations(lang);
 const sd = t.serviceDetail;
 
 const calUsername = (await getEntry('settings', 'site'))?.data.calUsername?.trim();
+// No Cal.com event for this service → contact widget instead of the calendar.
+const bookable = !!svc.calEvent?.trim();
 
 const name = svc.name[lang];
 const price = svc.price;
@@ -134,6 +136,21 @@ const jsonLd = {
         <div class="svc-includes">{svc.includes[lang].map(inc => <div>{inc}</div>)}</div>
       </section>
 
+      {(!bookable || svc.key === 'book') && (
+        <div class="svc-cta-row big" style="margin-bottom:48px">
+          <span class="text">{sd.cta}</span>
+          <a href={bookable ? `/${lang}/#contact` : '#contact'} class="btn accent">{t.nav.contact}</a>
+        </div>
+      )}
+
+      {bookable && (
+        <section class="svc-section svc-booking" id="booking">
+          <h2 class="svc-booking-title">{t.sections.booking} · {name}</h2>
+          <p class="svc-desc" style="margin-bottom:20px;font-size:16px;color:var(--fg-2)">{t.sections.bookingSub}</p>
+          <Booking t={t} lang={lang} services={services} calUsername={calUsername} initialServiceKey={svc.key} client:visible />
+        </section>
+      )}
+
       {videoId && (
         <section class="svc-section">
           <h2 class="svc-section-title">{sd.video}</h2>
@@ -169,32 +186,13 @@ const jsonLd = {
         )}
       </section>
 
-      <div class="svc-cta-row" style="margin-bottom:48px">
-        <span class="text">{sd.cta}</span>
-        <div style="display:flex;gap:8px">
-          <a href="#booking" class="btn accent">{sd.bookNow}</a>
-          <a href={`/${lang}/#contact`} class="btn ghost">{t.nav.contact}</a>
-        </div>
-      </div>
-
-      <section class="svc-section" id="booking">
-        <h2 class="svc-section-title">{t.sections.booking} · {name}</h2>
-        <p class="svc-desc" style="margin-bottom:20px;font-size:16px;color:var(--fg-2)">{t.sections.bookingSub}</p>
-        <Booking t={t} lang={lang} services={services} calUsername={calUsername} initialServiceKey={svc.key} client:visible />
-      </section>
-
-      <section class="svc-section">
-        <h2 class="svc-section-title">{sd.otherServices}</h2>
-        <nav class="services-grid others" aria-label={sd.otherServices}>
-          {others.map(s => (
-            <a href={`/${lang}/services/${s.key}/`} class="service-card">
-              <div class="service-name">{s.name[lang]}</div>
-              <div class="service-desc">{s.desc[lang]}</div>
-              <span class="service-cta">{sd.learnMore}</span>
-            </a>
-          ))}
-        </nav>
-      </section>
+      {!bookable && (
+        <section class="svc-section" id="contact">
+          <h2 class="svc-section-title">{t.sections.contact} · {name}</h2>
+          <p class="svc-desc" style="margin-bottom:20px;font-size:16px;color:var(--fg-2)">{t.sections.contactSub}</p>
+          <Contact t={t} lang={lang} client:visible />
+        </section>
+      )}
     </div>
   </main>
   <Footer t={t} lang={lang} />

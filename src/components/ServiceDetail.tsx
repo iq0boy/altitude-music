@@ -128,7 +128,7 @@ export default function ServiceDetail({ t, lang, services, testimonials }: Props
         <div className="svc-cta-row">
           <span className="text">{sd.cta}</span>
           <div style={{ display: 'flex', gap: 8 }}>
-            <a href="#booking" onClick={close} className="btn accent">{sd.bookNow}</a>
+            {svc.calEvent?.trim() && <a href="#booking" onClick={close} className="btn accent">{sd.bookNow}</a>}
             <a href="#contact" onClick={close} className="btn ghost">{t.nav.contact}</a>
           </div>
         </div>

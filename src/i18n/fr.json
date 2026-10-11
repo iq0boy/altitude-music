@@ -48,7 +48,7 @@
   "contactForm": {
     "name": "Nom", "email": "Email", "project": "Type de projet", "message": "Message",
     "send": "Envoyer", "whatsapp": "Répondre sur Instagram", "sent": "Message envoyé. À très vite.", "sending": "Envoi…", "error": "Le message n'est pas parti. Réessaie, ou écris-nous directement :",
-    "types": ["Enregistrement", "Mix & Master", "Album / EP", "Pochette", "Autre"]
+    "types": ["Enregistrement", "Mix & Master", "Album / EP", "Design visuel", "Consulting stratégie", "Demande custom", "Autre"]
   },
   "booking": {
     "pickDate": "Choisis d'abord une date dans le calendrier.",

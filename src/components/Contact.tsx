@@ -3,8 +3,9 @@ import type { Translations, Lang } from '../i18n/utils';
 
 interface Props { t: Translations; lang: Lang; }
 
-const STUDIO_LAT = 50.6705;
-const STUDIO_LNG = 4.6150;
+// Official position of the address (Belgian BeSt address registry).
+const STUDIO_LAT = 50.66673;
+const STUDIO_LNG = 4.62431;
 const STUDIO_ADDRESS = '6 Rue Louis de Geer, 1348 Ottignies-Louvain-la-Neuve, Belgium';
 const GMAPS_URL = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(STUDIO_ADDRESS)}`;
 
@@ -84,9 +85,6 @@ export default function Contact({ t, lang }: Props) {
               <div className="socials">
                 <a href="https://www.instagram.com/alt_itude.music/" target="_blank" rel="noopener" title="Instagram">
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/></svg>
-                </a>
-                <a href="https://www.tiktok.com/@altitudemusic13" target="_blank" rel="noopener" title="TikTok">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19.6 7.5a5.5 5.5 0 01-3.4-1.2v8.4a5.7 5.7 0 11-5.7-5.7v2.7a3 3 0 103 3V2h2.7a5.5 5.5 0 005.5 5.5v0z"/></svg>
                 </a>
                 <a href="https://open.spotify.com/playlist/2B4GNjjI37Y2t1OGQj8LkD" target="_blank" rel="noopener" title="Spotify">
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" strokeWidth="2"/><path d="M7 10c3-1 7-1 10 1M7.5 13c2.5-.8 6-.5 8.5 1M8 16c2-.5 4.5-.3 6.5 1" stroke="currentColor" strokeWidth="1.5" fill="none" strokeLinecap="round"/></svg>
