@@ -138,7 +138,9 @@ button:focus-visible, a:focus-visible { outline-offset: 4px; }
   text-transform: uppercase; color: var(--fg-2); transition: color .2s;
 }
 .nav-links a:hover { color: var(--fg); }
-.nav-links-book { display: none; }
+/* Menu-only copy of the booking button: shown when .nav-book is hidden (≤600px). Scoped to beat .btn's display. */
+.nav-links .nav-links-book { display: none; }
+@media (max-width: 600px) { .nav-links .nav-links-book { display: inline-flex; margin-top: 16px; align-self: flex-start; } }
 .nav-burger { display: none; width: 40px; height: 40px; border: 1px solid var(--line); border-radius: 6px; background: transparent; padding: 0; flex-direction: column; align-items: center; justify-content: center; gap: 5px; cursor: pointer; }
 .nav-burger span { display: block; width: 18px; height: 2px; background: var(--fg); transition: transform .25s, opacity .2s; }
 .nav.open .nav-burger span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
@@ -154,7 +156,6 @@ button:focus-visible, a:focus-visible { outline-offset: 4px; }
   }
   .nav.open .nav-links { display: flex; }
   .nav-links a:not(.btn) { font-size: 14px; padding: 16px 0; border-bottom: 1px solid var(--line); color: var(--fg); }
-  .nav-links-book { display: inline-flex; margin-top: 16px; align-self: flex-start; }
   body.nav-open { overflow: hidden; }
 }
 .nav-right { display: flex; align-items: center; gap: 16px; }
@@ -693,6 +694,11 @@ a.team-card:hover .team-handle { color: var(--accent); }
 .svc-video-embed.vertical { aspect-ratio: 9/16; max-width: 380px; }
 .svc-cta-row { display: flex; gap: 12px; flex-wrap: wrap; padding: 28px; border: 1px solid var(--line); border-radius: 8px; background: var(--bg-2); align-items: center; justify-content: space-between; }
 .svc-cta-row .text { font-family: var(--display); font-size: 22px; font-weight: 500; }
+.svc-cta-row.big { gap: 24px; padding: clamp(28px, 5vw, 56px); border-color: var(--accent); }
+.svc-cta-row.big .text { font-size: clamp(28px, 4.4vw, 48px); line-height: 1.05; }
+.svc-cta-row.big .btn { font-size: 16px; padding: 16px 28px; }
+.svc-booking-title { font-family: var(--display); font-size: clamp(28px, 4.4vw, 48px); font-weight: 500; line-height: 1.05; margin: 0 0 12px; }
+.booking-grid { border-color: var(--accent); }
 .svc-reviews-empty { color: var(--fg-3); font-style: italic; padding: 24px; border: 1px dashed var(--line); border-radius: 8px; text-align: center; font-family: var(--mono); font-size: 12px; letter-spacing: 0.06em; }
 
 /* === ANIMATIONS === */
