@@ -128,26 +128,26 @@ const homeJsonLd = {
 
     <About t={t} lang={lang} team={teamMembers} />
 
-    <section class="section" id="testimonials" style="border-top:1px solid var(--line)">
-      <div class="container">
-        <SectionHead tag="// 06" title={t.sections.testimonials} sub={t.sections.testimonialsSub} />
-        <Testimonials testimonials={testimonials} services={serviceList} t={t} lang={lang} client:visible />
-      </div>
-    </section>
-
     <Blog posts={posts} t={t} lang={lang} />
 
     <section class="section" id="booking" style="border-top:1px solid var(--line)">
       <div class="container">
-        <SectionHead tag="// 08" title={t.sections.booking} sub={t.sections.bookingSub} />
+        <SectionHead tag="// 07" title={t.sections.booking} sub={t.sections.bookingSub} />
         <Booking t={t} lang={lang} services={serviceList} calUsername={calUsername} client:visible />
       </div>
     </section>
 
     <section class="section" id="contact" style="border-top:1px solid var(--line)">
       <div class="container">
-        <SectionHead tag="// 09" title={t.sections.contact} sub={t.sections.contactSub} />
+        <SectionHead tag="// 08" title={t.sections.contact} sub={t.sections.contactSub} />
         <Contact t={t} lang={lang} client:visible />
+      </div>
+    </section>
+
+    <section class="section" id="testimonials" style="border-top:1px solid var(--line)">
+      <div class="container">
+        <SectionHead tag="// 09" title={t.sections.testimonials} sub={t.sections.testimonialsSub} />
+        <Testimonials testimonials={testimonials} services={serviceList} t={t} lang={lang} client:visible />
       </div>
     </section>
   </main>

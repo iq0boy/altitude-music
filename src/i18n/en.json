@@ -48,7 +48,7 @@
   "contactForm": {
     "name": "Name", "email": "Email", "project": "Project type", "message": "Message",
     "send": "Send", "whatsapp": "Reply on Instagram", "sent": "Message sent. Talk soon.", "sending": "Sending…", "error": "The message didn't go through. Try again, or email us directly:",
-    "types": ["Recording", "Mix & Master", "Album / EP", "Cover Art", "Other"]
+    "types": ["Recording", "Mix & Master", "Album / EP", "Visual Design", "Strategy Consulting", "Custom Request", "Other"]
   },
   "booking": {
     "pickDate": "Pick a date in the calendar first.",
